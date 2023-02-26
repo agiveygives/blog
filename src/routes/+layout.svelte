@@ -4,6 +4,7 @@
 
 <style>
 	:global(body) {
+		min-height: 100vh;
 		margin: 0;
 		background-color: #f2f2f2;
 		font-size: 18px;
@@ -15,12 +16,12 @@
 	}
 
 	.content {
-		margin: 15px 20px;
+		margin: 100px 20px 15px 20px;
 	}
 </style>
 
 <Header />
 
-<section class='content'>
+<div class='content'>
 	<slot />
-</section>
+</div>

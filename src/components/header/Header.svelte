@@ -21,15 +21,18 @@
 
 <style>
 	header {
-    position: sticky;
+    position: fixed;
+		z-index: 1;
     top: 0;
+    right: 0;
+    left: 0;
 		display: grid;
 		grid-template-columns: max-content auto max-content;
 		grid-column-gap: 20px;
 		align-items: center;
-		background-color: #00c49a;
+		background-color: #f2f2f2;
 		padding: 5px 10px;
-    transition: border-radius 300ms linear;
+    transition: border-radius 300ms linear, background-color 300ms linear;
 	}
 
 	.sharp {
@@ -39,6 +42,7 @@
 	.rounded {
 		border-radius: 0px 0px 20px 20px;
 		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+		background-color: #00c49a;
 	}
 
 	img {
