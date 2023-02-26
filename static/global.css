@@ -1,0 +1,39 @@
+:root {
+  --caribbean-current: #156064;
+  --mint: #00c49a;
+  --naples-yellow: #f8e16c;
+  --melon:#ffc2b4;
+  --coral:#fb8f67;
+
+	--white: #f2f2f2;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--white);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--mint);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--caribbean-current);
+}
+
+body {
+	margin: 0;
+	background-color: var(--white);
+	font-size: 18px;
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}

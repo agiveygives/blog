@@ -1,6 +1,6 @@
 <style>
 	div {
-		margin-top: 100px;
+		margin: 100px 20px 15px 20px;
 	}
 </style>
 
