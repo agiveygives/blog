@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9267cb91-17d6-4624-90eb-329c9f0dd7f1/deploy-status)](https://app.netlify.com/sites/enchanting-kataifi-b6cf40/deploys)
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).

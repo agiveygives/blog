@@ -1,2 +1,28 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+	import Resume from '@/components/resume';
+</script>
+
+<style>
+	div {
+		display: grid;
+		grid-template-columns: 25% auto;
+	}
+
+	.about {
+		justify-self: start;
+	}
+
+	.resume {
+		justify-self: end;
+	}
+</style>
+
+<div>
+	<article class='about'>
+		fun facts
+	</article>
+
+	<article class='resume'>
+		<Resume />
+	</article>
+</div>
