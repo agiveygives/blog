@@ -1,0 +1,15 @@
+{
+	"/": [
+		"src/routes/+layout.ts",
+		"src/routes/+layout.ts"
+	],
+	"/about": [
+		"src/routes/+layout.ts"
+	],
+	"/blog": [
+		"src/routes/+layout.ts"
+	],
+	"/portfolio": [
+		"src/routes/+layout.ts"
+	]
+}
