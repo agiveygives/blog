@@ -26,6 +26,13 @@
  * ```
  */
 declare module '$env/static/private' {
+	export const VITE_APP_FIREBASE_API_KEY: string;
+	export const VITE_APP_FIREBASE_AUTH_DOMAIN: string;
+	export const VITE_APP_FIREBASE_PROJECT_ID: string;
+	export const VITE_APP_FIREBASE_STORAGE_BUCKET: string;
+	export const VITE_APP_FIREBASE_MESSAGING_SENDER_ID: string;
+	export const VITE_APP_FIREBASE_APP_ID: string;
+	export const VITE_APP_FIREBASE_MEASUREMENT_ID: string;
 	export const ALLUSERSPROFILE: string;
 	export const APPDATA: string;
 	export const aptos: string;
@@ -53,6 +60,7 @@ declare module '$env/static/private' {
 	export const LOGONSERVER: string;
 	export const MSYSTEM: string;
 	export const NODE: string;
+	export const NODE_ENV: string;
 	export const NODE_OPTIONS: string;
 	export const npm_command: string;
 	export const npm_config_always_auth: string;
@@ -148,6 +156,13 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
+		VITE_APP_FIREBASE_API_KEY: string;
+		VITE_APP_FIREBASE_AUTH_DOMAIN: string;
+		VITE_APP_FIREBASE_PROJECT_ID: string;
+		VITE_APP_FIREBASE_STORAGE_BUCKET: string;
+		VITE_APP_FIREBASE_MESSAGING_SENDER_ID: string;
+		VITE_APP_FIREBASE_APP_ID: string;
+		VITE_APP_FIREBASE_MEASUREMENT_ID: string;
 		ALLUSERSPROFILE: string;
 		APPDATA: string;
 		aptos: string;
@@ -175,6 +190,7 @@ declare module '$env/dynamic/private' {
 		LOGONSERVER: string;
 		MSYSTEM: string;
 		NODE: string;
+		NODE_ENV: string;
 		NODE_OPTIONS: string;
 		npm_command: string;
 		npm_config_always_auth: string;

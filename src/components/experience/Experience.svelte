@@ -1,4 +1,23 @@
 <script>
+	import { onMount } from 'svelte';
+	import { firebase } from '@/stores/firebase';
+
+	onMount(() => {
+		firebase.subscribe((config) => {
+			if (config) {
+				config.db.collection('experience').onSnapshot(querySnapshot => {
+					// Get all documents from collection - with IDs
+					const data = querySnapshot.docs.map(doc => ({
+						...doc.data(),
+						id: doc.id,
+					}));
+
+					console.log(data);
+				});
+			}
+		});
+	})
+
 	const companies = [
 		{
 			company: 'Big Nerd Ranch',
