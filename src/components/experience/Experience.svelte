@@ -7,7 +7,12 @@
 				{
 					title: 'Senior Software Engineer',
 					timeline: 'October 2021 - Present',
-					duties: []
+					duties: [
+						'Consulted for a client on a greenfield international payment platform.',
+						'Developed a greenfield full-stack web app using Rails, React, TypeScript, and GraphQL.',
+						'Worked with the client to create good development practices for code quality and testing',
+						'Helped cultivate an agile culture for the client team.',
+					]
 				}
 			]
 		},
@@ -18,7 +23,11 @@
 				{
 					title: 'Front-End Developer',
 					timeline: 'July 2020 - October 2021',
-					duties: []
+					duties: [
+						'Developed for an ASP.NET application using TypeScript, React and Redux.',
+						'Pioneered a shift to TDD within our front-end applications using react-testing-library',
+						'Uplifted our ASP.NET MVC front-end to a mobile friendly React application.',
+					]
 				}
 			]
 		},
@@ -29,12 +38,24 @@
 				{
 					title: 'Senior Software Engineer',
 					timeline: 'July 2018 - July 2020',
-					duties: []
+					duties: [
+						'Developed for a Ruby on Rails application using React and Redux.',
+						'Developed for an API using Ruby and AWS Technologies.',
+						'Developed enhancements and bug fixes for mpage components using JavaScript.',
+						'Developed tests with  Rspec, Jest with Enzyme, Jasmine, and Selenium WebdriverIO.',
+						'Participated in Agile practices and ceremonies.',
+						'Mentored new hires in Cerner’s Dev Academy.',
+
+					]
 				},
 				{
 					title: 'Senior Software Engineer Intern',
 					timeline: 'May 2017 - July 2017',
-					duties: []
+					duties: [
+						'Developed for Population Health system with the Care Management Team.',
+						'Used JavaScript, HTML5, and CSS3 to complete stories during two week iterations.',
+						'Updated Dynamic Document templates to include new CSS styles and information.',
+					]
 				}
 			]
 		}
