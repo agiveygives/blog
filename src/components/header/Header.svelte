@@ -1,38 +1,54 @@
-<script>
-  export let duration = "300ms";
+<script lang="ts">
+	export let duration = '300ms';
 
-  let headerClass = "sharp";
-  let y = 0;
+	let headerClass = 'sharp';
+	let y = 0;
 
-  function deriveClass(y) {
-    if (y <= 0) {
-      return 'sharp';
-    }
+	function deriveClass(y: number) {
+		if (y <= 0) {
+			return 'sharp';
+		}
 
 		return 'rounded';
-  }
+	}
 
-  function setTransitionDuration(node) {
-    node.style.transitionDuration = duration;
-  }
+	function setTransitionDuration(node: HTMLElement) {
+		node.style.transitionDuration = duration;
+	}
 
-  $: headerClass = deriveClass(y);
+	$: headerClass = deriveClass(y);
 </script>
+
+<svelte:window bind:scrollY={y} />
+
+<header use:setTransitionDuration class={headerClass}>
+	<a href="/">
+		<img src="/andrew.png" aria-label="Andrew Givens" alt="Andrew Givens" />
+	</a>
+	<nav>
+		<ul>
+			<li><a href="/blog">Blog</a></li>
+			<li><a href="/portfolio">Portfolio</a></li>
+			<li><a href="/about">About Me</a></li>
+		</ul>
+	</nav>
+	<div />
+</header>
 
 <style>
 	header {
-    position: fixed;
+		position: fixed;
 		z-index: 1;
-    top: 0;
-    right: 0;
-    left: 0;
+		top: 0;
+		right: 0;
+		left: 0;
 		display: grid;
 		grid-template-columns: max-content auto max-content;
 		grid-column-gap: 20px;
 		align-items: center;
 		background-color: var(--white);
 		padding: 5px 10px;
-    transition: border-radius 300ms linear, background-color 300ms linear;
+		transition: border-radius 300ms linear, background-color 300ms linear;
 	}
 
 	.sharp {
@@ -100,20 +116,3 @@
 		transform: scale(1);
 	}
 </style>
-
-<svelte:window bind:scrollY={y} />
-
-<header use:setTransitionDuration class={headerClass}>
-	<a href='/'>
-		<img src='/andrew.png' aria-label='Andrew Givens' alt='Andrew Givens' />
-	</a>
-	<nav>
-		<ul>
-			<li><a href='/blog'>Blog</a></li>
-			<li><a href='/portfolio'>Portfolio</a></li>
-			<li><a href='/about'>About Me</a></li>
-		</ul>
-	</nav>
-	<div>
-	</div>
-</header>

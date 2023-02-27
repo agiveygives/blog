@@ -1,6 +1,6 @@
-import { a as assets, b as base, p as public_env, o as options, g as get_hooks, s as set_public_env } from "./chunks/internal.js";
 import * as devalue from "devalue";
 import { n as noop, s as safe_not_equal } from "./chunks/index.js";
+import { a as assets, b as base, p as public_env, o as options, g as get_hooks, s as set_public_env } from "./chunks/internal.js";
 import { parse, serialize } from "cookie";
 import * as set_cookie_parser from "set-cookie-parser";
 const DEV = false;
@@ -2456,12 +2456,6 @@ async function respond(request, options2, manifest, state) {
   }
   let route = null;
   let params = {};
-  if (!state.prerendering?.fallback) {
-    if (!decoded.startsWith(base)) {
-      return text("Not found", { status: 404 });
-    }
-    decoded = decoded.slice(base.length) || "/";
-  }
   const is_data_request = has_data_suffix(decoded);
   let invalidated_data_nodes;
   if (is_data_request) {

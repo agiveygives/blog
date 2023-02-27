@@ -19,6 +19,9 @@ function subscribe(store, ...callbacks) {
   const unsub = store.subscribe(...callbacks);
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
+function null_to_empty(value) {
+  return value == null ? "" : value;
+}
 let current_component;
 function set_current_component(component) {
   current_component = component;
@@ -51,6 +54,13 @@ function escape(value, is_attr = false) {
     last = i + 1;
   }
   return escaped + str.substring(last);
+}
+function each(items, fn) {
+  let str = "";
+  for (let i = 0; i < items.length; i += 1) {
+    str += fn(items[i], i);
+  }
+  return str;
 }
 const missing_component = {
   $$render: () => ""
@@ -102,9 +112,11 @@ function create_ssr_component(fn) {
 }
 export {
   setContext as a,
-  subscribe as b,
+  null_to_empty as b,
   create_ssr_component as c,
+  subscribe as d,
   escape as e,
+  each as f,
   getContext as g,
   missing_component as m,
   noop as n,

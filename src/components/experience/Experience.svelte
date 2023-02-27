@@ -11,7 +11,7 @@
 						'Consulted for a client on a greenfield international payment platform.',
 						'Developed a greenfield full-stack web app using Rails, React, TypeScript, and GraphQL.',
 						'Worked with the client to create good development practices for code quality and testing',
-						'Helped cultivate an agile culture for the client team.',
+						'Helped cultivate an agile culture for the client team.'
 					]
 				}
 			]
@@ -26,7 +26,7 @@
 					duties: [
 						'Developed for an ASP.NET application using TypeScript, React and Redux.',
 						'Pioneered a shift to TDD within our front-end applications using react-testing-library',
-						'Uplifted our ASP.NET MVC front-end to a mobile friendly React application.',
+						'Uplifted our ASP.NET MVC front-end to a mobile friendly React application.'
 					]
 				}
 			]
@@ -44,8 +44,7 @@
 						'Developed enhancements and bug fixes for mpage components using JavaScript.',
 						'Developed tests with  Rspec, Jest with Enzyme, Jasmine, and Selenium WebdriverIO.',
 						'Participated in Agile practices and ceremonies.',
-						'Mentored new hires in Cerner’s Dev Academy.',
-
+						'Mentored new hires in Cerner’s Dev Academy.'
 					]
 				},
 				{
@@ -54,25 +53,48 @@
 					duties: [
 						'Developed for Population Health system with the Care Management Team.',
 						'Used JavaScript, HTML5, and CSS3 to complete stories during two week iterations.',
-						'Updated Dynamic Document templates to include new CSS styles and information.',
+						'Updated Dynamic Document templates to include new CSS styles and information.'
 					]
 				}
 			]
 		}
-	]
+	];
 	const totalCompanies = companies.length;
 </script>
+
+<div class="experience">
+	{#each companies as { company, location, roles }, i}
+		<div class="company">
+			<h2>{company}</h2>
+			<p>{location}</p>
+		</div>
+		<div class="roles">
+			{#each roles as role}
+				<h3>{role.title}</h3>
+				<h4>{role.timeline}</h4>
+				<ul>
+					{#each role.duties as duty}
+						<li>{duty}</li>
+					{/each}
+				</ul>
+			{/each}
+		</div>
+		{#if i + 1 < totalCompanies}
+			<div class="divider" />
+		{/if}
+	{/each}
+</div>
 
 <style>
 	.experience {
 		display: grid;
-    grid-template-columns: auto auto;
-    padding: 20px;
-    align-items: center;
-    justify-content: space-around;
+		grid-template-columns: auto auto;
+		padding: 20px;
+		align-items: center;
+		justify-content: space-around;
 		gap: 20px;
-    background-color: var(--caribbean-current);
-    color: var(--coral);
+		background-color: var(--caribbean-current);
+		color: var(--coral);
 	}
 
 	.divider {
@@ -86,26 +108,3 @@
 		}
 	}
 </style>
-
-<div class='experience'>
-	{#each companies as { company, location, roles}, i}
-		<div class='company'>
-			<h2>{company}</h2>
-			<p>{location}</p>
-		</div>
-		<div class='roles'>
-			{#each roles as role}
-				<h3>{role.title}</h3>
-				<h4>{role.timeline}</h4>
-				<ul>
-					{#each role.duties as duty}
-						<li>{duty}</li>
-					{/each}
-				</ul>
-			{/each}
-		</div>
-		{#if (i + 1) < totalCompanies}
-			<div class='divider' />
-		{/if}
-	{/each}
-</div>

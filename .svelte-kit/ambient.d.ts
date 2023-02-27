@@ -53,7 +53,6 @@ declare module '$env/static/private' {
 	export const LOGONSERVER: string;
 	export const MSYSTEM: string;
 	export const NODE: string;
-	export const NODE_ENV: string;
 	export const NODE_OPTIONS: string;
 	export const npm_command: string;
 	export const npm_config_always_auth: string;
@@ -66,7 +65,6 @@ declare module '$env/static/private' {
 	export const npm_config_metrics_registry: string;
 	export const npm_config_node_gyp: string;
 	export const npm_config_noproxy: string;
-	export const npm_config_open: string;
 	export const npm_config_prefix: string;
 	export const npm_config_registry: string;
 	export const npm_config_userconfig: string;
@@ -177,7 +175,6 @@ declare module '$env/dynamic/private' {
 		LOGONSERVER: string;
 		MSYSTEM: string;
 		NODE: string;
-		NODE_ENV: string;
 		NODE_OPTIONS: string;
 		npm_command: string;
 		npm_config_always_auth: string;
@@ -190,7 +187,6 @@ declare module '$env/dynamic/private' {
 		npm_config_metrics_registry: string;
 		npm_config_node_gyp: string;
 		npm_config_noproxy: string;
-		npm_config_open: string;
 		npm_config_prefix: string;
 		npm_config_registry: string;
 		npm_config_userconfig: string;
