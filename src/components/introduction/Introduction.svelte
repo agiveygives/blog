@@ -25,9 +25,13 @@
 
 <section class='intro'>
 	<div class='intro-content'>
-		<img class='bitmoji' src='/images/bitmoji-bird-friends.png' alt='Andrew Givens Bitmoji with Birds' />
+		<img
+			class='bitmoji'
+			src='/images/bitmoji-bird-friends.png'
+			alt='Andrew Givens Bitmoji with Birds'
+		/>
 
-		<h3>Andrew Givens</h3>
+		<h1>Andrew Givens</h1>
 
 		<p>Full Stack Software Engineer</p>
 
