@@ -1,14 +1,9 @@
-import { c as create_ssr_component, a as setContext, v as validate_component, m as missing_component } from "./index.js";
+import { c as create_ssr_component, a as setContext, v as validate_component, m as missing_component } from "./index2.js";
+import "./shared-server.js";
 const base = "";
 let assets = base;
 function set_assets(path) {
   assets = path;
-}
-let public_env = {};
-function set_private_env(environment) {
-}
-function set_public_env(environment) {
-  public_env = environment;
 }
 function afterUpdate() {
 }
@@ -102,7 +97,7 @@ const options = {
   root: Root,
   service_worker: false,
   templates: {
-    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="stylesheet" href="' + assets2 + '/global.css">\n		<link rel="icon" href="' + assets2 + '/andrew.png" />\n		<meta name="viewport" content="width=device-width" />\n		<title>Andrew Givens</title>\n\n		<link href="https://fonts.cdnfonts.com/css/inter" rel="stylesheet">\n\n		' + head + '\n	</head>\n	<body data-sveltekit-preload-data="hover">\n		<div style="height: 100%">' + body + "</div>\n	</body>\n</html>\n",
+    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="stylesheet" href="' + assets2 + '/global.css" />\n		<link rel="icon" href="' + assets2 + '/andrew.png" />\n		<meta name="viewport" content="width=device-width" />\n		<title>Andrew Givens</title>\n\n		<link href="https://fonts.cdnfonts.com/css/inter" rel="stylesheet" />\n\n		' + head + '\n	</head>\n	<body data-sveltekit-preload-data="hover">\n		<div style="height: 100%">' + body + "</div>\n	</body>\n</html>\n",
     error: ({ status, message }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
@@ -150,7 +145,7 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "1tr80yh"
+  version_hash: "1s446yb"
 };
 function get_hooks() {
   return {};
@@ -158,11 +153,8 @@ function get_hooks() {
 export {
   assets as a,
   base as b,
-  set_assets as c,
-  set_building as d,
-  set_private_env as e,
+  set_building as c,
   get_hooks as g,
   options as o,
-  public_env as p,
-  set_public_env as s
+  set_assets as s
 };
