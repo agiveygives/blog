@@ -1,5 +1,4 @@
-<script>
-	/** @type {import('./$types').LayoutData} */
+<script lang='ts'>
   export let data;
 
 	import Introduction from '@/components/introduction';
