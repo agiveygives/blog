@@ -26,16 +26,17 @@
  * ```
  */
 declare module '$env/static/private' {
-	export const VITE_APP_FIREBASE_API_KEY: string;
-	export const VITE_APP_FIREBASE_AUTH_DOMAIN: string;
-	export const VITE_APP_FIREBASE_PROJECT_ID: string;
-	export const VITE_APP_FIREBASE_STORAGE_BUCKET: string;
-	export const VITE_APP_FIREBASE_MESSAGING_SENDER_ID: string;
-	export const VITE_APP_FIREBASE_APP_ID: string;
-	export const VITE_APP_FIREBASE_MEASUREMENT_ID: string;
+	export const SECRET_FIREBASE_API_KEY: string;
+	export const SECRET_FIREBASE_AUTH_DOMAIN: string;
+	export const SECRET_FIREBASE_PROJECT_ID: string;
+	export const SECRET_FIREBASE_STORAGE_BUCKET: string;
+	export const SECRET_FIREBASE_MESSAGING_SENDER_ID: string;
+	export const SECRET_FIREBASE_APP_ID: string;
+	export const SECRET_FIREBASE_MEASUREMENT_ID: string;
 	export const ALLUSERSPROFILE: string;
+	export const ANDROID_HOME: string;
 	export const APPDATA: string;
-	export const aptos: string;
+	export const APTOS_PATH: string;
 	export const ChocolateyInstall: string;
 	export const ChocolateyLastPathUpdate: string;
 	export const CHROME_CRASHPAD_PIPE_NAME: string;
@@ -48,22 +49,22 @@ declare module '$env/static/private' {
 	export const DriverData: string;
 	export const EDITOR: string;
 	export const EXEPATH: string;
+	export const FPS_BROWSER_APP_PROFILE_STRING: string;
+	export const FPS_BROWSER_USER_PROFILE_STRING: string;
 	export const GIT_ASKPASS: string;
 	export const GOPATH: string;
-	export const GTK_BASEPATH: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
 	export const HOMEPATH: string;
 	export const INIT_CWD: string;
+	export const JAVA_HOME: string;
 	export const LANG: string;
 	export const LOCALAPPDATA: string;
 	export const LOGONSERVER: string;
 	export const MSYSTEM: string;
 	export const NODE: string;
 	export const NODE_ENV: string;
-	export const NODE_OPTIONS: string;
 	export const npm_command: string;
-	export const npm_config_always_auth: string;
 	export const npm_config_cache: string;
 	export const npm_config_engine_strict: string;
 	export const npm_config_globalconfig: string;
@@ -74,7 +75,6 @@ declare module '$env/static/private' {
 	export const npm_config_node_gyp: string;
 	export const npm_config_noproxy: string;
 	export const npm_config_prefix: string;
-	export const npm_config_registry: string;
 	export const npm_config_userconfig: string;
 	export const npm_config_user_agent: string;
 	export const npm_execpath: string;
@@ -88,6 +88,7 @@ declare module '$env/static/private' {
 	export const NVM_HOME: string;
 	export const NVM_SYMLINK: string;
 	export const OculusBase: string;
+	export const OLDPWD: string;
 	export const OneDrive: string;
 	export const OneDriveConsumer: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
@@ -119,14 +120,14 @@ declare module '$env/static/private' {
 	export const USERDOMAIN_ROAMINGPROFILE: string;
 	export const USERNAME: string;
 	export const USERPROFILE: string;
-	export const VS140COMNTOOLS: string;
 	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 	export const VSCODE_GIT_ASKPASS_MAIN: string;
 	export const VSCODE_GIT_ASKPASS_NODE: string;
 	export const VSCODE_GIT_IPC_HANDLE: string;
-	export const VSCODE_INSPECTOR_OPTIONS: string;
 	export const WINDIR: string;
+	export const ZES_ENABLE_SYSMAN: string;
 	export const _: string;
+	export const __COMPAT_LAYER: string;
 }
 
 /**
@@ -156,16 +157,17 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
-		VITE_APP_FIREBASE_API_KEY: string;
-		VITE_APP_FIREBASE_AUTH_DOMAIN: string;
-		VITE_APP_FIREBASE_PROJECT_ID: string;
-		VITE_APP_FIREBASE_STORAGE_BUCKET: string;
-		VITE_APP_FIREBASE_MESSAGING_SENDER_ID: string;
-		VITE_APP_FIREBASE_APP_ID: string;
-		VITE_APP_FIREBASE_MEASUREMENT_ID: string;
+		SECRET_FIREBASE_API_KEY: string;
+		SECRET_FIREBASE_AUTH_DOMAIN: string;
+		SECRET_FIREBASE_PROJECT_ID: string;
+		SECRET_FIREBASE_STORAGE_BUCKET: string;
+		SECRET_FIREBASE_MESSAGING_SENDER_ID: string;
+		SECRET_FIREBASE_APP_ID: string;
+		SECRET_FIREBASE_MEASUREMENT_ID: string;
 		ALLUSERSPROFILE: string;
+		ANDROID_HOME: string;
 		APPDATA: string;
-		aptos: string;
+		APTOS_PATH: string;
 		ChocolateyInstall: string;
 		ChocolateyLastPathUpdate: string;
 		CHROME_CRASHPAD_PIPE_NAME: string;
@@ -178,22 +180,22 @@ declare module '$env/dynamic/private' {
 		DriverData: string;
 		EDITOR: string;
 		EXEPATH: string;
+		FPS_BROWSER_APP_PROFILE_STRING: string;
+		FPS_BROWSER_USER_PROFILE_STRING: string;
 		GIT_ASKPASS: string;
 		GOPATH: string;
-		GTK_BASEPATH: string;
 		HOME: string;
 		HOMEDRIVE: string;
 		HOMEPATH: string;
 		INIT_CWD: string;
+		JAVA_HOME: string;
 		LANG: string;
 		LOCALAPPDATA: string;
 		LOGONSERVER: string;
 		MSYSTEM: string;
 		NODE: string;
 		NODE_ENV: string;
-		NODE_OPTIONS: string;
 		npm_command: string;
-		npm_config_always_auth: string;
 		npm_config_cache: string;
 		npm_config_engine_strict: string;
 		npm_config_globalconfig: string;
@@ -204,7 +206,6 @@ declare module '$env/dynamic/private' {
 		npm_config_node_gyp: string;
 		npm_config_noproxy: string;
 		npm_config_prefix: string;
-		npm_config_registry: string;
 		npm_config_userconfig: string;
 		npm_config_user_agent: string;
 		npm_execpath: string;
@@ -218,6 +219,7 @@ declare module '$env/dynamic/private' {
 		NVM_HOME: string;
 		NVM_SYMLINK: string;
 		OculusBase: string;
+		OLDPWD: string;
 		OneDrive: string;
 		OneDriveConsumer: string;
 		ORIGINAL_XDG_CURRENT_DESKTOP: string;
@@ -249,14 +251,14 @@ declare module '$env/dynamic/private' {
 		USERDOMAIN_ROAMINGPROFILE: string;
 		USERNAME: string;
 		USERPROFILE: string;
-		VS140COMNTOOLS: string;
 		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 		VSCODE_GIT_ASKPASS_MAIN: string;
 		VSCODE_GIT_ASKPASS_NODE: string;
 		VSCODE_GIT_IPC_HANDLE: string;
-		VSCODE_INSPECTOR_OPTIONS: string;
 		WINDIR: string;
+		ZES_ENABLE_SYSMAN: string;
 		_: string;
+		__COMPAT_LAYER: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: string]: string | undefined;
 	}
