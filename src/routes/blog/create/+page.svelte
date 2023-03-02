@@ -3,12 +3,12 @@
 	import { redirectLocation } from '@/stores/redirectLocation';
 
 	onMount(() => {
-		redirectLocation.set('/about');
+		redirectLocation.set('/blog');
 	})
 </script>
 
 <div>
-	<h3>About Me</h3>
+	<h3>Create Blog</h3>
 </div>
 
 <style>

@@ -1,3 +1,12 @@
+<script>
+	import { onMount } from 'svelte';
+	import { redirectLocation } from '@/stores/redirectLocation';
+
+	onMount(() => {
+		redirectLocation.set('/portfolio');
+	})
+</script>
+
 <div>
 	<h3>Portfolio</h3>
 </div>

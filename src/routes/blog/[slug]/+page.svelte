@@ -1,15 +1,19 @@
 <script>
+  export let data;
+
 	import { onMount } from 'svelte';
 	import { redirectLocation } from '@/stores/redirectLocation';
 
 	onMount(() => {
-		redirectLocation.set('/about');
+		redirectLocation.set('/blog');
 	})
 </script>
 
-<div>
-	<h3>About Me</h3>
-</div>
+<article>
+  <h1>{ data.title }</h1>
+  <p>Published: {data.date}</p>
+  <svelte:component this={data.content} />
+</article>
 
 <style>
 	div {

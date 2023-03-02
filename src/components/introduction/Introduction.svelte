@@ -2,7 +2,7 @@
 	<div class="intro-content">
 		<img
 			class="bitmoji"
-			src="/images/bitmoji-bird-friends.png"
+			src="/images/bitmoji/bird-friends.png"
 			alt="Andrew Givens Bitmoji with Birds"
 		/>
 
@@ -11,12 +11,12 @@
 		<p>Full Stack Software Engineer</p>
 
 		<div class="logos">
-			<img src="/images/react-logo.png" alt="React JS Logo" />
-			<img src="/images/typescript-logo.svg" alt="Type Script Logo" />
-			<img src="/images/css-logo.png" alt="CSS 3 Logo" />
-			<img src="/images/ruby-on-rails-logo.png" alt="Ruby on Rails Logo" />
-			<img src="/images/graphql-logo.png" alt="Graph QL Logo" />
-			<img src="/images/docker-logo.png" alt="Docker Logo" />
+			<img src="/images/logos/react-logo.png" alt="React JS Logo" />
+			<img src="/images/logos/typescript-logo.svg" alt="Type Script Logo" />
+			<img src="/images/logos/css-logo.png" alt="CSS 3 Logo" />
+			<img src="/images/logos/ruby-on-rails-logo.png" alt="Ruby on Rails Logo" />
+			<img src="/images/logos/graphql-logo.png" alt="Graph QL Logo" />
+			<img src="/images/logos/docker-logo.png" alt="Docker Logo" />
 		</div>
 	</div>
 </section>

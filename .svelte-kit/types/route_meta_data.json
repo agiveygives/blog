@@ -7,10 +7,24 @@
 	"/about": [
 		"src/routes/+layout.ts"
 	],
-	"/api/login": [
-		"src/routes/api/login/+server.ts"
+	"/api/auth/login": [
+		"src/routes/api/auth/login/+server.ts"
+	],
+	"/api/auth/logout": [
+		"src/routes/api/auth/logout/+server.ts"
+	],
+	"/api/auth/validate": [
+		"src/routes/api/auth/validate/+server.ts"
 	],
 	"/blog": [
+		"src/routes/+layout.ts"
+	],
+	"/blog/create": [
+		"src/routes/blog/create/+page.server.ts",
+		"src/routes/+layout.ts"
+	],
+	"/blog/[slug]": [
+		"src/routes/blog/[slug]/+page.ts",
 		"src/routes/+layout.ts"
 	],
 	"/portfolio": [
