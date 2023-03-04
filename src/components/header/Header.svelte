@@ -1,20 +1,42 @@
 <script lang="ts">
-	export let duration = '300ms';
+	import { onMount } from 'svelte';
+	import { loggedIn } from '@/stores/loggedIn';
 
+	onMount(() => {
+		fetch('/api/auth/validate')
+			.then((response) => {
+				if (response.ok) {
+					loggedIn.set(true);
+				} else {
+					loggedIn.set(false);
+				}
+			})
+			.catch(() => loggedIn.set(false));
+	});
+
+	const logout = () => {
+		fetch('/api/auth/logout').then((response) => {
+			if (response.ok) {
+				loggedIn.set(false);
+			}
+		});
+	};
+
+	let duration = '300ms';
 	let headerClass = 'sharp';
 	let y = 0;
 
-	function deriveClass(y: number) {
+	const deriveClass = (y: number) => {
 		if (y <= 0) {
 			return 'sharp';
 		}
 
 		return 'rounded';
-	}
+	};
 
-	function setTransitionDuration(node: HTMLElement) {
+	const setTransitionDuration = (node: HTMLElement) => {
 		node.style.transitionDuration = duration;
-	}
+	};
 
 	$: headerClass = deriveClass(y);
 </script>
@@ -32,7 +54,11 @@
 			<li><a href="/about">About Me</a></li>
 		</ul>
 	</nav>
-	<div />
+	<div>
+		{#if $loggedIn}
+			<button class="logout" on:click={logout}>Log out</button>
+		{/if}
+	</div>
 </header>
 
 <style>
@@ -114,5 +140,19 @@
 		opacity: 1;
 		transform: translate3d(0, 0.2em, 0);
 		transform: scale(1);
+	}
+
+	.logout {
+		padding: 10px 20px;
+		border-radius: 10px;
+		background-color: var(--mint);
+		color: var(--white);
+		border: unset;
+		cursor: pointer;
+	}
+
+	.logout:hover,
+	.logout:focus {
+		background-color: var(--caribbean-current);
 	}
 </style>

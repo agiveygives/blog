@@ -1,16 +1,23 @@
 {
 	"/": [
-		"src/routes/+page.server.ts",
-		"src/routes/+layout.ts",
-		"src/routes/+layout.ts"
+		"src/routes/+page.server.ts"
 	],
-	"/about": [
-		"src/routes/+layout.ts"
+	"/about": [],
+	"/api/auth/login": [
+		"src/routes/api/auth/login/+server.ts"
 	],
-	"/blog": [
-		"src/routes/+layout.ts"
+	"/api/auth/logout": [
+		"src/routes/api/auth/logout/+server.ts"
 	],
-	"/portfolio": [
-		"src/routes/+layout.ts"
-	]
+	"/api/auth/validate": [
+		"src/routes/api/auth/validate/+server.ts"
+	],
+	"/blog": [],
+	"/blog/create": [
+		"src/routes/blog/create/+page.server.ts"
+	],
+	"/blog/[slug]": [
+		"src/routes/blog/[slug]/+page.ts"
+	],
+	"/portfolio": []
 }

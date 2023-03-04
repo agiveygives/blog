@@ -1,4 +1,4 @@
-import { c as create_ssr_component, a as setContext, v as validate_component, m as missing_component } from "./index2.js";
+import { c as create_ssr_component, s as setContext, v as validate_component, m as missing_component } from "./index3.js";
 import "./shared-server.js";
 const base = "";
 let assets = base;
@@ -145,7 +145,7 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "cu96se"
+  version_hash: "xxc02i"
 };
 function get_hooks() {
   return {};

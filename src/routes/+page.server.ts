@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { collection, query, orderBy, getDocs } from "firebase/firestore";
+import { collection, query, orderBy, getDocs } from 'firebase/firestore';
 import { db } from '@/firebase.config';
 
 type RoleType = {
@@ -12,16 +12,16 @@ type ExperienceType = {
 	company: string;
 	location: string;
 	roles: RoleType[];
-}
+};
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
 	const experienceRef = collection(db, 'experience');
-	const q = query(experienceRef, orderBy("startDate", 'desc'));
+	const q = query(experienceRef, orderBy('startDate', 'desc'));
 
 	const experienceData = await getDocs(q);
 
-	const companies: ExperienceType[] = []
+	const companies: ExperienceType[] = [];
 
 	experienceData.forEach((doc) => {
 		const docData = doc.data();
@@ -29,15 +29,15 @@ export async function load() {
 		const companyData = {
 			company: docData.company,
 			location: docData.location,
-			roles: docData.roles,
+			roles: docData.roles
 		};
 
 		companies.push(companyData);
 	});
 
-  if (companies.length) {
-    return { companies };
-  }
+	if (companies.length) {
+		return { companies };
+	}
 
-  throw error(404, 'Not found');
+	throw error(404, 'Not found');
 }

@@ -1,4 +1,4 @@
-import { c as create_ssr_component, f as each, e as escape, v as validate_component } from "../../chunks/index2.js";
+import { c as create_ssr_component, d as each, e as escape, v as validate_component } from "../../chunks/index3.js";
 const Introduction_svelte_svelte_type_style_lang = "";
 const css$1 = {
   code: ".intro.svelte-16bgb3z.svelte-16bgb3z{display:grid;justify-content:center;min-height:100vh;background-color:var(--white);color:var(--caribbean-current)}.intro-content.svelte-16bgb3z.svelte-16bgb3z{margin:120px auto auto auto;text-align:center}.bitmoji.svelte-16bgb3z.svelte-16bgb3z{height:200px;padding-bottom:20px}.logos.svelte-16bgb3z>img.svelte-16bgb3z{height:75px;padding:10px}",
@@ -6,18 +6,18 @@ const css$1 = {
 };
 const Introduction = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$result.css.add(css$1);
-  return `<section class="${"intro svelte-16bgb3z"}"><div class="${"intro-content svelte-16bgb3z"}"><img class="${"bitmoji svelte-16bgb3z"}" src="${"/images/bitmoji-bird-friends.png"}" alt="${"Andrew Givens Bitmoji with Birds"}">
+  return `<section class="${"intro svelte-16bgb3z"}"><div class="${"intro-content svelte-16bgb3z"}"><img class="${"bitmoji svelte-16bgb3z"}" src="${"/images/bitmoji/bird-friends.png"}" alt="${"Andrew Givens Bitmoji with Birds"}">
 
 		<h1>Andrew Givens</h1>
 
 		<p>Full Stack Software Engineer</p>
 
-		<div class="${"logos svelte-16bgb3z"}"><img src="${"/images/react-logo.png"}" alt="${"React JS Logo"}" class="${"svelte-16bgb3z"}">
-			<img src="${"/images/typescript-logo.svg"}" alt="${"Type Script Logo"}" class="${"svelte-16bgb3z"}">
-			<img src="${"/images/css-logo.png"}" alt="${"CSS 3 Logo"}" class="${"svelte-16bgb3z"}">
-			<img src="${"/images/ruby-on-rails-logo.png"}" alt="${"Ruby on Rails Logo"}" class="${"svelte-16bgb3z"}">
-			<img src="${"/images/graphql-logo.png"}" alt="${"Graph QL Logo"}" class="${"svelte-16bgb3z"}">
-			<img src="${"/images/docker-logo.png"}" alt="${"Docker Logo"}" class="${"svelte-16bgb3z"}"></div></div>
+		<div class="${"logos svelte-16bgb3z"}"><img src="${"/images/logos/react-logo.png"}" alt="${"React JS Logo"}" class="${"svelte-16bgb3z"}">
+			<img src="${"/images/logos/typescript-logo.svg"}" alt="${"Type Script Logo"}" class="${"svelte-16bgb3z"}">
+			<img src="${"/images/logos/css-logo.png"}" alt="${"CSS 3 Logo"}" class="${"svelte-16bgb3z"}">
+			<img src="${"/images/logos/ruby-on-rails-logo.png"}" alt="${"Ruby on Rails Logo"}" class="${"svelte-16bgb3z"}">
+			<img src="${"/images/logos/graphql-logo.png"}" alt="${"Graph QL Logo"}" class="${"svelte-16bgb3z"}">
+			<img src="${"/images/logos/docker-logo.png"}" alt="${"Docker Logo"}" class="${"svelte-16bgb3z"}"></div></div>
 </section>`;
 });
 const Experience_svelte_svelte_type_style_lang = "";
