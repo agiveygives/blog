@@ -1,4 +1,4 @@
-import { c as create_ssr_component } from "../../../chunks/index2.js";
+import { c as create_ssr_component } from "../../../chunks/index3.js";
 const _page_svelte_svelte_type_style_lang = "";
 const css = {
   code: "div.svelte-fj3zha{margin:100px 20px 15px 20px}",
