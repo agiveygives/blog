@@ -1,6 +1,6 @@
-<script lang='ts'>
-  import Fa from 'svelte-fa';
-  import { faX } from '@fortawesome/free-solid-svg-icons';
+<script lang="ts">
+	import Fa from 'svelte-fa';
+	import { faX } from '@fortawesome/free-solid-svg-icons';
 	import { loggedIn } from '@/stores/loggedIn';
 
 	let showModal = false;
@@ -9,11 +9,14 @@
 	let password: string;
 
 	const handleSubmit = (e) => {
-    const formData = new FormData(e.target);
+		const formData = new FormData(e.target);
+
+		email = '';
+		password = '';
 
 		fetch('/api/auth/login', {
 			method: 'post',
-			body: formData,
+			body: formData
 		})
 			.then((response) => {
 				if (response.ok) {
@@ -26,7 +29,7 @@
 			.finally(() => {
 				showModal = false;
 			});
-	}
+	};
 
 	var pattern = ['m', 'a', 'r', 'g', 'e'];
 	var current = 0;
@@ -54,13 +57,13 @@
 		const greetings = [
 			'You look nice today!',
 			'Hey, come here often?',
-			'How you doin\'?',
+			"How you doin'?",
 			'Fancy seeing you here!',
-			'Nice to see you, today!',
-		]
+			'Nice to see you, today!'
+		];
 
 		return greetings[Math.floor(Math.random() * greetings.length)];
-	}
+	};
 
 	$: if (showModal) {
 		greeting = randomGreeting();
@@ -70,29 +73,30 @@
 <svelte:window on:keydown={keyHandler} />
 
 <div class={`modal-background ${showModal ? '' : 'hidden'}`}>
-  <div class="modal-container">
-		<button class='close' on:click={() => { showModal = false; }}>
+	<div class="modal-container">
+		<button
+			class="close"
+			on:click={() => {
+				showModal = false;
+			}}
+		>
 			<Fa icon={faX} />
 		</button>
 
-		<div class='header'>{greeting}</div>
+		<div class="header">{greeting}</div>
 
-		<div class='modal-content'>
-			<div class='bitmoji-container'>
-				<img
-					class="bitmoji"
-					src="/images/bitmoji/secret.png"
-					alt="Andrew Givens Bitmoji shh"
-				/>
+		<div class="modal-content">
+			<div class="bitmoji-container">
+				<img class="bitmoji" src="/images/bitmoji/secret.png" alt="Andrew Givens Bitmoji shh" />
 			</div>
 
 			<form on:submit|preventDefault={handleSubmit}>
-				<input type="email" name='email' bind:value={email} placeholder="email" />
-				<input type="password" name='password' bind:value={password} placeholder="password" />
-				<button type='submit'>Login</button>
+				<input type="email" name="email" bind:value={email} placeholder="email" />
+				<input type="password" name="password" bind:value={password} placeholder="password" />
+				<button type="submit">Login</button>
 			</form>
 		</div>
-  </div>
+	</div>
 </div>
 
 <style>
@@ -134,8 +138,8 @@
 		background-color: transparent;
 		border: none;
 		cursor: pointer;
-    float: right;
-    margin: 10px;
+		float: right;
+		margin: 10px;
 	}
 
 	.close:hover,
@@ -150,7 +154,7 @@
 
 	.bitmoji-container {
 		justify-content: center;
-    display: flex;
+		display: flex;
 	}
 
 	.bitmoji {
@@ -159,9 +163,9 @@
 
 	form {
 		display: grid;
-    grid-template-columns: auto;
-    grid-gap: 10px;
-    justify-content: center;
+		grid-template-columns: auto;
+		grid-gap: 10px;
+		justify-content: center;
 	}
 
 	input {

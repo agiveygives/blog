@@ -2,12 +2,12 @@ import { json, error, type RequestHandler } from '@sveltejs/kit';
 import {
 	signInWithEmailAndPassword,
 	setPersistence,
-	browserSessionPersistence,
+	browserSessionPersistence
 } from 'firebase/auth';
 import { auth } from '@/firebase.config';
 
 /** @type {import('./$types').RequestHandler} */
-export const POST: RequestHandler = async  ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
 	const user = auth.currentUser;
 	if (user) {
 		return json({});
@@ -22,11 +22,11 @@ export const POST: RequestHandler = async  ({ request }) => {
 	}
 
 	try {
-		await setPersistence(auth, browserSessionPersistence)
+		await setPersistence(auth, browserSessionPersistence);
 		await signInWithEmailAndPassword(auth, email, password);
 	} catch {
 		throw error(401);
 	}
 
-  return json({});
-}
+	return json({});
+};

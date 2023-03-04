@@ -1,7 +1,5 @@
 {
 	"editor.insertSpaces": false,
 	"editor.tabSize": 2,
-	"cSpell.words": [
-		"mdsvex"
-	]
+	"cSpell.words": ["mdsvex"]
 }

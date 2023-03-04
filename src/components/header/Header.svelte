@@ -11,17 +11,16 @@
 					loggedIn.set(false);
 				}
 			})
-			.catch(() => loggedIn.set(false) )
-	})
+			.catch(() => loggedIn.set(false));
+	});
 
 	const logout = () => {
-		fetch('/api/auth/logout')
-			.then((response) => {
-				if (response.ok) {
-					loggedIn.set(false);
-				}
-			})
-	}
+		fetch('/api/auth/logout').then((response) => {
+			if (response.ok) {
+				loggedIn.set(false);
+			}
+		});
+	};
 
 	let duration = '300ms';
 	let headerClass = 'sharp';
@@ -33,11 +32,11 @@
 		}
 
 		return 'rounded';
-	}
+	};
 
 	const setTransitionDuration = (node: HTMLElement) => {
 		node.style.transitionDuration = duration;
-	}
+	};
 
 	$: headerClass = deriveClass(y);
 </script>
@@ -57,7 +56,7 @@
 	</nav>
 	<div>
 		{#if $loggedIn}
-			<button class='logout' on:click={logout}>Log out</button>
+			<button class="logout" on:click={logout}>Log out</button>
 		{/if}
 	</div>
 </header>
@@ -145,14 +144,15 @@
 
 	.logout {
 		padding: 10px 20px;
-    border-radius: 10px;
+		border-radius: 10px;
 		background-color: var(--mint);
 		color: var(--white);
 		border: unset;
 		cursor: pointer;
 	}
 
-	.logout:hover, .logout:focus {
-		background-color: var(--caribbean-current)
+	.logout:hover,
+	.logout:focus {
+		background-color: var(--caribbean-current);
 	}
 </style>

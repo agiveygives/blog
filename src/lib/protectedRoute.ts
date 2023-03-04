@@ -7,4 +7,4 @@ export const protectedRoute = async (location = '/') => {
 	if (!user) {
 		throw redirect(307, location);
 	}
-}
+};

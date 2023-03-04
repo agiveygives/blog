@@ -3,8 +3,7 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 // import { getAnalytics } from 'firebase/analytics';
-import { getStorage } from "firebase/storage";
-
+import { getStorage } from 'firebase/storage';
 
 export const firebaseConfig = {
 	apiKey: env.SECRET_FIREBASE_API_KEY,
