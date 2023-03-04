@@ -1,10 +1,12 @@
 <script>
 	import { onMount } from 'svelte';
-	import { redirectLocation } from '@/stores/redirectLocation';
+	import { invalidateAll } from '$app/navigation';
+	import { browser } from '$app/environment';
+	import { loggedIn } from '@/stores/loggedIn';
 
-	onMount(() => {
-		redirectLocation.set('/blog');
-	})
+	$: if (browser && !$loggedIn) {
+		invalidateAll();
+	}
 </script>
 
 <div>

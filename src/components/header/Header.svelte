@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { loggedIn } from '@/stores/loggedIn';
-	import { redirectLocation } from '@/stores/redirectLocation';
 
 	onMount(() => {
 		fetch('/api/auth/validate')
@@ -16,7 +15,7 @@
 	})
 
 	const logout = () => {
-		fetch(`/api/auth/logout?redirect=${$redirectLocation}`)
+		fetch('/api/auth/logout')
 			.then((response) => {
 				if (response.ok) {
 					loggedIn.set(false);

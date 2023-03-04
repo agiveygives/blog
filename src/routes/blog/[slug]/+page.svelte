@@ -1,12 +1,5 @@
 <script>
   export let data;
-
-	import { onMount } from 'svelte';
-	import { redirectLocation } from '@/stores/redirectLocation';
-
-	onMount(() => {
-		redirectLocation.set('/blog');
-	})
 </script>
 
 <article>

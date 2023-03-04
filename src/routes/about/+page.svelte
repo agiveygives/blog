@@ -1,10 +1,5 @@
 <script>
 	import { onMount } from 'svelte';
-	import { redirectLocation } from '@/stores/redirectLocation';
-
-	onMount(() => {
-		redirectLocation.set('/about');
-	})
 </script>
 
 <div>
