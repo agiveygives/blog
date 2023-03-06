@@ -9,7 +9,7 @@
 </article>
 
 <style>
-	div {
+	article {
 		margin: 100px 20px 15px 20px;
 	}
 </style>

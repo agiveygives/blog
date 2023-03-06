@@ -6,7 +6,7 @@ export const handler = init({
 	assets: new Set(["andrew.png","global.css","images/bitmoji/bird-friends.png","images/bitmoji/secret.png","images/logos/css-logo.png","images/logos/docker-logo.png","images/logos/graphql-logo.png","images/logos/react-logo.png","images/logos/ruby-on-rails-logo.png","images/logos/typescript-logo.svg"]),
 	mimeTypes: {".png":"image/png",".css":"text/css",".svg":"image/svg+xml"},
 	_: {
-		client: {"start":{"file":"_app/immutable/entry/start.faa29ec9.js","imports":["_app/immutable/entry/start.faa29ec9.js","_app/immutable/chunks/index.b271b0ab.js","_app/immutable/chunks/singletons.2a42090d.js","_app/immutable/chunks/index.ff27eb8e.js","_app/immutable/chunks/control.e7f5239e.js"],"stylesheets":[],"fonts":[]},"app":{"file":"_app/immutable/entry/app.6508023e.js","imports":["_app/immutable/entry/app.6508023e.js","_app/immutable/chunks/index.b271b0ab.js"],"stylesheets":[],"fonts":[]}},
+		client: {"start":{"file":"_app/immutable/entry/start.47a602d7.js","imports":["_app/immutable/entry/start.47a602d7.js","_app/immutable/chunks/index.8acc6421.js","_app/immutable/chunks/singletons.9482a958.js","_app/immutable/chunks/index.90d6a637.js","_app/immutable/chunks/control.e7f5239e.js"],"stylesheets":[],"fonts":[]},"app":{"file":"_app/immutable/entry/app.203e315b.js","imports":["_app/immutable/entry/app.203e315b.js","_app/immutable/chunks/index.8acc6421.js"],"stylesheets":[],"fonts":[]}},
 		nodes: [
 			() => import('../server/nodes/0.js'),
 			() => import('../server/nodes/1.js'),
