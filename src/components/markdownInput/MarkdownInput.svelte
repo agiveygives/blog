@@ -1,6 +1,9 @@
 <script lang="ts">
+	import Button from '@/components/button';
 	import Switch from '@/components/switch';
 
+	let isEditTitle = false;
+	let blogTitle = 'New Blog Post';
 	let markdown = '';
 	let oldMarkdown: string | null = null;
 	let isPreview = false;
@@ -27,6 +30,19 @@
 
 <div class='container'>
 	<div>
+		<div class='title'>
+			{#if isEditTitle}
+				<input type='text' bind:value={blogTitle} />
+				<Button variant='primary' on:click={() => { isEditTitle = false; }}>
+					Done
+				</Button>
+			{:else}
+				<div>{blogTitle}</div>
+				<Button variant='ghost' on:click={() => { isEditTitle = true; }}>
+					Edit
+				</Button>
+			{/if}
+		</div>
 		<div class='controls' />
 		{#if isPreview}
 			<div class='markdown'>{@html compiledMarkdown}</div>
@@ -46,6 +62,11 @@
 				<option value='front-end'>front-end</option>
 			</select>
 		</div>
+
+		<div class='publish-controls'>
+			<Button>Publish</Button>
+			<Button variant='ghost'>Save as draft</Button>
+		</div>
 	</aside>
 </div>
 
@@ -58,6 +79,26 @@
 		gap: 50px;
     justify-items: start;
     justify-content: center;
+	}
+
+	.title {
+		display: grid;
+		grid-template-columns: auto 100px;
+		gap: 20px;
+    align-items: center;
+		font-size: 24px;
+	}
+
+	input {
+		padding: 5px;
+		border-radius: 5px;
+		border: var(--mint) solid 1px;
+		font-size: 24px;
+	}
+
+	input:focus,
+	input:hover {
+		border: var(--mint) solid 2px;
 	}
 
 	.controls {
