@@ -12,6 +12,12 @@
 	"/api/auth/validate": [
 		"src/routes/api/auth/validate/+server.ts"
 	],
+	"/api/blog": [
+		"src/routes/api/blog/+server.ts"
+	],
+	"/api/markdown": [
+		"src/routes/api/markdown/+server.ts"
+	],
 	"/blog": [],
 	"/blog/create": [
 		"src/routes/blog/create/+page.server.ts"

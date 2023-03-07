@@ -1,23 +1,43 @@
 import { redirect } from '@sveltejs/kit';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/firebase.config';
 
 type ParamsType = {
 	slug: string;
 };
 
+type BlogDocType = {
+	metadata: {
+		title: string;
+		description: string;
+		labels: string[];
+		createdAt: string;
+		updatedAt: string;
+	},
+	content: string;
+}
+
 export const load = async ({ params }: { params: ParamsType }) => {
-	let post;
+	let blogData;
 	try {
-		post = await import(`../../../blogs/${params.slug}.md`);
+		blogData = (await getDoc(doc(db, "blogs", params.slug))).data() as BlogDocType;
+
+		if (!blogData) {
+			throw new Error('Blog does not exist');
+		}
 	} catch {
 		throw redirect(307, '/blog');
 	}
 
-	const { title, date } = post.metadata;
-	const content = post.default;
+	const { title, createdAt, updatedAt, description, labels } = blogData.metadata
+	const content = blogData.content;
 
 	return {
-		content,
 		title,
-		date
+		description,
+		labels,
+		createdAt,
+		updatedAt,
+		content,
 	};
 };
