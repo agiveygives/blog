@@ -10,7 +10,8 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$bindings.data(data);
   $$result.css.add(css);
   return `<article class="${"svelte-174y7ih"}"><h1>${escape(data.title)}</h1>
-	<p>Published: ${escape(data.date)}</p>
+	<p>Published: ${escape(data.createdAt)}</p>
+	<p>Last updated: ${escape(data.updatedAt)}</p>
 	${validate_component(data.content || missing_component, "svelte:component").$$render($$result, {}, {}, {})}
 </article>`;
 });

@@ -204,10 +204,11 @@ const Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 			<li class="${"svelte-2iuv0z"}"><a href="${"/portfolio"}" class="${"svelte-2iuv0z"}">Portfolio</a></li>
 			<li class="${"svelte-2iuv0z"}"><a href="${"/about"}" class="${"svelte-2iuv0z"}">About Me</a></li></ul></nav>
 	<div><button class="${"menu svelte-2iuv0z"}">${validate_component(Fa, "Fa").$$render($$result, { icon: faBars, size: "2x" }, {}, {})}</button>
-			${validate_component(Popover, "Popover").$$render($$result, { show: isPopoverVisible }, {}, {
+		${validate_component(Popover, "Popover").$$render($$result, { show: isPopoverVisible }, {}, {
     default: () => {
       return `<button class="${"menu-option svelte-2iuv0z"}"><a href="${"mailto:agivens1996@gmail.com"}" class="${"svelte-2iuv0z"}">Contact</a></button>
-				${$loggedIn ? `<button class="${"menu-option svelte-2iuv0z"}">Log Out</button>` : ``}`;
+			${$loggedIn ? `<button class="${"menu-option svelte-2iuv0z"}"><a href="${"/blog/create"}" class="${"svelte-2iuv0z"}">Create blog</a></button>
+				<button class="${"menu-option svelte-2iuv0z"}">Log Out</button>` : ``}`;
     }
   })}</div>
 </header>`;

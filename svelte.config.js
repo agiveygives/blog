@@ -6,9 +6,7 @@ const config = {
 	extensions: ['.svelte', '.md'],
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
-	preprocess: [
-		vitePreprocess(),
-	],
+	preprocess: [vitePreprocess()],
 
 	kit: {
 		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.

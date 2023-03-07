@@ -27,8 +27,13 @@
 	background: var(--caribbean-current);
 }
 
+html {
+	height: 75%;
+}
+
 body {
 	margin: 0;
+	height: 75%;
 	background-color: var(--white);
 	font-size: 18px;
 	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',

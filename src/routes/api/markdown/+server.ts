@@ -16,10 +16,10 @@ export const POST: RequestHandler = async ({ request }) => {
 	try {
 		data = await request.json();
 		compiledMarkdown = purify.sanitize(marked.parse(data.markdown));
-	} catch(err) {
+	} catch (err) {
 		console.log(error);
 		throw error(500);
 	}
 
 	return json({ mdx: compiledMarkdown });
-}
+};

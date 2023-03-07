@@ -18,8 +18,8 @@
 	div {
 		margin: 100px 20px 15px 20px;
 		height: 100%;
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
+		display: flex;
+		justify-content: flex-start;
+		flex-direction: column;
 	}
 </style>

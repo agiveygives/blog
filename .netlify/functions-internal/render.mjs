@@ -6,7 +6,7 @@ export const handler = init({
 	assets: new Set(["andrew.png","global.css","images/bitmoji/bird-friends.png","images/bitmoji/secret.png","images/logos/css-logo.png","images/logos/docker-logo.png","images/logos/graphql-logo.png","images/logos/react-logo.png","images/logos/ruby-on-rails-logo.png","images/logos/typescript-logo.svg"]),
 	mimeTypes: {".png":"image/png",".css":"text/css",".svg":"image/svg+xml"},
 	_: {
-		client: {"start":{"file":"_app/immutable/entry/start.47a602d7.js","imports":["_app/immutable/entry/start.47a602d7.js","_app/immutable/chunks/index.8acc6421.js","_app/immutable/chunks/singletons.9482a958.js","_app/immutable/chunks/index.90d6a637.js","_app/immutable/chunks/control.e7f5239e.js"],"stylesheets":[],"fonts":[]},"app":{"file":"_app/immutable/entry/app.203e315b.js","imports":["_app/immutable/entry/app.203e315b.js","_app/immutable/chunks/index.8acc6421.js"],"stylesheets":[],"fonts":[]}},
+		client: {"start":{"file":"_app/immutable/entry/start.cbcaa54d.js","imports":["_app/immutable/entry/start.cbcaa54d.js","_app/immutable/chunks/index.3193b9c7.js","_app/immutable/chunks/singletons.8d0bf3b6.js","_app/immutable/chunks/index.ac476d2f.js"],"stylesheets":[],"fonts":[]},"app":{"file":"_app/immutable/entry/app.0ea01750.js","imports":["_app/immutable/entry/app.0ea01750.js","_app/immutable/chunks/index.3193b9c7.js"],"stylesheets":[],"fonts":[]}},
 		nodes: [
 			() => import('../server/nodes/0.js'),
 			() => import('../server/nodes/1.js'),
@@ -52,6 +52,20 @@ export const handler = init({
 				params: [],
 				page: null,
 				endpoint: () => import('../server/entries/endpoints/api/auth/validate/_server.ts.js')
+			},
+			{
+				id: "/api/blog",
+				pattern: /^\/api\/blog\/?$/,
+				params: [],
+				page: null,
+				endpoint: () => import('../server/entries/endpoints/api/blog/_server.ts.js')
+			},
+			{
+				id: "/api/markdown",
+				pattern: /^\/api\/markdown\/?$/,
+				params: [],
+				page: null,
+				endpoint: () => import('../server/entries/endpoints/api/markdown/_server.ts.js')
 			},
 			{
 				id: "/blog",

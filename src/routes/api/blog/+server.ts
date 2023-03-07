@@ -15,11 +15,11 @@ export const POST: RequestHandler = async ({ request }) => {
 
 		newBlogId = `${blogsData.size + 1}`;
 
-		await setDoc(doc(db, "blogs", newBlogId), data);
-	} catch(err) {
+		await setDoc(doc(db, 'blogs', newBlogId), data);
+	} catch (err) {
 		console.log(error);
 		throw error(500);
 	}
 
 	throw redirect(307, `/blog/${newBlogId}`);
-}
+};

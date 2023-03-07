@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	export let variant: 'primary' | 'secondary' | 'text' | 'ghost' = 'primary';
 	export let rounded = false;
 
@@ -6,19 +6,16 @@
 
 	let buttonClasses = variant;
 
-	$: buttonClasses = classnames(
-		variant,
-		{
-			rounded: rounded
-		},
-	)
+	$: buttonClasses = classnames(variant, {
+		rounded: rounded
+	});
 </script>
 
 <button class={buttonClasses} on:click>
 	<slot />
 </button>
 
-<style lang='scss'>
+<style lang="scss">
 	@import '@/scss/_variables.scss';
 
 	button {
@@ -36,7 +33,8 @@
 		background-color: $mint;
 		color: $white;
 
-		&:hover, &:focus {
+		&:hover,
+		&:focus {
 			background-color: darken($mint, 10%);
 		}
 	}
@@ -45,7 +43,8 @@
 		background-color: $coral;
 		color: $white;
 
-		&:hover, &:focus {
+		&:hover,
+		&:focus {
 			background-color: darken($coral, 10%);
 		}
 	}
@@ -54,7 +53,8 @@
 		background-color: transparent;
 		color: $mint;
 
-		&:hover, &:focus {
+		&:hover,
+		&:focus {
 			color: darken($mint, 10%);
 		}
 	}
@@ -64,9 +64,9 @@
 		background-color: transparent;
 		color: $caribbean-current;
 
-		&:hover, &:focus {
-			text-shadow:0px 0px 1px $caribbean-current;
+		&:hover,
+		&:focus {
+			text-shadow: 0px 0px 1px $caribbean-current;
 		}
 	}
 </style>
-

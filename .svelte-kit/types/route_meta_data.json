@@ -23,7 +23,7 @@
 		"src/routes/blog/create/+page.server.ts"
 	],
 	"/blog/[slug]": [
-		"src/routes/blog/[slug]/+page.ts"
+		"src/routes/blog/[slug]/+page.server.ts"
 	],
 	"/portfolio": []
 }

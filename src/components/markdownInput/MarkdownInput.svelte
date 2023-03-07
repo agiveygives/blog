@@ -10,7 +10,7 @@
 	let compiledMarkdown = '<div>Loading...</div>';
 
 	$: if (isPreview && markdown !== oldMarkdown) {
-		oldMarkdown = markdown
+		oldMarkdown = markdown;
 
 		compiledMarkdown = '<div>Loading...</div>';
 
@@ -24,48 +24,58 @@
 			})
 			.catch((e) => {
 				compiledMarkdown = '<div>Error compiling markdown</div>';
-			})
+			});
 	}
 </script>
 
-<div class='container'>
+<div class="container">
 	<div>
-		<div class='title'>
+		<div class="title">
 			{#if isEditTitle}
-				<input type='text' bind:value={blogTitle} />
-				<Button variant='primary' on:click={() => { isEditTitle = false; }}>
+				<input type="text" bind:value={blogTitle} />
+				<Button
+					variant="primary"
+					on:click={() => {
+						isEditTitle = false;
+					}}
+				>
 					Done
 				</Button>
 			{:else}
 				<div>{blogTitle}</div>
-				<Button variant='ghost' on:click={() => { isEditTitle = true; }}>
+				<Button
+					variant="ghost"
+					on:click={() => {
+						isEditTitle = true;
+					}}
+				>
 					Edit
 				</Button>
 			{/if}
 		</div>
-		<div class='controls' />
+		<div class="controls" />
 		{#if isPreview}
-			<div class='markdown'>{@html compiledMarkdown}</div>
+			<div class="markdown">{@html compiledMarkdown}</div>
 		{:else}
 			<textarea bind:value={markdown} />
 		{/if}
 	</div>
 
 	<aside>
-		<div class='preview-toggle'>
-			<Switch bind:checked={isPreview} id='preview-toggle' />
-			<label for='preview-toggle'>Preview</label>
+		<div class="preview-toggle">
+			<Switch bind:checked={isPreview} id="preview-toggle" />
+			<label for="preview-toggle">Preview</label>
 		</div>
 
-		<div class='metadata'>
+		<div class="metadata">
 			<select>
-				<option value='front-end'>front-end</option>
+				<option value="front-end">front-end</option>
 			</select>
 		</div>
 
-		<div class='publish-controls'>
+		<div class="publish-controls">
 			<Button>Publish</Button>
-			<Button variant='ghost'>Save as draft</Button>
+			<Button variant="ghost">Save as draft</Button>
 		</div>
 	</aside>
 </div>
@@ -77,15 +87,15 @@
 		display: grid;
 		grid-template-columns: auto 200px;
 		gap: 50px;
-    justify-items: start;
-    justify-content: center;
+		justify-items: start;
+		justify-content: center;
 	}
 
 	.title {
 		display: grid;
 		grid-template-columns: auto 100px;
 		gap: 20px;
-    align-items: center;
+		align-items: center;
 		font-size: 24px;
 	}
 
@@ -103,9 +113,9 @@
 
 	.controls {
 		display: grid;
-    justify-content: end;
-    grid-template-columns: auto auto;
-    align-items: center;
+		justify-content: end;
+		grid-template-columns: auto auto;
+		align-items: center;
 		padding-bottom: 15px;
 		max-width: 100vw;
 		width: 800px;
@@ -115,7 +125,8 @@
 		padding-left: 10px;
 	}
 
-	textarea, .markdown {
+	textarea,
+	.markdown {
 		max-width: 100vw;
 		width: 800px;
 		height: 100%;
@@ -125,7 +136,8 @@
 		border: solid 1px var(--mint);
 	}
 
-	textarea:focus, textarea:focus-visible {
+	textarea:focus,
+	textarea:focus-visible {
 		border: solid 2px var(--mint);
 		outline: none;
 	}
