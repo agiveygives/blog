@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Button from '@/components/button';
 	import Switch from '@/components/switch';
+	import { MultiSelect } from '@/components/select';
 
 	let isEditTitle = false;
 	let blogTitle = 'New Blog Post';
@@ -29,7 +30,7 @@
 </script>
 
 <div class="container">
-	<div>
+	<div class='md-input-container'>
 		<div class="title">
 			{#if isEditTitle}
 				<input type="text" bind:value={blogTitle} />
@@ -68,9 +69,7 @@
 		</div>
 
 		<div class="metadata">
-			<select>
-				<option value="front-end">front-end</option>
-			</select>
+			<MultiSelect />
 		</div>
 
 		<div class="publish-controls">
@@ -89,6 +88,12 @@
 		gap: 50px;
 		justify-items: start;
 		justify-content: center;
+	}
+
+	.md-input-container {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
 	}
 
 	.title {
@@ -144,7 +149,7 @@
 
 	aside {
 		position: sticky;
-		top: 125px;
+		top: 105px;
 		align-self: start;
 		display: grid;
 		gap: 15px;

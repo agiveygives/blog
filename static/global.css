@@ -28,12 +28,15 @@
 }
 
 html {
-	height: 75%;
+	display: flex;
+	height: 100%;
 }
 
 body {
 	margin: 0;
-	height: 75%;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
 	background-color: var(--white);
 	font-size: 18px;
 	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
@@ -45,4 +48,10 @@ body {
 .hidden {
 	display: none;
 	visibility: hidden;
+}
+
+.page-content {
+	margin: 100px 20px 15px 20px;
+	display: flex;
+	flex: 1;
 }

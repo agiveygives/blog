@@ -10,15 +10,12 @@
 	}
 </script>
 
-<div>
+<div class='page-content'>
 	<MarkdownInput />
 </div>
 
 <style>
 	div {
-		margin: 100px 20px 15px 20px;
-		height: 100%;
-		display: flex;
 		justify-content: flex-start;
 		flex-direction: column;
 	}
