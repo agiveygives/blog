@@ -8,6 +8,31 @@
 	--white: #f2f2f2;
 }
 
+@font-face {
+	font-family: 'Bauhaus';
+	src: url('fonts/bauhaus/BauhausRegular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'BauhausBold';
+	src: url('fonts/bauhaus/BauhausBold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'BauhausBoldItalic';
+	src: url('fonts/bauhaus/BauhausBoldItalic.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
+}
+@font-face {
+	font-family: 'BauhausItalic';
+	src: url('fonts/bauhaus/BauhausItalic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}
+
 ::-webkit-scrollbar {
 	width: 10px;
 }
@@ -39,10 +64,13 @@ body {
 	flex-direction: column;
 	background-color: var(--white);
 	font-size: 18px;
-	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-		'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+body, button, input {
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+		'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .hidden {

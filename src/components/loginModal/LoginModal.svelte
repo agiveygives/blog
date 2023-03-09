@@ -163,7 +163,7 @@
 
 	form {
 		display: grid;
-		grid-template-columns: auto;
+		grid-template-columns: 25%;
 		grid-gap: 10px;
 		justify-content: center;
 	}

@@ -1,15 +1,11 @@
 <script lang='ts'>
 	import classnames from 'classnames';
 	import { clickOutside } from '@/directives/onClickOutside';
+	import { TextInput } from '@/components/input';
+	import Popover from '@/components/popover';
 
-	export let options = [
-		{ value: 'front-end', display: 'Front End' },
-		{ value: 'back-end', display: 'Back End' },
-		{ value: 'web', display: 'Web' },
-		{ value: 'mobile', display: 'Mobile' },
-		{ value: 'ios', display: 'iOS' },
-		{ value: 'android', display: 'Android' },
-	];
+	export let options = [];
+	export let onSelectionChange = (selectedOptions: string[]) => {};
 	let filteredOptions = options;
 	let expanded = false;
 	let selectedOptions = [];
@@ -26,6 +22,8 @@
 		} else {
 			selectedOptions.push(event.target.value);
 		}
+
+		onSelectionChange(selectedOptions)
 	}
 
 	const showCheckboxes = () => {
@@ -42,11 +40,10 @@
 	$: filteredOptions = options.filter((option) => option.display.toLowerCase().includes(search.toLowerCase()))
 </script>
 
-<div class="multiselect" use:clickOutside on:click_outside={closeCheckboxes}>
-	<div class="selectBox">
-		<input type='text' bind:value={search} placeholder='Search' on:click={showCheckboxes} />
-	</div>
-	<div class={checkboxClass}>
+<div use:clickOutside on:click_outside={closeCheckboxes}>
+	<TextInput bind:value={search} placeholder='Search' on:click={showCheckboxes} />
+
+	<Popover show={expanded}>
 		{#each filteredOptions as option}
 			<label for={option.value}>
 				<input
@@ -58,33 +55,15 @@
 				<span>{option.display}</span>
 			</label>
 		{/each}
-	</div>
+	</Popover>
 </div>
 
 <style>
-	.multiselect {
-		width: 200px;
-	}
-
-	.selectBox {
-		position: relative;
-		cursor: pointer;
-	}
-
-	.selectBox input {
-		width: 100%;
-		font-weight: bold;
-	}
-
-	.checkboxes {
-		border: 1px #dadada solid;
-	}
-
-	.checkboxes label {
+	label {
 		display: block;
 	}
 
-	.checkboxes label:hover {
+	label:hover {
 		background-color: #1e90ff;
 }
 </style>

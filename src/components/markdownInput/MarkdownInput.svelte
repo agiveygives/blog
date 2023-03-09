@@ -2,6 +2,21 @@
 	import Button from '@/components/button';
 	import Switch from '@/components/switch';
 	import { MultiSelect } from '@/components/select';
+	import Pill from '@/components/pill';
+
+	let tags: string[] = [];
+	let tagOptions = [
+		{ value: 'front-end', display: 'Front End' },
+		{ value: 'back-end', display: 'Back End' },
+		{ value: 'web', display: 'Web' },
+		{ value: 'mobile', display: 'Mobile' },
+		{ value: 'ios', display: 'iOS' },
+		{ value: 'android', display: 'Android' },
+	];
+
+	const onSelectionChange = (newTags: string[]) => {
+		tags = newTags;
+	}
 
 	let isEditTitle = false;
 	let blogTitle = 'New Blog Post';
@@ -68,9 +83,20 @@
 			<label for="preview-toggle">Preview</label>
 		</div>
 
-		<div class="metadata">
-			<MultiSelect />
-		</div>
+		<fieldset class="tags">
+			<legend>Tags</legend>
+
+			<MultiSelect
+				options={tagOptions}
+				onSelectionChange={onSelectionChange}
+			/>
+
+			<div class='tags-container'>
+				{#each tags as tag}
+					<Pill>{tagOptions.find((option) => option.value === tag).display}</Pill>
+				{/each}
+			</div>
+		</fieldset>
 
 		<div class="publish-controls">
 			<Button>Publish</Button>
@@ -113,7 +139,7 @@
 
 	input:focus,
 	input:hover {
-		border: var(--mint) solid 2px;
+		border-color: var(--caribbean-current);
 	}
 
 	.controls {
@@ -155,10 +181,26 @@
 		gap: 15px;
 	}
 
-	.metadata {
+	.tags-container {
+		margin: 10px 0px;
+	}
+
+	.tags {
 		height: min-content;
 		border: solid 1px var(--coral);
 		border-radius: 5px;
 		padding: 10px 15px;
+		min-height: 200px;
+	}
+
+	legend {
+		font-size: 14px;
+		color: var(--coral);
+		font-size: bold;
+	}
+
+	.publish-controls {
+		display: flex;
+		justify-content: space-between;
 	}
 </style>
