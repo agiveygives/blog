@@ -3,6 +3,9 @@
 	import Switch from '@/components/switch';
 	import { MultiSelect } from '@/components/select';
 	import Pill from '@/components/pill';
+	import Drawer from '@/components/drawer';
+
+	let innerWidth = 0
 
 	let tags: string[] = [];
 	let tagOptions = [
@@ -44,6 +47,8 @@
 	}
 </script>
 
+<svelte:window bind:innerWidth />
+
 <div class="container">
 	<div class='md-input-container'>
 		<div class="title">
@@ -77,32 +82,63 @@
 		{/if}
 	</div>
 
-	<aside>
-		<div class="preview-toggle">
-			<Switch bind:checked={isPreview} id="preview-toggle" />
-			<label for="preview-toggle">Preview</label>
-		</div>
+	{#if innerWidth < 1200}
+		<Drawer placement='right' size='300px' open={true}>
+			<div class='drawer-content'>
+				<div class="preview-toggle">
+					<Switch bind:checked={isPreview} id="preview-toggle" />
+					<label for="preview-toggle">Preview</label>
+				</div>
 
-		<fieldset class="tags">
-			<legend>Tags</legend>
+				<fieldset class="tags">
+					<legend>Tags</legend>
 
-			<MultiSelect
-				options={tagOptions}
-				onSelectionChange={onSelectionChange}
-			/>
+					<MultiSelect
+						options={tagOptions}
+						onSelectionChange={onSelectionChange}
+					/>
 
-			<div class='tags-container'>
-				{#each tags as tag}
-					<Pill>{tagOptions.find((option) => option.value === tag).display}</Pill>
-				{/each}
+					<div class='tags-container'>
+						{#each tags as tag}
+							<Pill>{tagOptions.find((option) => option.value === tag).display}</Pill>
+						{/each}
+					</div>
+				</fieldset>
+
+				<div class="publish-controls">
+					<Button>Publish</Button>
+					<Button variant="ghost">Save as draft</Button>
+				</div>
 			</div>
-		</fieldset>
+		</Drawer>
+	{:else}
+		<aside>
+			<div class="preview-toggle">
+				<Switch bind:checked={isPreview} id="preview-toggle" />
+				<label for="preview-toggle">Preview</label>
+			</div>
 
-		<div class="publish-controls">
-			<Button>Publish</Button>
-			<Button variant="ghost">Save as draft</Button>
-		</div>
-	</aside>
+			<fieldset class="tags">
+				<legend>Tags</legend>
+
+				<MultiSelect
+					options={tagOptions}
+					onSelectionChange={onSelectionChange}
+				/>
+
+				<div class='tags-container'>
+					{#each tags as tag}
+						<Pill>{tagOptions.find((option) => option.value === tag).display}</Pill>
+					{/each}
+				</div>
+			</fieldset>
+
+			<div class="publish-controls">
+				<Button>Publish</Button>
+				<Button variant="ghost">Save as draft</Button>
+			</div>
+		</aside>
+	{/if}
 </div>
 
 <style>
@@ -110,15 +146,21 @@
 		flex-grow: 1;
 		height: auto;
 		display: grid;
-		grid-template-columns: auto 200px;
+		grid-template-columns: 800px auto;
 		gap: 50px;
 		justify-items: start;
 		justify-content: center;
 	}
 
+	@media screen and (max-width: 1200px) {
+		.container {
+			grid-template-columns: 80vw;
+		}
+	}
+
 	.md-input-container {
 		display: flex;
-		flex: 1;
+		width: 100%;
 		flex-direction: column;
 	}
 
@@ -149,7 +191,6 @@
 		align-items: center;
 		padding-bottom: 15px;
 		max-width: 100vw;
-		width: 800px;
 	}
 
 	label {
@@ -158,8 +199,6 @@
 
 	textarea,
 	.markdown {
-		max-width: 100vw;
-		width: 800px;
 		height: 100%;
 		resize: none;
 		padding: 20px;
@@ -202,5 +241,12 @@
 	.publish-controls {
 		display: flex;
 		justify-content: space-between;
+	}
+
+	.drawer-content {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		padding: 20px;
 	}
 </style>
