@@ -3,11 +3,11 @@
 - [x] Break MarkdownInput into smaller components
 - [x] Description (and excerpt?)
 - [x] Define authors
-- [ ] Publish
+- [x] Publish
 - [x] Save as draft
-- [ ] Display Blog list
+- [x] Display Blog list
 - [x] Render blog
-- [ ] Edit blog
+- [x] Edit blog
 - [ ] Autosave blog locally
 - [ ] Link blogs as a series
 - [ ] Create new tags

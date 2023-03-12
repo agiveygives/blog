@@ -1,24 +1,36 @@
 <script lang="ts">
+	export let blogId: string;
+	export let blogData: BlogType = {
+		description: '',
+		authors: '',
+		tags: [],
+		title: 'New Blog Post',
+		content: '',
+	};
+
 	import { goto } from '$app/navigation';
 	import Button from '@/components/button';
 	import Drawer from '@/components/drawer';
 	import { TextInput } from '@/components/input';
 	import MetadataInput from '@/components/markdownInput/MetadataInput.svelte';
 	import TitleInput from '@/components/markdownInput/TitleInput.svelte';
+	import type BlogType from '@/types/blogType';
 
 	let innerWidth = 0;
 
-	let description: string = '';
-	let authors: string = '';
-	let tags: string[] = [];
-	let blogTitle = 'New Blog Post';
-	let markdown = '';
+	let description: string = blogData.description;
+	let authors: string = blogData.authors;
+	let tags: string[] = blogData.tags;
+	let blogTitle = blogData.title;
+	let markdown = blogData.content;
 	let oldMarkdown: string | null = null;
 	let isPreview = false;
 	let compiledMarkdown = '<div>Loading...</div>';
 
 	const publish = (isPublic: boolean) => {
-		fetch('/api/blog', {
+		const uri = blogId ? `/api/blog/${blogId}` : '/api/blog'
+
+		fetch(uri, {
 			method: 'post',
 			body: JSON.stringify({
 				title: blogTitle,

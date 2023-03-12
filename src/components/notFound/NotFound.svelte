@@ -28,5 +28,6 @@
 
 	p {
 		margin: 5px 0px;
+		text-align: center;
 	}
 </style>

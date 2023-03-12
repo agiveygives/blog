@@ -31,5 +31,5 @@ export const load: Load = async () => {
 		blogs.push({ ...(doc.data() as BlogDocType), id: doc.id });
 	});
 
-	return { blogs };
+	return { blogs, loggedIn: !!auth.currentUser };
 };

@@ -9,6 +9,14 @@
 
 	const formatDate = (date: string) =>
 		new Date(date).toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' });
+
+	const handleClick = (blogId: string) => {
+		if (data.loggedIn) {
+			goto(`/blog/${blogId}/edit`)
+		} else {
+			goto(`/blog/${blogId}`)
+		}
+	}
 </script>
 
 <div class="page-content">
@@ -18,7 +26,7 @@
 	<ul>
 		{#each data.blogs as blog}
 			<li key={blog.id}>
-				<button on:click={() => goto(`/blog/${blog.id}`)}>
+				<button on:click={() => handleClick(blog.id)}>
 					<div class="title">
 						<span>{blog.title}</span>
 						<span class="authors">by: {blog.authors}</span>
