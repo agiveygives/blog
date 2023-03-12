@@ -1,32 +1,42 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import Button from '@/components/button';
-	import Switch from '@/components/switch';
-	import { MultiSelect } from '@/components/select';
-	import Pill from '@/components/pill';
 	import Drawer from '@/components/drawer';
+	import { TextInput } from '@/components/input';
+	import MetadataInput from '@/components/markdownInput/MetadataInput.svelte';
+	import TitleInput from '@/components/markdownInput/TitleInput.svelte';
 
 	let innerWidth = 0
 
+	let description: string = '';
+	let authors: string = ''
 	let tags: string[] = [];
-	let tagOptions = [
-		{ value: 'front-end', display: 'Front End' },
-		{ value: 'back-end', display: 'Back End' },
-		{ value: 'web', display: 'Web' },
-		{ value: 'mobile', display: 'Mobile' },
-		{ value: 'ios', display: 'iOS' },
-		{ value: 'android', display: 'Android' },
-	];
-
-	const onSelectionChange = (newTags: string[]) => {
-		tags = newTags;
-	}
-
-	let isEditTitle = false;
 	let blogTitle = 'New Blog Post';
 	let markdown = '';
 	let oldMarkdown: string | null = null;
 	let isPreview = false;
 	let compiledMarkdown = '<div>Loading...</div>';
+
+	const publish = (isPublic: boolean) => {
+		fetch('/api/blog', {
+			method: 'post',
+			body: JSON.stringify({
+				title: blogTitle,
+				description,
+				authors,
+				tags,
+				content: markdown,
+				draft: !isPublic,
+			})
+		})
+			.then((res) => res.json())
+			.then((body) => {
+				goto(`/blog/${body.id}`)
+			})
+			.catch((error) => {
+				console.log(error);
+			})
+	}
 
 	$: if (isPreview && markdown !== oldMarkdown) {
 		oldMarkdown = markdown;
@@ -50,94 +60,42 @@
 <svelte:window bind:innerWidth />
 
 <div class="container">
-	<div class='md-input-container'>
-		<div class="title">
-			{#if isEditTitle}
-				<input type="text" bind:value={blogTitle} />
-				<Button
-					variant="primary"
-					on:click={() => {
-						isEditTitle = false;
-					}}
-				>
-					Done
-				</Button>
+	{#if innerWidth > 0}
+		<div class='md-input-container'>
+			<TitleInput bind:value={blogTitle} />
+			<div class="controls" />
+			{#if isPreview}
+				<div class="markdown">{@html compiledMarkdown}</div>
 			{:else}
-				<div>{blogTitle}</div>
-				<Button
-					variant="ghost"
-					on:click={() => {
-						isEditTitle = true;
-					}}
-				>
-					Edit
-				</Button>
+				<textarea bind:value={markdown} />
 			{/if}
 		</div>
-		<div class="controls" />
-		{#if isPreview}
-			<div class="markdown">{@html compiledMarkdown}</div>
-		{:else}
-			<textarea bind:value={markdown} />
-		{/if}
-	</div>
 
-	{#if innerWidth < 1200}
-		<Drawer placement='right' size='300px' open={true}>
-			<div class='drawer-content'>
-				<div class="preview-toggle">
-					<Switch bind:checked={isPreview} id="preview-toggle" />
-					<label for="preview-toggle">Preview</label>
-				</div>
-
-				<fieldset class="tags">
-					<legend>Tags</legend>
-
-					<MultiSelect
-						options={tagOptions}
-						onSelectionChange={onSelectionChange}
+		{#if innerWidth < 1200}
+			<Drawer placement='right' size='300px'>
+				<div class='drawer-content'>
+					<MetadataInput
+						bind:isPreview={isPreview}
+						bind:tags={tags}
+						bind:authors={authors}
+						bind:description={description}
+						onPublish={() => publish(true)}
+						onSaveDraft={() => publish(false)}
 					/>
-
-					<div class='tags-container'>
-						{#each tags as tag}
-							<Pill>{tagOptions.find((option) => option.value === tag).display}</Pill>
-						{/each}
-					</div>
-				</fieldset>
-
-				<div class="publish-controls">
-					<Button>Publish</Button>
-					<Button variant="ghost">Save as draft</Button>
 				</div>
-			</div>
-		</Drawer>
-	{:else}
-		<aside>
-			<div class="preview-toggle">
-				<Switch bind:checked={isPreview} id="preview-toggle" />
-				<label for="preview-toggle">Preview</label>
-			</div>
-
-			<fieldset class="tags">
-				<legend>Tags</legend>
-
-				<MultiSelect
-					options={tagOptions}
-					onSelectionChange={onSelectionChange}
+			</Drawer>
+		{:else}
+			<aside>
+				<MetadataInput
+					bind:isPreview={isPreview}
+					bind:tags={tags}
+					bind:authors={authors}
+					bind:description={description}
+					onPublish={() => publish(true)}
+					onSaveDraft={() => publish(false)}
 				/>
-
-				<div class='tags-container'>
-					{#each tags as tag}
-						<Pill>{tagOptions.find((option) => option.value === tag).display}</Pill>
-					{/each}
-				</div>
-			</fieldset>
-
-			<div class="publish-controls">
-				<Button>Publish</Button>
-				<Button variant="ghost">Save as draft</Button>
-			</div>
-		</aside>
+			</aside>
+		{/if}
 	{/if}
 </div>
 
@@ -164,26 +122,6 @@
 		flex-direction: column;
 	}
 
-	.title {
-		display: grid;
-		grid-template-columns: auto 100px;
-		gap: 20px;
-		align-items: center;
-		font-size: 24px;
-	}
-
-	input {
-		padding: 5px;
-		border-radius: 5px;
-		border: var(--mint) solid 1px;
-		font-size: 24px;
-	}
-
-	input:focus,
-	input:hover {
-		border-color: var(--caribbean-current);
-	}
-
 	.controls {
 		display: grid;
 		justify-content: end;
@@ -191,10 +129,6 @@
 		align-items: center;
 		padding-bottom: 15px;
 		max-width: 100vw;
-	}
-
-	label {
-		padding-left: 10px;
 	}
 
 	textarea,
@@ -218,29 +152,6 @@
 		align-self: start;
 		display: grid;
 		gap: 15px;
-	}
-
-	.tags-container {
-		margin: 10px 0px;
-	}
-
-	.tags {
-		height: min-content;
-		border: solid 1px var(--coral);
-		border-radius: 5px;
-		padding: 10px 15px;
-		min-height: 200px;
-	}
-
-	legend {
-		font-size: 14px;
-		color: var(--coral);
-		font-size: bold;
-	}
-
-	.publish-controls {
-		display: flex;
-		justify-content: space-between;
 	}
 
 	.drawer-content {

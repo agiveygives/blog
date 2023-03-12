@@ -1,4 +1,5 @@
 import { redirect } from '@sveltejs/kit';
+import type { Load } from '@sveltejs/kit';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase.config';
 
@@ -7,17 +8,16 @@ type ParamsType = {
 };
 
 type BlogDocType = {
-	metadata: {
-		title: string;
-		description: string;
-		labels: string[];
-		createdAt: string;
-		updatedAt: string;
-	};
+	title: string;
+	authors: string;
+	description: string;
+	tags: string[];
+	createdAt: string;
+	updatedAt: string;
 	content: string;
 };
 
-export const load = async ({ params }: { params: ParamsType }) => {
+export const load: Load<ParamsType> = async ({ params, fetch }) => {
 	let blogData;
 	try {
 		blogData = (await getDoc(doc(db, 'blogs', params.slug))).data() as BlogDocType;
@@ -25,17 +25,32 @@ export const load = async ({ params }: { params: ParamsType }) => {
 		if (!blogData) {
 			throw new Error('Blog does not exist');
 		}
-	} catch {
+
+		const response = await fetch('/api/markdown', {
+			method: 'post',
+			body: JSON.stringify({ markdown: blogData.content })
+		});
+		blogData.content = (await response.json())?.mdx;
+	} catch(error) {
+		console.log(error);
 		throw redirect(307, '/blog');
 	}
 
-	const { title, createdAt, updatedAt, description, labels } = blogData.metadata;
-	const content = blogData.content;
+	const {
+		title,
+		authors,
+		content,
+		description,
+		tags,
+		createdAt,
+		updatedAt,
+	} = blogData;
 
 	return {
 		title,
 		description,
-		labels,
+		tags,
+		authors,
 		createdAt,
 		updatedAt,
 		content

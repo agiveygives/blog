@@ -1,30 +1,26 @@
 <script lang='ts'>
-	let pill;
+	const r = Math.round(Math.random(255) * 255);
+	const g = Math.round(Math.random(255) * 255);
+	const b = Math.round(Math.random(255) * 255);
 
-	$: {
-		if (pill) {
-			let r = Math.round(Math.random(255) * 255);
-			let g = Math.round(Math.random(255) * 255);
-			let b = Math.round(Math.random(255) * 255);
-			let backgroundColor = `rgba(${r}, ${g}, ${b}, 0.2)`;
-			let color = `rgb(${r}, ${g}, ${b})`;
-			pill.style.backgroundColor = backgroundColor;
-			pill.style.border = `solid 1px ${color}`;
-			pill.style.color = color;
-		}
-	}
+	const style = `--color: rgb(${r}, ${g}, ${b})`;
 </script>
 
-<div bind:this={pill}>
+<div {style}>
 	<slot />
 </div>
 
 <style lang='scss'>
 	div {
+		$color: var(--color);
+
 		padding: 5px;
 		border-radius: 50px;
-		font-size: 16px;
+		font-size: 12px;
 		margin: 5px 0px;
 		width: fit-content;
+		color: $color;
+		border: solid 1px $color;
+		/* background-color: lighten($color, 80%); */
 	}
 </style>

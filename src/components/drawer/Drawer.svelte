@@ -1,14 +1,15 @@
-<script>
+<script lang='ts'>
+	export let duration = 0.2;
+	export let placement: 'left' | 'right' | 'top' | 'bottom' = "left";
+	export let size = '300px';
+	export let open = false;
+
 	import { onMount } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
 	import Fa from 'svelte-fa';
 	import { faCaretLeft, faCaretRight, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 	import classnames from 'classnames';
 
-	export let duration = 0.2;
-	export let placement = "left";
-	export let size = '300px';
-	let open = false;
 	let icon = faCaretRight;
 
 	$: switch (placement) {
@@ -46,8 +47,24 @@
 
 	$: scrollLock(open)
 
-	function handleClickAway () {
-			dispatch('clickAway')
+	const handleClickAway = () => {
+		closeDrawer()
+	}
+
+	const handleKeyToggle = (event: MouseEvent) => {
+		if (event.key === 'Escape') {
+			closeDrawer();
+		}
+		if (event.key.toLowerCase() === 'o') {
+			openDrawer();
+		}
+	}
+
+	const openDrawer = () => {
+		open = true;
+	}
+	const closeDrawer = () => {
+		open = false;
 	}
 
 	onMount(() => {
@@ -57,6 +74,7 @@
 
 </script>
 
+<svelte:window on:keydown={handleKeyToggle} />
 
 <button class={classnames('toggle', placement, { closed: !open })} on:click={toggleDrawer} {style}>
 	<div class='toggle-icon' class:open {style}>
@@ -64,13 +82,12 @@
 	</div>
 </button>
 
-<aside class="drawer" class:open {style}>
-	<div class="overlay" on:click={handleClickAway} />
+<div class="overlay" class:open on:click={handleClickAway} on:keydown={handleKeyToggle} />
 
+<aside class="drawer" class:open {style}>
 	<div class="panel {placement}" class:size>
 		<slot />
 	</div>
-
 </aside>
 
 <style>
@@ -119,7 +136,7 @@
 			top: 0;
 			left: 0;
 			height: 100%;
-			width: 100%;
+			width: var(--size);
 			z-index: -1;
 			transition: z-index var(--duration) step-end;
 	}
@@ -135,14 +152,15 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
+			z-index: -1;
 			background: rgba(100, 100, 100, 0.5);
 			opacity: 0;
-			z-index: 2;
 			transition: opacity var(--duration) ease;
 	}
 
-	.drawer.open .overlay {
+	.overlay.open {
 			opacity: 1;
+			z-index: 99;
 	}
 
 	.panel {

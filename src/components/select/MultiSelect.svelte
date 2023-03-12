@@ -5,10 +5,10 @@
 	import Popover from '@/components/popover';
 
 	export let options = [];
+	export let selectedOptions = [];
 	export let onSelectionChange = (selectedOptions: string[]) => {};
 	let filteredOptions = options;
 	let expanded = false;
-	let selectedOptions = [];
 	let search = '';
 
 	const selectOption = (event) => {
@@ -50,6 +50,7 @@
 					type="checkbox"
 					id={option.value}
 					value={option.value}
+					checked={selectedOptions.includes(option.value)}
 					on:click={selectOption}
 				/>
 				<span>{option.display}</span>

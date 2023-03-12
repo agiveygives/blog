@@ -13,6 +13,11 @@
 		display: inline-block;
 		width: 30px;
 		height: 17px;
+		border-radius: 17px;
+	}
+
+	.switch:hover, .switch:focus, .switch:focus-within {
+		box-shadow: 0px 0px 5px rgb(0 0 0 / 50%);
 	}
 
 	.switch input {
