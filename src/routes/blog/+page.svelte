@@ -89,6 +89,8 @@
 	.title {
 		display: flex;
 		flex-wrap: wrap;
+		gap: 5px;
+    align-items: flex-end;
 	}
 
 	.authors {
