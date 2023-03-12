@@ -1,4 +1,6 @@
 <script lang="ts">
+	export let onLogin: () => void;
+
 	import Fa from 'svelte-fa';
 	import classnames from 'classnames';
 	import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -76,6 +78,8 @@
 			{#if $loggedIn}
 				<button class="menu-option"><a href="/blog/create">Create blog</a></button>
 				<button class="menu-option" on:click={logout}>Log Out</button>
+			{:else}
+				<button class='menu-option' on:click={() => onLogin()}>Log in</button>
 			{/if}
 		</Popover>
 	</div>
