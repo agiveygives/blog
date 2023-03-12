@@ -1,8 +1,7 @@
 <div>
-	<img src="/images/bitmoji/duck.png" alt="Andrew Givens Bitmoji with a Duck" />
-	<p>Ope. This is awkward.</p>
-	<p>It looks like I don't have what you're looking for.</p>
-	<p>Would you like this duck?</p>
+	<img src="/images/bitmoji/construction.png" alt="Andrew Givens Bitmoji with a jack hammer" />
+	<p>This one still has a bit of work to do.</p>
+	<p>Check back later!</p>
 </div>
 
 <style>

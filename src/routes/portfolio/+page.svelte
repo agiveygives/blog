@@ -1,9 +1,7 @@
-<div>
-	<h3>Portfolio</h3>
-</div>
+<script>
+	import UnderConstruction from '@/components/underConstruction';
+</script>
 
-<style>
-	div {
-		margin: 100px 20px 15px 20px;
-	}
-</style>
+<div class="page-content">
+	<UnderConstruction />
+</div>

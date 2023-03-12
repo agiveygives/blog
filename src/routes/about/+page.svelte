@@ -1,7 +1,7 @@
 <script>
-	import { onMount } from 'svelte';
+	import UnderConstruction from '@/components/underConstruction';
 </script>
 
 <div class="page-content">
-	<h3>About Me</h3>
+	<UnderConstruction />
 </div>
