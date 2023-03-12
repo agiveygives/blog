@@ -1,12 +1,29 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import { faX } from '@fortawesome/free-solid-svg-icons';
 	import { loggedIn } from '@/stores/loggedIn';
+	import { clickOutside } from '@/directives/onClickOutside';
 
-	let showModal = false;
+	export let showModal = false;
+	let mounted = false;
 	let greeting = '';
 	let email: string;
 	let password: string;
+
+	const scrollLock = (showModal) => {
+		if (mounted) {
+			const body = document.querySelector('body');
+			body.style.overflow = showModal ? 'hidden' : 'auto';
+		}
+	};
+
+	$: scrollLock(showModal);
+
+	onMount(() => {
+		mounted = true;
+		scrollLock(showModal);
+	});
 
 	const handleSubmit = (e) => {
 		const formData = new FormData(e.target);
@@ -85,7 +102,13 @@
 
 		<div class="header">{greeting}</div>
 
-		<div class="modal-content">
+		<div
+			class="modal-content"
+			use:clickOutside
+			on:click_outside={() => {
+				showModal = false;
+			}}
+		>
 			<div class="bitmoji-container">
 				<img class="bitmoji" src="/images/bitmoji/secret.png" alt="Andrew Givens Bitmoji shh" />
 			</div>
@@ -163,9 +186,21 @@
 
 	form {
 		display: grid;
-		grid-template-columns: auto;
+		grid-template-columns: 25%;
 		grid-gap: 10px;
 		justify-content: center;
+	}
+
+	@media screen and (max-width: 1000px) {
+		form {
+			grid-template-columns: 50%;
+		}
+	}
+
+	@media screen and (max-width: 500px) {
+		form {
+			grid-template-columns: 90%;
+		}
 	}
 
 	input {

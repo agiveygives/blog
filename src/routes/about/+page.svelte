@@ -2,12 +2,6 @@
 	import { onMount } from 'svelte';
 </script>
 
-<div>
+<div class="page-content">
 	<h3>About Me</h3>
 </div>
-
-<style>
-	div {
-		margin: 100px 20px 15px 20px;
-	}
-</style>

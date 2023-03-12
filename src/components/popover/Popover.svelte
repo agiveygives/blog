@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	export let show = false;
 
 	import classnames from 'classnames';
@@ -7,12 +7,12 @@
 </script>
 
 <div class={popoverClasses}>
-	<div class='content'>
+	<div class="content">
 		<slot />
 	</div>
 </div>
 
-<style lang='scss'>
+<style lang="scss">
 	@import '@/scss/_variables.scss';
 
 	.popover {
@@ -25,5 +25,6 @@
 		border-radius: 5px;
 		position: absolute;
 		right: 0;
+		min-width: 100%;
 	}
 </style>

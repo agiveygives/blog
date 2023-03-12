@@ -1,4 +1,6 @@
 <script lang="ts">
+	export let onLogin: () => void;
+
 	import Fa from 'svelte-fa';
 	import classnames from 'classnames';
 	import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -31,11 +33,11 @@
 
 	const togglePopover = () => {
 		isPopoverVisible = !isPopoverVisible;
-	}
+	};
 
 	const closePopover = () => {
 		isPopoverVisible = false;
-	}
+	};
 
 	let duration = '300ms';
 	let headerClass = 'sharp';
@@ -70,13 +72,16 @@
 		</ul>
 	</nav>
 	<div use:clickOutside on:click_outside={closePopover}>
-			<button class="menu" on:click={togglePopover}><Fa icon={faBars} size="2x" /></button>
-			<Popover show={isPopoverVisible}>
-				<button class='menu-option'><a href='mailto:agivens1996@gmail.com'>Contact</a></button>
-				{#if $loggedIn}
-					<button class='menu-option' on:click={logout}>Log Out</button>
-				{/if}
-			</Popover>
+		<button class="menu" on:click={togglePopover}><Fa icon={faBars} size="2x" /></button>
+		<Popover show={isPopoverVisible}>
+			<button class="menu-option"><a href="mailto:agivens1996@gmail.com">Contact</a></button>
+			{#if $loggedIn}
+				<button class="menu-option"><a href="/blog/create">Create blog</a></button>
+				<button class="menu-option" on:click={logout}>Log Out</button>
+			{:else}
+				<button class="menu-option" on:click={() => onLogin()}>Log in</button>
+			{/if}
+		</Popover>
 	</div>
 </header>
 
@@ -179,7 +184,8 @@
 				transform-origin: center;
 			}
 
-			&:hover::after, &:focus::after {
+			&:hover::after,
+			&:focus::after {
 				opacity: 1;
 				transform: translate3d(0, 0.2em, 0);
 				transform: scale(1);

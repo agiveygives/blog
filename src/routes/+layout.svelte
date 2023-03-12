@@ -1,10 +1,16 @@
 <script lang="ts">
 	import Header from '@/components/header';
 	import LoginModal from '@/components/loginModal';
+
+	let loginOpen = false;
 </script>
 
-<Header />
+<Header
+	onLogin={() => {
+		loginOpen = true;
+	}}
+/>
 
-<LoginModal />
+<LoginModal bind:showModal={loginOpen} />
 
 <slot />

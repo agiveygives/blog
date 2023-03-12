@@ -1,4 +1,6 @@
 <script>
+	export let data;
+
 	import { onMount } from 'svelte';
 	import { invalidateAll } from '$app/navigation';
 	import { browser } from '$app/environment';
@@ -11,7 +13,7 @@
 </script>
 
 <div class="page-content">
-	<MarkdownInput />
+	<MarkdownInput blogData={data.blogData} blogId={data.blogId} />
 </div>
 
 <style>
