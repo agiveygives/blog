@@ -191,6 +191,18 @@
 		justify-content: center;
 	}
 
+	@media screen and (max-width: 1000px) {
+		form {
+			grid-template-columns: 50%;
+		}
+	}
+
+	@media screen and (max-width: 500px) {
+		form {
+			grid-template-columns: 90%;
+		}
+	}
+
 	input {
 		padding: 5px;
 		border-radius: 5px;

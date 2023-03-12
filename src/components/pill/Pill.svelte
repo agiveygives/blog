@@ -3,7 +3,9 @@
 	const g = Math.round(Math.random(255) * 255);
 	const b = Math.round(Math.random(255) * 255);
 
-	const style = `--color: rgb(${r}, ${g}, ${b})`;
+	export let color = `rgb(${r}, ${g}, ${b})`;
+
+	const style = `--color: ${color}`;
 </script>
 
 <div {style}>

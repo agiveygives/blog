@@ -29,7 +29,12 @@
 		align-items: center;
 		width: 50%;
 		margin: 100px auto;
-		min-width: 500px;
+	}
+
+	@media screen and (max-width: 700px) {
+		article {
+			width: 90%;
+		}
 	}
 
 	h1 {

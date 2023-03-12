@@ -60,9 +60,6 @@
 		if (event.key === 'Escape') {
 			closeDrawer();
 		}
-		if (event.key.toLowerCase() === 'o') {
-			openDrawer();
-		}
 	};
 
 	const openDrawer = () => {

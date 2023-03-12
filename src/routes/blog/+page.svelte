@@ -23,6 +23,9 @@
 						{#each blog.tags as tag}
 							<Pill>{tag}</Pill>
 						{/each}
+						{#if blog.draft}
+							<Pill color='red'>Draft</Pill>
+						{/if}
 					</div>
 
 					<div class="publish-date">
@@ -59,6 +62,7 @@
 	li {
 		width: 100%;
 		list-style: none;
+		margin-bottom: 20px;
 	}
 
 	button {
@@ -103,6 +107,11 @@
 		width: 100%;
 		gap: 5px;
 		justify-content: flex-end;
+	}
+
+	.draft {
+		border-color: var(--coral);
+		color: var(--coral);
 	}
 
 	.publish-date {
