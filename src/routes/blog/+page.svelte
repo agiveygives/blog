@@ -3,6 +3,7 @@
 
 	import { goto } from '$app/navigation';
 
+	import NotFound from '@/components/notFound';
 	import Link from '@/components/link';
 	import Pill from '@/components/pill';
 
@@ -11,6 +12,9 @@
 </script>
 
 <div class="page-content">
+	{#if data.blogs.length < 1}
+		<NotFound />
+	{/if}
 	<ul>
 		{#each data.blogs as blog}
 			<li key={blog.id}>
@@ -107,11 +111,6 @@
 		width: 100%;
 		gap: 5px;
 		justify-content: flex-end;
-	}
-
-	.draft {
-		border-color: var(--coral);
-		color: var(--coral);
 	}
 
 	.publish-date {
