@@ -5,7 +5,7 @@
 		authors: '',
 		tags: [],
 		title: 'New Blog Post',
-		content: '',
+		content: ''
 	};
 
 	import { goto } from '$app/navigation';
@@ -28,7 +28,7 @@
 	let compiledMarkdown = '<div>Loading...</div>';
 
 	const publish = (isPublic: boolean) => {
-		const uri = blogId ? `/api/blog/${blogId}` : '/api/blog'
+		const uri = blogId ? `/api/blog/${blogId}` : '/api/blog';
 
 		fetch(uri, {
 			method: 'post',

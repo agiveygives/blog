@@ -16,10 +16,14 @@ export const POST: RequestHandler = async ({ request, params }) => {
 
 		const data = await request.json();
 
-		await setDoc(doc(db, 'blogs', blogId), {
-			...data,
-			updatedAt: now
-		}, { merge: true });
+		await setDoc(
+			doc(db, 'blogs', blogId),
+			{
+				...data,
+				updatedAt: now
+			},
+			{ merge: true }
+		);
 	} catch (err) {
 		console.log(error);
 		throw error(500);

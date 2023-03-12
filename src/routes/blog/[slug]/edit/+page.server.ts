@@ -31,8 +31,8 @@ export const load: Load<ParamsType> = async ({ params }) => {
 			authors,
 			createdAt,
 			updatedAt,
-			content,
+			content
 		},
-		blogId: params.slug,
+		blogId: params.slug
 	};
 };

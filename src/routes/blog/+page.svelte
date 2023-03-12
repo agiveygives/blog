@@ -12,11 +12,11 @@
 
 	const handleClick = (blogId: string) => {
 		if (data.loggedIn) {
-			goto(`/blog/${blogId}/edit`)
+			goto(`/blog/${blogId}/edit`);
 		} else {
-			goto(`/blog/${blogId}`)
+			goto(`/blog/${blogId}`);
 		}
-	}
+	};
 </script>
 
 <div class="page-content">
@@ -36,7 +36,7 @@
 							<Pill>{tag}</Pill>
 						{/each}
 						{#if blog.draft}
-							<Pill color='red'>Draft</Pill>
+							<Pill color="red">Draft</Pill>
 						{/if}
 					</div>
 
