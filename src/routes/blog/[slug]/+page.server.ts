@@ -31,20 +31,12 @@ export const load: Load<ParamsType> = async ({ params, fetch }) => {
 			body: JSON.stringify({ markdown: blogData.content })
 		});
 		blogData.content = (await response.json())?.mdx;
-	} catch(error) {
+	} catch (error) {
 		console.log(error);
 		throw redirect(307, '/blog');
 	}
 
-	const {
-		title,
-		authors,
-		content,
-		description,
-		tags,
-		createdAt,
-		updatedAt,
-	} = blogData;
+	const { title, authors, content, description, tags, createdAt, updatedAt } = blogData;
 
 	return {
 		title,

@@ -79,7 +79,7 @@
 				<button class="menu-option"><a href="/blog/create">Create blog</a></button>
 				<button class="menu-option" on:click={logout}>Log Out</button>
 			{:else}
-				<button class='menu-option' on:click={() => onLogin()}>Log in</button>
+				<button class="menu-option" on:click={() => onLogin()}>Log in</button>
 			{/if}
 		</Popover>
 	</div>

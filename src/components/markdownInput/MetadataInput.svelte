@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	export let isPreview = false;
 	export let tags: string[] = [];
 	export let authors: string;
@@ -19,12 +19,12 @@
 		{ value: 'web', display: 'Web' },
 		{ value: 'mobile', display: 'Mobile' },
 		{ value: 'ios', display: 'iOS' },
-		{ value: 'android', display: 'Android' },
+		{ value: 'android', display: 'Android' }
 	];
 
 	const onSelectionChange = (newTags: string[]) => {
 		tags = newTags;
-	}
+	};
 </script>
 
 <div class="preview-toggle">
@@ -35,17 +35,13 @@
 <fieldset class="authors">
 	<legend>Authors</legend>
 
-	<TextInput placeholder="Authors" size='md' bind:value={authors} />
+	<TextInput placeholder="Authors" size="md" bind:value={authors} />
 </fieldset>
 
 <fieldset class="tags">
 	<legend>Tags</legend>
 
-	<MultiSelect
-		options={tagOptions}
-		bind:selectedOptions={tags}
-		onSelectionChange={onSelectionChange}
-	/>
+	<MultiSelect options={tagOptions} bind:selectedOptions={tags} {onSelectionChange} />
 
 	<div class={classnames('tags-container', { filled: tags.length > 0 })}>
 		{#each tags as tag}
@@ -57,8 +53,12 @@
 <fieldset class="description">
 	<legend>Description</legend>
 
-	<div class='description-container'>
-		<textarea bind:value={description} maxLength={200} placeholder='Description about your blog post.' />
+	<div class="description-container">
+		<textarea
+			bind:value={description}
+			maxLength={200}
+			placeholder="Description about your blog post."
+		/>
 	</div>
 </fieldset>
 
@@ -75,10 +75,10 @@
 	}
 
 	.tags-container {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    flex-wrap: wrap;
+		display: flex;
+		justify-content: flex-start;
+		flex-direction: row;
+		flex-wrap: wrap;
 		column-gap: 10px;
 	}
 

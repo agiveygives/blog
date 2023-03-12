@@ -1,28 +1,33 @@
-<script lang='ts'>
+<script lang="ts">
 	export let duration = 0.2;
-	export let placement: 'left' | 'right' | 'top' | 'bottom' = "left";
+	export let placement: 'left' | 'right' | 'top' | 'bottom' = 'left';
 	export let size = '300px';
 	export let open = false;
 
 	import { onMount } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
 	import Fa from 'svelte-fa';
-	import { faCaretLeft, faCaretRight, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+	import {
+		faCaretLeft,
+		faCaretRight,
+		faCaretUp,
+		faCaretDown
+	} from '@fortawesome/free-solid-svg-icons';
 	import classnames from 'classnames';
 
 	let icon = faCaretRight;
 
 	$: switch (placement) {
-		case "left":
+		case 'left':
 			icon = faCaretRight;
 			break;
-		case "right":
+		case 'right':
 			icon = faCaretLeft;
 			break;
-		case "top":
+		case 'top':
 			icon = faCaretDown;
 			break;
-		case "bottom":
+		case 'bottom':
 			icon = faCaretUp;
 			break;
 		default:
@@ -31,25 +36,25 @@
 
 	const toggleDrawer = () => {
 		open = !open;
-	}
+	};
 
-	let mounted = false
-	const dispatch = createEventDispatcher()
+	let mounted = false;
+	const dispatch = createEventDispatcher();
 
 	$: style = `--duration: ${duration}s; --size: ${size};`;
 
 	function scrollLock(open) {
-			if (mounted) {
-					const body = document.querySelector("body");
-					body.style.overflow = open ? 'hidden' : 'auto'
-			}
+		if (mounted) {
+			const body = document.querySelector('body');
+			body.style.overflow = open ? 'hidden' : 'auto';
+		}
 	}
 
-	$: scrollLock(open)
+	$: scrollLock(open);
 
 	const handleClickAway = () => {
-		closeDrawer()
-	}
+		closeDrawer();
+	};
 
 	const handleKeyToggle = (event: MouseEvent) => {
 		if (event.key === 'Escape') {
@@ -58,27 +63,26 @@
 		if (event.key.toLowerCase() === 'o') {
 			openDrawer();
 		}
-	}
+	};
 
 	const openDrawer = () => {
 		open = true;
-	}
+	};
 	const closeDrawer = () => {
 		open = false;
-	}
+	};
 
 	onMount(() => {
-			mounted = true
-			scrollLock(open)
-	})
-
+		mounted = true;
+		scrollLock(open);
+	});
 </script>
 
 <svelte:window on:keydown={handleKeyToggle} />
 
 <button class={classnames('toggle', placement, { closed: !open })} on:click={toggleDrawer} {style}>
-	<div class='toggle-icon' class:open {style}>
-		<Fa icon={icon} />
+	<div class="toggle-icon" class:open {style}>
+		<Fa {icon} />
 	</div>
 </button>
 
@@ -132,77 +136,77 @@
 	}
 
 	.drawer {
-			position: fixed;
-			top: 0;
-			left: 0;
-			height: 100%;
-			width: var(--size);
-			z-index: -1;
-			transition: z-index var(--duration) step-end;
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: var(--size);
+		z-index: -1;
+		transition: z-index var(--duration) step-end;
 	}
 
 	.drawer.open {
-			z-index: 99;
-			transition: z-index var(--duration) step-start;
+		z-index: 99;
+		transition: z-index var(--duration) step-start;
 	}
 
 	.overlay {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			z-index: -1;
-			background: rgba(100, 100, 100, 0.5);
-			opacity: 0;
-			transition: opacity var(--duration) ease;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		background: rgba(100, 100, 100, 0.5);
+		opacity: 0;
+		transition: opacity var(--duration) ease;
 	}
 
 	.overlay.open {
-			opacity: 1;
-			z-index: 99;
+		opacity: 1;
+		z-index: 99;
 	}
 
 	.panel {
-			position: fixed;
-			width: 100%;
-			height: 100%;
-			background: var(--white);
-			z-index: 3;
-			transition: transform var(--duration) ease;
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		background: var(--white);
+		z-index: 3;
+		transition: transform var(--duration) ease;
 	}
 
 	.panel.left {
-			left: 0;
-			transform: translate(-100%, 0);
+		left: 0;
+		transform: translate(-100%, 0);
 	}
 
 	.panel.right {
-			right: 0;
-			transform: translate(100%, 0);
+		right: 0;
+		transform: translate(100%, 0);
 	}
 
 	.panel.top {
-			top: 0;
-			transform: translate(0, -100%);
+		top: 0;
+		transform: translate(0, -100%);
 	}
 
 	.panel.bottom {
-			bottom: 0;
-			transform: translate(0, 100%);
+		bottom: 0;
+		transform: translate(0, 100%);
 	}
 
 	.panel.left.size,
 	.panel.right.size {
-			max-width: var(--size);
+		max-width: var(--size);
 	}
 
 	.panel.top.size,
 	.panel.bottom.size {
-			max-height: var(--size);
+		max-height: var(--size);
 	}
 
 	.drawer.open .panel {
-			transform: translate(0, 0);
+		transform: translate(0, 0);
 	}
 </style>

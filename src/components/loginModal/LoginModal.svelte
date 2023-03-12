@@ -6,24 +6,24 @@
 	import { clickOutside } from '@/directives/onClickOutside';
 
 	export let showModal = false;
-	let mounted = false
+	let mounted = false;
 	let greeting = '';
 	let email: string;
 	let password: string;
 
 	const scrollLock = (showModal) => {
-			if (mounted) {
-					const body = document.querySelector("body");
-					body.style.overflow = showModal ? 'hidden' : 'auto'
-			}
-	}
+		if (mounted) {
+			const body = document.querySelector('body');
+			body.style.overflow = showModal ? 'hidden' : 'auto';
+		}
+	};
 
 	$: scrollLock(showModal);
 
 	onMount(() => {
-			mounted = true
-			scrollLock(showModal)
-	})
+		mounted = true;
+		scrollLock(showModal);
+	});
 
 	const handleSubmit = (e) => {
 		const formData = new FormData(e.target);
@@ -102,7 +102,13 @@
 
 		<div class="header">{greeting}</div>
 
-		<div class="modal-content" use:clickOutside on:click_outside={() => { showModal = false; }}>
+		<div
+			class="modal-content"
+			use:clickOutside
+			on:click_outside={() => {
+				showModal = false;
+			}}
+		>
 			<div class="bitmoji-container">
 				<img class="bitmoji" src="/images/bitmoji/secret.png" alt="Andrew Givens Bitmoji shh" />
 			</div>

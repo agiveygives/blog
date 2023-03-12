@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	export let value = 'New Blog Post';
 	let isEditTitle = false;
 
@@ -8,7 +8,7 @@
 
 <div class="title">
 	{#if isEditTitle}
-		<TextInput bind:value={value} size='xl' />
+		<TextInput bind:value size="xl" />
 		<Button
 			variant="primary"
 			on:click={() => {

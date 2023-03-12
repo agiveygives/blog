@@ -10,7 +10,7 @@
 	}
 </script>
 
-<div class='page-content'>
+<div class="page-content">
 	<MarkdownInput />
 </div>
 

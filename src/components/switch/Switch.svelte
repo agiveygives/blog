@@ -16,7 +16,9 @@
 		border-radius: 17px;
 	}
 
-	.switch:hover, .switch:focus, .switch:focus-within {
+	.switch:hover,
+	.switch:focus,
+	.switch:focus-within {
 		box-shadow: 0px 0px 5px rgb(0 0 0 / 50%);
 	}
 

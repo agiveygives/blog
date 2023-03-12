@@ -6,10 +6,10 @@
 	import MetadataInput from '@/components/markdownInput/MetadataInput.svelte';
 	import TitleInput from '@/components/markdownInput/TitleInput.svelte';
 
-	let innerWidth = 0
+	let innerWidth = 0;
 
 	let description: string = '';
-	let authors: string = ''
+	let authors: string = '';
 	let tags: string[] = [];
 	let blogTitle = 'New Blog Post';
 	let markdown = '';
@@ -26,17 +26,17 @@
 				authors,
 				tags,
 				content: markdown,
-				draft: !isPublic,
+				draft: !isPublic
 			})
 		})
 			.then((res) => res.json())
 			.then((body) => {
-				goto(`/blog/${body.id}`)
+				goto(`/blog/${body.id}`);
 			})
 			.catch((error) => {
 				console.log(error);
-			})
-	}
+			});
+	};
 
 	$: if (isPreview && markdown !== oldMarkdown) {
 		oldMarkdown = markdown;
@@ -61,7 +61,7 @@
 
 <div class="container">
 	{#if innerWidth > 0}
-		<div class='md-input-container'>
+		<div class="md-input-container">
 			<TitleInput bind:value={blogTitle} />
 			<div class="controls" />
 			{#if isPreview}
@@ -72,13 +72,13 @@
 		</div>
 
 		{#if innerWidth < 1200}
-			<Drawer placement='right' size='300px'>
-				<div class='drawer-content'>
+			<Drawer placement="right" size="300px">
+				<div class="drawer-content">
 					<MetadataInput
-						bind:isPreview={isPreview}
-						bind:tags={tags}
-						bind:authors={authors}
-						bind:description={description}
+						bind:isPreview
+						bind:tags
+						bind:authors
+						bind:description
 						onPublish={() => publish(true)}
 						onSaveDraft={() => publish(false)}
 					/>
@@ -87,10 +87,10 @@
 		{:else}
 			<aside>
 				<MetadataInput
-					bind:isPreview={isPreview}
-					bind:tags={tags}
-					bind:authors={authors}
-					bind:description={description}
+					bind:isPreview
+					bind:tags
+					bind:authors
+					bind:description
 					onPublish={() => publish(true)}
 					onSaveDraft={() => publish(false)}
 				/>

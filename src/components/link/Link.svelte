@@ -1,10 +1,10 @@
-<script lang='ts'>
+<script lang="ts">
 	export let href = '';
 </script>
 
-<a href={href}><slot /></a>
+<a {href}><slot /></a>
 
-<style lang='scss'>
+<style lang="scss">
 	@import '@/scss/_variables.scss';
 
 	a {

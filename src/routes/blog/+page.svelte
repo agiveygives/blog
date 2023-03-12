@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	export let data;
 
 	import { goto } from '$app/navigation';
@@ -6,32 +6,30 @@
 	import Link from '@/components/link';
 	import Pill from '@/components/pill';
 
-	const formatDate = (date: string) => (
-		(new Date(date))
-			.toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' })
-	);
+	const formatDate = (date: string) =>
+		new Date(date).toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' });
 </script>
 
-<div class='page-content'>
+<div class="page-content">
 	<ul>
 		{#each data.blogs as blog}
 			<li key={blog.id}>
 				<button on:click={() => goto(`/blog/${blog.id}`)}>
-					<div class='title'>
+					<div class="title">
 						<span>{blog.title}</span>
-						<span class='authors'>by: {blog.authors}</span>
+						<span class="authors">by: {blog.authors}</span>
 					</div>
-					<div class='tags'>
+					<div class="tags">
 						{#each blog.tags as tag}
 							<Pill>{tag}</Pill>
 						{/each}
 					</div>
 
-					<div class='publish-date'>
+					<div class="publish-date">
 						{formatDate(blog.createdAt)}
 					</div>
 
-					<div class='description'>
+					<div class="description">
 						{blog.description}
 					</div>
 				</button>
@@ -43,8 +41,8 @@
 <style>
 	.page-content {
 		align-items: center;
-    width: 50%;
-    margin: 100px auto;
+		width: 50%;
+		margin: 100px auto;
 	}
 
 	@media screen and (max-width: 700px) {
@@ -60,7 +58,7 @@
 
 	li {
 		width: 100%;
-    list-style: none;
+		list-style: none;
 	}
 
 	button {
@@ -69,20 +67,22 @@
 		align-items: center;
 		justify-items: start;
 		height: 100%;
-    width: 100%;
-    padding: 20px;
-    background-color: var(--white);
-    border: solid 1px var(--mint);
-    border-radius: 10px;
+		width: 100%;
+		padding: 20px;
+		background-color: var(--white);
+		border: solid 1px var(--mint);
+		border-radius: 10px;
 		font-size: 16px;
 		color: var(--caribbean-current);
 		cursor: pointer;
-    box-shadow: 0px 0px 5px rgb(0 0 0 / 20%);
+		box-shadow: 0px 0px 5px rgb(0 0 0 / 20%);
 	}
 
-	button:hover, button:focus, button:focus-within {
+	button:hover,
+	button:focus,
+	button:focus-within {
 		border-color: var(--caribbean-current);
-    box-shadow: 0px 0px 10px rgb(0 0 0 / 50%);
+		box-shadow: 0px 0px 10px rgb(0 0 0 / 50%);
 		transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
 	}
 
@@ -90,7 +90,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 5px;
-    align-items: flex-end;
+		align-items: flex-end;
 	}
 
 	.authors {
@@ -100,9 +100,9 @@
 
 	.tags {
 		display: inline-flex;
-    width: 100%;
-    gap: 5px;
-    justify-content: flex-end;
+		width: 100%;
+		gap: 5px;
+		justify-content: flex-end;
 	}
 
 	.publish-date {

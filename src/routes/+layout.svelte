@@ -5,7 +5,11 @@
 	let loginOpen = false;
 </script>
 
-<Header onLogin={() => { loginOpen = true; }} />
+<Header
+	onLogin={() => {
+		loginOpen = true;
+	}}
+/>
 
 <LoginModal bind:showModal={loginOpen} />
 

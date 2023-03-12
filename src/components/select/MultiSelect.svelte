@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	import classnames from 'classnames';
 	import { clickOutside } from '@/directives/onClickOutside';
 	import { TextInput } from '@/components/input';
@@ -13,9 +13,7 @@
 
 	const selectOption = (event) => {
 		const clickedOption = event.target.value;
-		const selectedIndex = selectedOptions.findIndex((option) => (
-			option === clickedOption
-		));
+		const selectedIndex = selectedOptions.findIndex((option) => option === clickedOption);
 
 		if (selectedIndex > -1) {
 			selectedOptions.splice(selectedIndex, 1);
@@ -23,25 +21,27 @@
 			selectedOptions.push(event.target.value);
 		}
 
-		onSelectionChange(selectedOptions)
-	}
+		onSelectionChange(selectedOptions);
+	};
 
 	const showCheckboxes = () => {
 		expanded = true;
-	}
+	};
 
 	const closeCheckboxes = () => {
 		expanded = false;
-	}
+	};
 
 	let checkboxClass = 'checkboxes';
 	$: checkboxClass = classnames('checkboxes', { hidden: !expanded });
 
-	$: filteredOptions = options.filter((option) => option.display.toLowerCase().includes(search.toLowerCase()))
+	$: filteredOptions = options.filter((option) =>
+		option.display.toLowerCase().includes(search.toLowerCase())
+	);
 </script>
 
 <div use:clickOutside on:click_outside={closeCheckboxes}>
-	<TextInput bind:value={search} placeholder='Search' on:click={showCheckboxes} />
+	<TextInput bind:value={search} placeholder="Search" on:click={showCheckboxes} />
 
 	<Popover show={expanded}>
 		{#each filteredOptions as option}
@@ -66,5 +66,5 @@
 
 	label:hover {
 		background-color: #1e90ff;
-}
+	}
 </style>

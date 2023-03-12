@@ -1,10 +1,10 @@
-<script lang='ts'>
+<script lang="ts">
 	export let placeholder = '';
 	export let value: string;
 	export let size: 'sm' | 'md' | 'lg' | 'xl' = 'md';
 </script>
 
-<input type='text' bind:value={value} on:click placeholder={placeholder} class={size} />
+<input type="text" bind:value on:click {placeholder} class={size} />
 
 <style>
 	input {

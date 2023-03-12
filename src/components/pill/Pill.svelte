@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	const r = Math.round(Math.random(255) * 255);
 	const g = Math.round(Math.random(255) * 255);
 	const b = Math.round(Math.random(255) * 255);
@@ -10,7 +10,7 @@
 	<slot />
 </div>
 
-<style lang='scss'>
+<style lang="scss">
 	div {
 		$color: var(--color);
 

@@ -22,14 +22,14 @@ export const load: Load = async () => {
 	if (auth.currentUser) {
 		blogsQuery = query(blogsRef, orderBy('createdAt', 'desc'));
 	} else {
-		blogsQuery = query(blogsRef, where("draft", "==", false), orderBy('createdAt', 'desc'));
+		blogsQuery = query(blogsRef, where('draft', '==', false), orderBy('createdAt', 'desc'));
 	}
 
 	const blogsData = await getDocs(blogsQuery);
 
 	blogsData.forEach((doc) => {
-		blogs.push({ ...doc.data() as BlogDocType, id: doc.id })
-	})
+		blogs.push({ ...(doc.data() as BlogDocType), id: doc.id });
+	});
 
 	return { blogs };
 };

@@ -5,7 +5,7 @@ import { db } from '@/firebase.config';
 /** @type {import('./$types').RequestHandler} */
 export const POST: RequestHandler = async ({ request }) => {
 	let newBlogId = '';
-	const now = (new Date()).toUTCString();
+	const now = new Date().toUTCString();
 
 	try {
 		const data = await request.json();
@@ -19,7 +19,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		await setDoc(doc(db, 'blogs', newBlogId), {
 			...data,
 			createdAt: now,
-			updatedAt: now,
+			updatedAt: now
 		});
 	} catch (err) {
 		console.log(error);
