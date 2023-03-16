@@ -16,7 +16,7 @@
 - [x] Render blog
 - [x] Edit blog
 - [ ] Controls to quickly add markdown templates for Headers, text modifiers, code blocks, tables, images, etc.
-- [ ] Better compiled markdown styling w/ syntax highlighting
+- [x] Better compiled markdown styling w/ syntax highlighting
 - [ ] Word/Character count
 - [ ] Field Validations
 - [ ] PublishedAt Date
