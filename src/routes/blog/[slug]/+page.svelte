@@ -31,7 +31,7 @@
 		margin: 100px auto;
 	}
 
-	@media screen and (max-width: 700px) {
+	@media screen and (max-width: 1200px) {
 		article {
 			width: 90%;
 		}

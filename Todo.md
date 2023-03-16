@@ -16,6 +16,7 @@
 - [x] Render blog
 - [x] Edit blog
 - [ ] Controls to quickly add markdown templates for Headers, text modifiers, code blocks, tables, images, etc.
+- [ ] Better compiled markdown styling w/ syntax highlighting
 - [ ] Word/Character count
 - [ ] Field Validations
 - [ ] PublishedAt Date
@@ -26,7 +27,6 @@
 - [ ] Link blogs as a series
 - [ ] Create new tags
 - [ ] Use a store for the MarkdownInput values
-- [ ] Syntax highlighting(?)
 - [ ] Support Gists
 
 # Portfolio
