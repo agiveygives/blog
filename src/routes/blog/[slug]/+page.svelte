@@ -1,6 +1,8 @@
 <script>
 	export let data;
 
+	import RenderMarkdown from '@/components/renderMarkdown';
+
 	const createdAt = new Date(data.createdAt).toLocaleString('default', {
 		month: 'long',
 		day: 'numeric',
@@ -18,9 +20,7 @@
 	<p>{data.authors}</p>
 	<p>Published: {createdAt}</p>
 	<p>Last updated: {updatedAt}</p>
-	<div>
-		{@html data.content}
-	</div>
+	<RenderMarkdown markdown={data.content} />
 </article>
 
 <style>
@@ -31,7 +31,7 @@
 		margin: 100px auto;
 	}
 
-	@media screen and (max-width: 700px) {
+	@media screen and (max-width: 1200px) {
 		article {
 			width: 90%;
 		}

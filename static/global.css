@@ -86,3 +86,68 @@ input {
 	flex: 1;
 	flex-direction: column;
 }
+
+.centered {
+	display: grid;
+	justify-content: center;
+}
+
+/**
+ * ==============================================
+ * Dot Bricks
+ * ==============================================
+ */
+.loading {
+  position: relative;
+  top: 8px;
+  left: -9999px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: var(--mint);
+  color: var(--mint);
+  box-shadow: 9991px -16px 0 0 var(--mint), 9991px 0 0 0 var(--mint), 10007px 0 0 0 var(--mint);
+  animation: dot-bricks 2s infinite ease;
+}
+
+@keyframes dot-bricks {
+  0% {
+    box-shadow: 9991px -16px 0 0 var(--mint), 9991px 0 0 0 var(--mint), 10007px 0 0 0 var(--mint);
+  }
+  8.333% {
+    box-shadow: 10007px -16px 0 0 var(--mint), 9991px 0 0 0 var(--mint), 10007px 0 0 0 var(--mint);
+  }
+  16.667% {
+    box-shadow: 10007px -16px 0 0 var(--mint), 9991px -16px 0 0 var(--mint), 10007px 0 0 0 var(--mint);
+  }
+  25% {
+    box-shadow: 10007px -16px 0 0 var(--mint), 9991px -16px 0 0 var(--mint), 9991px 0 0 0 var(--mint);
+  }
+  33.333% {
+    box-shadow: 10007px 0 0 0 var(--mint), 9991px -16px 0 0 var(--mint), 9991px 0 0 0 var(--mint);
+  }
+  41.667% {
+    box-shadow: 10007px 0 0 0 var(--mint), 10007px -16px 0 0 var(--mint), 9991px 0 0 0 var(--mint);
+  }
+  50% {
+    box-shadow: 10007px 0 0 0 var(--mint), 10007px -16px 0 0 var(--mint), 9991px -16px 0 0 var(--mint);
+  }
+  58.333% {
+    box-shadow: 9991px 0 0 0 var(--mint), 10007px -16px 0 0 var(--mint), 9991px -16px 0 0 var(--mint);
+  }
+  66.666% {
+    box-shadow: 9991px 0 0 0 var(--mint), 10007px 0 0 0 var(--mint), 9991px -16px 0 0 var(--mint);
+  }
+  75% {
+    box-shadow: 9991px 0 0 0 var(--mint), 10007px 0 0 0 var(--mint), 10007px -16px 0 0 var(--mint);
+  }
+  83.333% {
+    box-shadow: 9991px -16px 0 0 var(--mint), 10007px 0 0 0 var(--mint), 10007px -16px 0 0 var(--mint);
+  }
+  91.667% {
+    box-shadow: 9991px -16px 0 0 var(--mint), 9991px 0 0 0 var(--mint), 10007px -16px 0 0 var(--mint);
+  }
+  100% {
+    box-shadow: 9991px -16px 0 0 var(--mint), 9991px 0 0 0 var(--mint), 10007px 0 0 0 var(--mint);
+  }
+}
