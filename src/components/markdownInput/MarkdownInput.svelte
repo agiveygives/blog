@@ -15,7 +15,11 @@
 	import MetadataInput from '@/components/markdownInput/MetadataInput.svelte';
 	import TitleInput from '@/components/markdownInput/TitleInput.svelte';
 	import RenderMarkdown from '@/components/renderMarkdown';
+	import Controls from '@/components/markdownInput/Controls.svelte';
 	import type BlogType from '@/types/blogType';
+	import markdownData from '@/components/markdownInput/store';
+
+	markdownData.set(blogData);
 
 	let innerWidth = 0;
 
@@ -25,6 +29,15 @@
 	let blogTitle = blogData.title;
 	let markdown = blogData.content;
 	let isPreview = false;
+
+	$: {
+		console.log($markdownData);
+		markdownData.update((data) => {
+			data.content = markdown;
+
+			return data;
+		})
+	}
 
 	const publish = (isPublic: boolean) => {
 		const uri = blogId ? `/api/blog/${blogId}` : '/api/blog';
@@ -55,12 +68,16 @@
 <div class="container">
 	{#if innerWidth > 0}
 		<div class="md-input-container">
-			<TitleInput bind:value={blogTitle} />
-			<div class="controls" />
+			<TitleInput />
+
+			<div class="controls">
+				<Controls textareaRef={textareaRef} text={markdown} />
+			</div>
+
 			{#if isPreview}
 				<RenderMarkdown {markdown} />
 			{:else}
-				<textarea bind:value={markdown} />
+				<textarea bind:this={textareaRef} bind:value={markdown} />
 			{/if}
 		</div>
 
@@ -69,9 +86,6 @@
 				<div class="drawer-content">
 					<MetadataInput
 						bind:isPreview
-						bind:tags
-						bind:authors
-						bind:description
 						onPublish={() => publish(true)}
 						onSaveDraft={() => publish(false)}
 					/>
@@ -81,9 +95,6 @@
 			<aside>
 				<MetadataInput
 					bind:isPreview
-					bind:tags
-					bind:authors
-					bind:description
 					onPublish={() => publish(true)}
 					onSaveDraft={() => publish(false)}
 				/>
