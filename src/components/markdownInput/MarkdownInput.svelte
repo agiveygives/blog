@@ -14,6 +14,7 @@
 	import { TextInput } from '@/components/input';
 	import MetadataInput from '@/components/markdownInput/MetadataInput.svelte';
 	import TitleInput from '@/components/markdownInput/TitleInput.svelte';
+	import RenderMarkdown from '@/components/renderMarkdown';
 	import type BlogType from '@/types/blogType';
 
 	let innerWidth = 0;
@@ -23,9 +24,7 @@
 	let tags: string[] = blogData.tags;
 	let blogTitle = blogData.title;
 	let markdown = blogData.content;
-	let oldMarkdown: string | null = null;
 	let isPreview = false;
-	let compiledMarkdown = '<div>Loading...</div>';
 
 	const publish = (isPublic: boolean) => {
 		const uri = blogId ? `/api/blog/${blogId}` : '/api/blog';
@@ -49,24 +48,6 @@
 				console.log(error);
 			});
 	};
-
-	$: if (isPreview && markdown !== oldMarkdown) {
-		oldMarkdown = markdown;
-
-		compiledMarkdown = '<div>Loading...</div>';
-
-		fetch('/api/markdown', {
-			method: 'post',
-			body: JSON.stringify({ markdown })
-		})
-			.then((res) => res.json())
-			.then((body) => {
-				compiledMarkdown = body?.mdx;
-			})
-			.catch((e) => {
-				compiledMarkdown = '<div>Error compiling markdown</div>';
-			});
-	}
 </script>
 
 <svelte:window bind:innerWidth />
@@ -77,7 +58,7 @@
 			<TitleInput bind:value={blogTitle} />
 			<div class="controls" />
 			{#if isPreview}
-				<div class="markdown">{@html compiledMarkdown}</div>
+				<RenderMarkdown markdown={markdown} />
 			{:else}
 				<textarea bind:value={markdown} />
 			{/if}
@@ -143,8 +124,7 @@
 		max-width: 100vw;
 	}
 
-	textarea,
-	.markdown {
+	textarea {
 		height: 100%;
 		resize: none;
 		padding: 20px;
