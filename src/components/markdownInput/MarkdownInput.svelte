@@ -24,9 +24,7 @@
 	let tags: string[] = blogData.tags;
 	let blogTitle = blogData.title;
 	let markdown = blogData.content;
-	let oldMarkdown: string | null = null;
 	let isPreview = false;
-	let compiledMarkdown = '<div>Loading...</div>';
 
 	const publish = (isPublic: boolean) => {
 		const uri = blogId ? `/api/blog/${blogId}` : '/api/blog';
@@ -50,24 +48,6 @@
 				console.log(error);
 			});
 	};
-
-	// $: if (isPreview && markdown !== oldMarkdown) {
-	// 	oldMarkdown = markdown;
-
-	// 	compiledMarkdown = '<div>Loading...</div>';
-
-	// 	fetch('/api/markdown', {
-	// 		method: 'post',
-	// 		body: JSON.stringify({ markdown })
-	// 	})
-	// 		.then((res) => res.json())
-	// 		.then((body) => {
-	// 			compiledMarkdown = body?.mdx;
-	// 		})
-	// 		.catch((e) => {
-	// 			compiledMarkdown = '<div>Error compiling markdown</div>';
-	// 		});
-	// }
 </script>
 
 <svelte:window bind:innerWidth />
