@@ -1,18 +1,18 @@
 <script lang="ts">
 	export let isPreview = false;
-	export let tags: string[] = [];
-	export let authors: string;
-	export let description: string;
 	export let onPublish: () => void;
 	export let onSaveDraft: () => void;
 
+	import classnames from 'classnames';
 	import Button from '@/components/button';
 	import Switch from '@/components/switch';
 	import { MultiSelect } from '@/components/select';
 	import Pill from '@/components/pill';
 	import { TextInput } from '@/components/input';
-	import classnames from 'classnames';
+	import markdownData from '@/components/markdownInput/store';
 
+	let authors: string = $markdownData.authors;
+	let description: string = $markdownData.description;
 	let tagOptions = [
 		{ value: 'front-end', display: 'Front End' },
 		{ value: 'back-end', display: 'Back End' },
@@ -22,8 +22,21 @@
 		{ value: 'android', display: 'Android' }
 	];
 
+	$: {
+		markdownData.update((data) => {
+			data.description = description;
+			data.authors = authors;
+
+			return data;
+		})
+	}
+
 	const onSelectionChange = (newTags: string[]) => {
-		tags = newTags;
+		markdownData.update((data) => {
+			data.tags = newTags;
+
+			return data;
+		});
 	};
 </script>
 
@@ -41,10 +54,10 @@
 <fieldset class="tags">
 	<legend>Tags</legend>
 
-	<MultiSelect options={tagOptions} bind:selectedOptions={tags} {onSelectionChange} />
+	<MultiSelect options={tagOptions} selectedOptions={$markdownData.tags} onSelectionChange={onSelectionChange} />
 
-	<div class={classnames('tags-container', { filled: tags.length > 0 })}>
-		{#each tags as tag}
+	<div class={classnames('tags-container', { filled: $markdownData.tags.length > 0 })}>
+		{#each $markdownData.tags as tag}
 			<Pill>{tagOptions.find((option) => option.value === tag).display}</Pill>
 		{/each}
 	</div>
@@ -80,6 +93,7 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		column-gap: 10px;
+		width: 200px;
 	}
 
 	.tags-container.filled {

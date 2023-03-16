@@ -1,9 +1,18 @@
 <script lang="ts">
-	export let value = 'New Blog Post';
-	let isEditTitle = false;
-
 	import Button from '@/components/button';
 	import { TextInput } from '@/components/input';
+	import markdownData from '@/components/markdownInput/store';
+
+	let value = $markdownData.title;
+	let isEditTitle = false;
+
+	$: {
+		markdownData.update((data) => {
+			data.title = value;
+
+			return data;
+		})
+	}
 </script>
 
 <div class="title">

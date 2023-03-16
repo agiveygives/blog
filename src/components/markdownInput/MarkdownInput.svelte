@@ -14,18 +14,32 @@
 	import { TextInput } from '@/components/input';
 	import MetadataInput from '@/components/markdownInput/MetadataInput.svelte';
 	import TitleInput from '@/components/markdownInput/TitleInput.svelte';
+	import Controls from '@/components/markdownInput/Controls.svelte';
 	import type BlogType from '@/types/blogType';
+	import markdownData from '@/components/markdownInput/store';
+
+	markdownData.set(blogData);
 
 	let innerWidth = 0;
 
-	let description: string = blogData.description;
-	let authors: string = blogData.authors;
-	let tags: string[] = blogData.tags;
-	let blogTitle = blogData.title;
-	let markdown = blogData.content;
+	let description: string = $markdownData.description;
+	let authors: string = $markdownData.authors;
+	let tags: string[] = $markdownData.tags;
+	let blogTitle = $markdownData.title;
+	let markdown = $markdownData.content;
+	let textareaRef: HTMLElement;
 	let oldMarkdown: string | null = null;
 	let isPreview = false;
 	let compiledMarkdown = '<div>Loading...</div>';
+
+	$: {
+		console.log($markdownData);
+		markdownData.update((data) => {
+			data.content = markdown;
+
+			return data;
+		})
+	}
 
 	const publish = (isPublic: boolean) => {
 		const uri = blogId ? `/api/blog/${blogId}` : '/api/blog';
@@ -74,12 +88,16 @@
 <div class="container">
 	{#if innerWidth > 0}
 		<div class="md-input-container">
-			<TitleInput bind:value={blogTitle} />
-			<div class="controls" />
+			<TitleInput />
+
+			<div class="controls">
+				<Controls textareaRef={textareaRef} text={markdown} />
+			</div>
+
 			{#if isPreview}
 				<div class="markdown">{@html compiledMarkdown}</div>
 			{:else}
-				<textarea bind:value={markdown} />
+				<textarea bind:this={textareaRef} bind:value={markdown} />
 			{/if}
 		</div>
 
@@ -88,9 +106,6 @@
 				<div class="drawer-content">
 					<MetadataInput
 						bind:isPreview
-						bind:tags
-						bind:authors
-						bind:description
 						onPublish={() => publish(true)}
 						onSaveDraft={() => publish(false)}
 					/>
@@ -100,9 +115,6 @@
 			<aside>
 				<MetadataInput
 					bind:isPreview
-					bind:tags
-					bind:authors
-					bind:description
 					onPublish={() => publish(true)}
 					onSaveDraft={() => publish(false)}
 				/>
