@@ -17,7 +17,7 @@ type BlogDocType = {
 	content: string;
 };
 
-export const load: Load<ParamsType> = async ({ params, fetch }) => {
+export const load: Load<ParamsType> = async ({ params }) => {
 	let blogData;
 	try {
 		blogData = (await getDoc(doc(db, 'blogs', params.slug))).data() as BlogDocType;
@@ -25,12 +25,6 @@ export const load: Load<ParamsType> = async ({ params, fetch }) => {
 		if (!blogData) {
 			throw new Error('Blog does not exist');
 		}
-
-		const response = await fetch('/api/markdown', {
-			method: 'post',
-			body: JSON.stringify({ markdown: blogData.content })
-		});
-		blogData.content = (await response.json())?.mdx;
 	} catch (error) {
 		console.log(error);
 		throw redirect(307, '/blog');

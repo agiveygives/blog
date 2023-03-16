@@ -1,6 +1,4 @@
 <script>
-	import { onMount } from 'svelte';
-
 	export let companies;
 	const totalCompanies = companies.length;
 </script>
