@@ -11,7 +11,7 @@
 			data.title = value;
 
 			return data;
-		})
+		});
 	}
 </script>
 

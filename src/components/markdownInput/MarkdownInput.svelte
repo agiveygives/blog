@@ -9,6 +9,7 @@
 	};
 
 	import { goto } from '$app/navigation';
+	import classnames from 'classnames';
 	import Button from '@/components/button';
 	import Drawer from '@/components/drawer';
 	import { TextInput } from '@/components/input';
@@ -27,18 +28,8 @@
 	let authors: string = $markdownData.authors;
 	let tags: string[] = $markdownData.tags;
 	let blogTitle = $markdownData.title;
-	let markdown = $markdownData.content;
 	let textareaRef: HTMLElement;
 	let isPreview = false;
-
-	$: {
-		console.log($markdownData);
-		markdownData.update((data) => {
-			data.content = markdown;
-
-			return data;
-		})
-	}
 
 	const publish = (isPublic: boolean) => {
 		const uri = blogId ? `/api/blog/${blogId}` : '/api/blog';
@@ -50,7 +41,7 @@
 				description,
 				authors,
 				tags,
-				content: markdown,
+				content: $markdownData.content,
 				draft: !isPublic
 			})
 		})
@@ -71,14 +62,14 @@
 		<div class="md-input-container">
 			<TitleInput />
 
-			<div class="controls">
-				<Controls textareaRef={textareaRef} text={markdown} />
+			<div class={classnames('controls', { hidden: isPreview })}>
+				<Controls {textareaRef} text={$markdownData.content} />
 			</div>
 
 			{#if isPreview}
-				<RenderMarkdown markdown={markdown} />
+				<RenderMarkdown markdown={$markdownData.content} />
 			{:else}
-				<textarea bind:this={textareaRef} bind:value={markdown} />
+				<textarea bind:this={textareaRef} bind:value={$markdownData.content} />
 			{/if}
 		</div>
 
@@ -105,6 +96,11 @@
 </div>
 
 <style>
+	.hidden {
+		display: none;
+		visibility: hidden;
+	}
+
 	.container {
 		flex-grow: 1;
 		height: auto;
@@ -129,10 +125,9 @@
 
 	.controls {
 		display: grid;
-		justify-content: end;
+		justify-content: start;
 		grid-template-columns: auto auto;
 		align-items: center;
-		padding-bottom: 15px;
 		max-width: 100vw;
 	}
 
@@ -146,7 +141,7 @@
 
 	textarea:focus,
 	textarea:focus-visible {
-		border: solid 2px var(--mint);
+		border: solid 1px var(--caribbean-current);
 		outline: none;
 	}
 

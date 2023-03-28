@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	export let markdown: string = '';
 
 	import { onMount } from 'svelte';
@@ -8,19 +8,19 @@
 	import mdiTable from 'markdown-it-multimd-table';
 	import mdiFootnote from 'markdown-it-footnote';
 	import mdiHighlightJs from 'markdown-it-highlightjs';
-	import mdiAbbr from'markdown-it-abbr';
-	import mdiContainer from'markdown-it-container';
-	import mdiDefList from'markdown-it-deflist';
-	import mdiIns from'markdown-it-ins';
-	import mdiMark from'markdown-it-mark';
-	import mdiSub from'markdown-it-sub';
-	import mdiSup from'markdown-it-sup';
+	import mdiAbbr from 'markdown-it-abbr';
+	import mdiContainer from 'markdown-it-container';
+	import mdiDefList from 'markdown-it-deflist';
+	import mdiIns from 'markdown-it-ins';
+	import mdiMark from 'markdown-it-mark';
+	import mdiSub from 'markdown-it-sub';
+	import mdiSup from 'markdown-it-sup';
 
 	const md = new markdownIt({
 		html: true,
 		breaks: true,
 		linkify: true,
-		typographer:  true,
+		typographer: true
 	})
 		.use(mdiHighlightJs)
 		.use(mdiEmoji)
@@ -32,18 +32,17 @@
 		.use(mdiIns)
 		.use(mdiMark)
 		.use(mdiSub)
-		.use(mdiSup)
+		.use(mdiSup);
 
 	let compiledMarkdown = '<div class="centered"><div class="loading" /></div>';
 	let purify;
-
 
 	onMount(() => {
 		purify = DOMPurify(window);
 	});
 
 	$: if (purify) {
-		compiledMarkdown = purify.sanitize(md.render(markdown))
+		compiledMarkdown = purify.sanitize(md.render(markdown));
 	}
 </script>
 
@@ -65,8 +64,8 @@
 		color: #bababa;
 		background-color: #2d2d2d;
 		padding: 10px;
-    border-radius: 10px;
-    white-space: break-spaces;
+		border-radius: 10px;
+		white-space: break-spaces;
 	}
 
 	.markdown :global(table) {
@@ -76,7 +75,8 @@
 		border-spacing: 1px;
 	}
 
-	.markdown :global(td), .markdown :global(th) {
+	.markdown :global(td),
+	.markdown :global(th) {
 		border: 1px solid var(--white);
 		padding: 8px;
 	}

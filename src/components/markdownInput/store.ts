@@ -13,5 +13,5 @@ export default writable({
 	content: '',
 	authors: '',
 	tags: [],
-	description: '',
+	description: ''
 });

@@ -28,7 +28,7 @@
 			data.authors = authors;
 
 			return data;
-		})
+		});
 	}
 
 	const onSelectionChange = (newTags: string[]) => {
@@ -54,7 +54,7 @@
 <fieldset class="tags">
 	<legend>Tags</legend>
 
-	<MultiSelect options={tagOptions} selectedOptions={$markdownData.tags} onSelectionChange={onSelectionChange} />
+	<MultiSelect options={tagOptions} selectedOptions={$markdownData.tags} {onSelectionChange} />
 
 	<div class={classnames('tags-container', { filled: $markdownData.tags.length > 0 })}>
 		{#each $markdownData.tags as tag}
