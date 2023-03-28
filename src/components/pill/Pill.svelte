@@ -20,9 +20,11 @@
 		border-radius: 50px;
 		font-size: 12px;
 		margin: 5px 0px;
+		width: -moz-fit-content;
 		width: fit-content;
 		color: $color;
 		border: solid 1px $color;
+		filter: contrast(50%);
 		/* background-color: lighten($color, 80%); */
 	}
 </style>
