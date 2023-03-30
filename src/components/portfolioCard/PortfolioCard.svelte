@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	export let title: string;
 	export let description: string;
 	export let imageUrl: string;
@@ -12,21 +12,21 @@
 	import Pill from '@/components/pill';
 </script>
 
-<div class='card'>
+<div class="card">
 	<img src={imageUrl} alt={`${title} project image`} />
 
 	<h3>{title}</h3>
 	<p>{description}</p>
 
-	<div class='footer'>
-		<div class='row'>
+	<div class="footer">
+		<div class="row">
 			{#each techStack as tool}
 				<Pill color="var(--caribbean-current)">{tool}</Pill>
 			{/each}
 		</div>
-		<div class='row links'>
-			<a href={demoUrl} target="_blank" rel="noreferrer"><Fa icon={faExternalLink}  size="lg" /></a>
-			<a href={githubRepo} target="_blank" rel="noreferrer"><Fa icon={faGithub}  size="2x" /></a>
+		<div class="row links">
+			<a href={demoUrl} target="_blank" rel="noreferrer"><Fa icon={faExternalLink} size="lg" /></a>
+			<a href={githubRepo} target="_blank" rel="noreferrer"><Fa icon={faGithub} size="2x" /></a>
 		</div>
 	</div>
 </div>
@@ -59,9 +59,9 @@
 	.row {
 		display: flex;
 		flex-direction: row;
-    column-gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
+		column-gap: 10px;
+		align-items: center;
+		flex-wrap: wrap;
 	}
 
 	.links {

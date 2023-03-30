@@ -58,7 +58,7 @@
 			<TitleInput bind:value={blogTitle} />
 			<div class="controls" />
 			{#if isPreview}
-				<RenderMarkdown markdown={markdown} />
+				<RenderMarkdown {markdown} />
 			{:else}
 				<textarea bind:value={markdown} />
 			{/if}
