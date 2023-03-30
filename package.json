@@ -12,7 +12,7 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"devDependencies": {
-		"@fortawesome/free-brands-svg-icons": "^6.3.0",
+		"@fortawesome/free-brands-svg-icons": "^6.4.0",
 		"@fortawesome/free-solid-svg-icons": "^6.3.0",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/adapter-netlify": "^1.0.0-next.88",
@@ -31,6 +31,7 @@
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^4.0.0",
 		"firebase": "^9.17.1",
+		"install": "^0.13.0",
 		"jsdom": "^21.1.0",
 		"markdown-it": "^13.0.1",
 		"markdown-it-abbr": "^1.0.4",
@@ -44,6 +45,7 @@
 		"markdown-it-multimd-table": "^4.2.1",
 		"markdown-it-sub": "^1.0.0",
 		"markdown-it-sup": "^1.0.0",
+		"npm": "^9.6.2",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
 		"sass": "^1.58.3",
