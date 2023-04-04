@@ -20,7 +20,7 @@
 - [ ] Word/Character count
 - [ ] Field Validations
 - [ ] PublishedAt Date
-- [ ] Change ids to uuids
+- [x] Change ids to uuids
 - [ ] Image Upload
 - [ ] Prevent overwrite from out-of-date tab
 - [ ] Autosave blog locally
