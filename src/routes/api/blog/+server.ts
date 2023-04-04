@@ -4,13 +4,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { db } from '@/firebase.config';
 
 export const POST: RequestHandler = async ({ request }) => {
-	let newBlogId = '';
+	const newBlogId = uuidv4();
 	const now = new Date().toUTCString();
 
 	try {
 		const data = await request.json();
-
-		newBlogId = uuidv4();
 
 		await setDoc(doc(db, 'blogs', newBlogId), {
 			...data,
