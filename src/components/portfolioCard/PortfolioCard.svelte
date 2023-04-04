@@ -65,6 +65,7 @@
 	.footer {
 		display: grid;
 		grid-template-columns: auto 25%;
+		width: 100%;
 	}
 
 	.row {
