@@ -206,6 +206,7 @@
 		background-color: white;
 		border-radius: 5px;
 		flex: 1;
+		width: 100%;
 		max-width: 900px;
 
 		--primary: #02bca3;
@@ -260,6 +261,10 @@
 		font-size: 14px;
 	}
 
+	ul {
+		padding-inline-start: 20px;
+	}
+
 	li {
 		padding-top: 3px;
 	}
@@ -269,5 +274,19 @@
     grid-template-columns: min-content auto;
     align-items: center;
     gap: 8px;
+	}
+
+	@media screen and (max-width: 900px) {
+		article {
+			grid-template-columns: 100%;
+		}
+
+		aside {
+			padding-left: 20px
+		}
+
+		aside .section-divider {
+			margin-left: 0px;
+		}
 	}
 </style>
