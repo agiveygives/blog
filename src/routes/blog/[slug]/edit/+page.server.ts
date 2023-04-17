@@ -21,7 +21,7 @@ export const load: Load<ParamsType> = async ({ params }) => {
 		throw redirect(307, '/blog');
 	}
 
-	const { title, authors, content, description, tags, createdAt, updatedAt } = blogData;
+	const { title, authors, content, description, tags, createdAt, updatedAt, publishedAt } = blogData;
 
 	return {
 		blogData: {
@@ -29,6 +29,7 @@ export const load: Load<ParamsType> = async ({ params }) => {
 			description,
 			tags,
 			authors,
+			publishedAt,
 			createdAt,
 			updatedAt,
 			content

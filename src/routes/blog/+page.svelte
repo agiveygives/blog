@@ -41,7 +41,7 @@
 					</div>
 
 					<div class="publish-date">
-						{formatDate(blog.createdAt)}
+						{formatDate(blog.publishedAt || blog.createdAt)}
 					</div>
 
 					<div class="description">

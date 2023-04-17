@@ -3,7 +3,7 @@
 
 	import RenderMarkdown from '@/components/renderMarkdown';
 
-	const createdAt = new Date(data.createdAt).toLocaleString('default', {
+	const createdAt = new Date(data.publishedAt || data.createdAt).toLocaleString('default', {
 		month: 'long',
 		day: 'numeric',
 		year: 'numeric'

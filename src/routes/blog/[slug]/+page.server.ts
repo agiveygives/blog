@@ -12,6 +12,7 @@ type BlogDocType = {
 	authors: string;
 	description: string;
 	tags: string[];
+	publishedAt: string;
 	createdAt: string;
 	updatedAt: string;
 	content: string;
@@ -30,13 +31,14 @@ export const load: Load<ParamsType> = async ({ params }) => {
 		throw redirect(307, '/blog');
 	}
 
-	const { title, authors, content, description, tags, createdAt, updatedAt } = blogData;
+	const { title, authors, content, description, tags, createdAt, updatedAt, publishedAt } = blogData;
 
 	return {
 		title,
 		description,
 		tags,
 		authors,
+		publishedAt,
 		createdAt,
 		updatedAt,
 		content
