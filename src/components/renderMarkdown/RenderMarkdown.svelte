@@ -56,13 +56,13 @@
 	}
 
 	.markdown :global(pre > code) {
-		color: #bababa;
-		background-color: #2d2d2d;
+		color: #2d2d2d;
+		background-color: white;
 	}
 
 	.markdown :global(pre) {
-		color: #bababa;
-		background-color: #2d2d2d;
+		color: #2d2d2d;
+		background-color: white;
 		padding: 10px;
 		border-radius: 10px;
 		white-space: break-spaces;
