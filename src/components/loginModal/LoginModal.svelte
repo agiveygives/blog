@@ -38,6 +38,7 @@
 			.then((response) => {
 				if (response.ok) {
 					loggedIn.set(true);
+					window.location.reload();
 				} else {
 					loggedIn.set(false);
 				}

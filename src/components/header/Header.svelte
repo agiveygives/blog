@@ -27,6 +27,7 @@
 		fetch('/api/auth/logout').then((response) => {
 			if (response.ok) {
 				loggedIn.set(false);
+				window.location.reload();
 			}
 		});
 	};
