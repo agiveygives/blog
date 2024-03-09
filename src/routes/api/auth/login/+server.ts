@@ -1,10 +1,12 @@
+import { env } from '$env/dynamic/private';
 import { json, error, type RequestHandler } from '@sveltejs/kit';
 import {
 	signInWithEmailAndPassword,
-	setPersistence,
-	browserSessionPersistence
+	type UserCredential,
 } from 'firebase/auth';
 import { auth } from '@/firebase.config';
+
+const secure = env.ENVIRONMENT === 'development' ? '' : ' Secure;'
 
 /** @type {import('./$types').RequestHandler} */
 export const POST: RequestHandler = async ({ request }) => {
@@ -21,12 +23,24 @@ export const POST: RequestHandler = async ({ request }) => {
 		throw error(400, 'email and password required.');
 	}
 
+	let signInRes: UserCredential;
+
 	try {
-		await setPersistence(auth, browserSessionPersistence);
-		await signInWithEmailAndPassword(auth, email, password);
+		signInRes = await signInWithEmailAndPassword(auth, email, password);
 	} catch {
 		throw error(401);
 	}
 
-	return json({});
+	const refreshToken = signInRes.user.refreshToken;
+
+	return json({
+		status: 200,
+		headers: {
+				// Max-age : seconds
+				'set-cookie': [
+						`refreshToken=${refreshToken}; Max-Age=${60 * 60 * 24 * 30}; Path=/;${secure} HttpOnly`,
+				],
+				'cache-control': 'no-store'
+		},
+});
 };
