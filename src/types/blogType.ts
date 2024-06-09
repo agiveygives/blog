@@ -3,6 +3,7 @@ type BlogType = {
 	authors: string;
 	description: string;
 	tags: string[];
+	publishedAt: string;
 	createdAt: string;
 	updatedAt: string;
 	content: string;

@@ -50,7 +50,8 @@
 				authors,
 				tags,
 				content: markdown,
-				draft: !isPublic
+				draft: !isPublic,
+				publishedAt: blogData.publishedAt || (new Date).toUTCString(),
 			})
 		})
 			.then((res) => res.json())

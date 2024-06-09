@@ -41,7 +41,18 @@
 		justify-items: center;
 		padding: 10px;
 		margin-top: 100px;
-		/* box-shadow: 0px 0px 10px rgb(0 0 0 / 50%); */
+	}
+
+	@media screen and (max-width: 1200px) {
+		.card {
+			max-width: 45%;
+		}
+	}
+
+	@media screen and (max-width: 700px) {
+		.card {
+			max-width: 100%;
+		}
 	}
 
 	img {
@@ -54,6 +65,7 @@
 	.footer {
 		display: grid;
 		grid-template-columns: auto 25%;
+		width: 100%;
 	}
 
 	.row {

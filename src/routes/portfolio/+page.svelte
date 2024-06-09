@@ -46,6 +46,7 @@
 	.container {
 		display: flex;
 		flex-direction: row;
-		gap: 50px;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
 	}
 </style>

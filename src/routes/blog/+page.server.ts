@@ -8,6 +8,7 @@ type BlogDocType = {
 	authors: string;
 	description: string;
 	tags: string[];
+	publishedAt: string;
 	createdAt: string;
 	updatedAt: string;
 	content: string;
@@ -30,6 +31,10 @@ export const load: Load = async () => {
 	blogsData.forEach((doc) => {
 		blogs.push({ ...(doc.data() as BlogDocType), id: doc.id });
 	});
+
+	blogs.sort((a, b) => (
+		(a.publishedAt || a.createdAt) < (b.publishedAt || b.createdAt) ? -1 : 1
+	))
 
 	return { blogs, loggedIn: !!auth.currentUser };
 };

@@ -1,20 +1,14 @@
 import { json, error, type RequestHandler } from '@sveltejs/kit';
-import { collection, query, orderBy, getDocs, setDoc, doc } from 'firebase/firestore';
+import { setDoc, doc } from 'firebase/firestore';
+import { v4 as uuidv4 } from 'uuid';
 import { db } from '@/firebase.config';
 
-/** @type {import('./$types').RequestHandler} */
 export const POST: RequestHandler = async ({ request }) => {
-	let newBlogId = '';
+	const newBlogId = uuidv4();
 	const now = new Date().toUTCString();
 
 	try {
 		const data = await request.json();
-
-		const blogsRef = collection(db, 'blogs');
-		const q = query(blogsRef, orderBy('createdAt', 'desc'));
-		const blogsData = await getDocs(q);
-
-		newBlogId = `${blogsData.size + 1}`;
 
 		await setDoc(doc(db, 'blogs', newBlogId), {
 			...data,

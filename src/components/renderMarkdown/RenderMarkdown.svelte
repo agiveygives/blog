@@ -46,6 +46,10 @@
 	}
 </script>
 
+<svelte:head>
+	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</svelte:head>
+
 <div class="markdown">{@html compiledMarkdown}</div>
 
 <style>
@@ -56,13 +60,13 @@
 	}
 
 	.markdown :global(pre > code) {
-		color: #bababa;
-		background-color: #2d2d2d;
+		color: #2d2d2d;
+		background-color: white;
 	}
 
 	.markdown :global(pre) {
-		color: #bababa;
-		background-color: #2d2d2d;
+		color: #2d2d2d;
+		background-color: white;
 		padding: 10px;
 		border-radius: 10px;
 		white-space: break-spaces;
