@@ -25,6 +25,7 @@
 		border-radius: 5px;
 		position: absolute;
 		right: 0;
-		min-width: 100%;
+		width: 100%;
+		min-width: max-content;
 	}
 </style>
