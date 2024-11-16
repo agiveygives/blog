@@ -60,6 +60,9 @@
 		border-radius: 10px;
 		margin-top: -100px;
 		box-shadow: 0px 0px 10px rgb(0 0 0 / 50%);
+		max-height: 200px;
+		object-fit: cover;
+		object-position: top;
 	}
 
 	.footer {
