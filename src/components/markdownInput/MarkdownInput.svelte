@@ -8,7 +8,7 @@
 		content: ''
 	};
 
-  import { onDestroy } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import { goto } from '$app/navigation';
 	import Button from '@/components/button';
 	import Drawer from '@/components/drawer';
@@ -26,50 +26,50 @@
 
 	let textareaRef: HTMLTextAreaElement;
 
+	let description: string = blogData.description;
+	let authors: string = blogData.authors;
+	let tags: string[] = blogData.tags;
+	let blogTitle = blogData.title;
 	let markdown = blogData.content;
 	let isUpdatingFromStore = false;
 	let isPreview = false;
 
-  // Subscribe to the store and update `markdown` whenever `markdownData` changes
-  const unsubscribe = markdownData.subscribe(value => {
-    isUpdatingFromStore = true;
-    markdown = value.content;
-    isUpdatingFromStore = false;
-  });
+	// Subscribe to the store and update `markdown` whenever `markdownData` changes
+	const unsubscribe = markdownData.subscribe(value => {
+		isUpdatingFromStore = true;
+		blogTitle = value.title;
+		description = value.description;
+		authors = value.authors;
+		tags = value.tags;
+		markdown = value.content;
+		isUpdatingFromStore = false;
+	});
 
-  // Clean up the subscription when the component is destroyed
-  onDestroy(() => {
-    unsubscribe();
-  });
+	// Clean up the subscription when the component is destroyed
+	onDestroy(() => {
+		unsubscribe();
+	});
 
-  // Reactive statement to update `markdownData` whenever `markdown` changes
-  $: if (!isUpdatingFromStore) {
+	// Reactive statement to update `markdownData` whenever `markdown` changes
+	$: if (!isUpdatingFromStore) {
 		markdownData.update((data) => {
 			data.content = markdown;
 
 			return data;
 		})
-  }
+	}
 
 	const publish = (isPublic: boolean) => {
 		const uri = blogId ? `/api/blog/${blogId}` : '/api/blog';
 
-		const {
-			title,
-			content,
-			authors,
-			tags,
-			description,
-		} = markdownData;
-
 		fetch(uri, {
 			method: 'post',
 			body: JSON.stringify({
-				title,
+				title: blogTitle,
 				description,
 				authors,
 				tags,
-				content,
+				content: markdown,
 				draft: !isPublic,
 				publishedAt: blogData.publishedAt || (new Date).toUTCString(),
 			})
