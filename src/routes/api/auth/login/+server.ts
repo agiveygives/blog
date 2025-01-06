@@ -6,10 +6,8 @@ import {
 } from 'firebase/auth';
 import { auth } from '@/firebase.config';
 
-const secure = env.ENVIRONMENT === 'development' ? '' : ' Secure;'
-
 /** @type {import('./$types').RequestHandler} */
-export const POST: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request, cookies }) => {
 	const user = auth.currentUser;
 	if (user) {
 		return json({});
@@ -34,14 +32,30 @@ export const POST: RequestHandler = async ({ request }) => {
 	const refreshToken = signInRes.user.refreshToken;
 	const accessToken = await signInRes.user.getIdToken();
 
+	cookies.set(
+		'accessToken',
+		accessToken,
+		{
+			path: '/',
+			secure: env.ENVIRONMENT !== 'development',
+			httpOnly: true,
+			maxAge: 60 * 55
+		}
+	);
+	cookies.set(
+		'refreshToken',
+		refreshToken,
+		{
+			path: '/',
+			secure: env.ENVIRONMENT !== 'development',
+			httpOnly: true,
+			maxAge: 60 * 60 * 24 * 30
+		}
+	);
+
 	return json({
 		status: 200,
 		headers: {
-				// Max-age : seconds
-				'set-cookie': [
-					`accessToken=${accessToken}; Max-Age=${60 * 55}; Path=/;${secure} HttpOnly`,
-					`refreshToken=${refreshToken}; Max-Age=${60 * 60 * 24 * 30}; Path=/;${secure} HttpOnly`,
-				],
 				'cache-control': 'no-store'
 		},
 });
