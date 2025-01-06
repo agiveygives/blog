@@ -40,7 +40,8 @@ export const GET: RequestHandler = async ({ cookies }) => {
 				path: '/',
 				secure: env.ENVIRONMENT !== 'development',
 				httpOnly: true,
-				maxAge: 60 * 55
+				maxAge: 60 * 55,
+				sameSite: 'strict'
 			}
 		);
 		cookies.set(
@@ -50,7 +51,8 @@ export const GET: RequestHandler = async ({ cookies }) => {
 				path: '/',
 				secure: env.ENVIRONMENT !== 'development',
 				httpOnly: true,
-				maxAge: 60 * 60 * 24 * 30
+				maxAge: 60 * 60 * 24 * 30,
+				sameSite: 'strict'
 			}
 		);
 
@@ -62,8 +64,8 @@ export const GET: RequestHandler = async ({ cookies }) => {
 		});
 	}
 
-	cookies.delete('accessToken');
-	cookies.delete('refreshToken');
+	cookies.delete('accessToken', { path: '/' });
+	cookies.delete('refreshToken', { path: '/' });
 
 	throw error(401);
 };

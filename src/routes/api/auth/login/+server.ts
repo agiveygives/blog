@@ -39,7 +39,8 @@ export const POST: RequestHandler = async ({ request, cookies }) => {
 			path: '/',
 			secure: env.ENVIRONMENT !== 'development',
 			httpOnly: true,
-			maxAge: 60 * 55
+			maxAge: 60 * 55,
+				sameSite: 'strict'
 		}
 	);
 	cookies.set(
@@ -49,7 +50,8 @@ export const POST: RequestHandler = async ({ request, cookies }) => {
 			path: '/',
 			secure: env.ENVIRONMENT !== 'development',
 			httpOnly: true,
-			maxAge: 60 * 60 * 24 * 30
+			maxAge: 60 * 60 * 24 * 30,
+				sameSite: 'strict'
 		}
 	);
 
