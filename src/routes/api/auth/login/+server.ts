@@ -32,13 +32,15 @@ export const POST: RequestHandler = async ({ request }) => {
 	}
 
 	const refreshToken = signInRes.user.refreshToken;
+	const accessToken = await signInRes.user.getIdToken();
 
 	return json({
 		status: 200,
 		headers: {
 				// Max-age : seconds
 				'set-cookie': [
-						`refreshToken=${refreshToken}; Max-Age=${60 * 60 * 24 * 30}; Path=/;${secure} HttpOnly`,
+					`accessToken=${accessToken}; Max-Age=${60 * 55}; Path=/;${secure} HttpOnly`,
+					`refreshToken=${refreshToken}; Max-Age=${60 * 60 * 24 * 30}; Path=/;${secure} HttpOnly`,
 				],
 				'cache-control': 'no-store'
 		},

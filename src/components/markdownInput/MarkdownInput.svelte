@@ -8,7 +8,7 @@
 		content: ''
 	};
 
-  import { onDestroy } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import { goto } from '$app/navigation';
 	import Button from '@/components/button';
 	import Drawer from '@/components/drawer';
@@ -34,26 +34,30 @@
 	let isUpdatingFromStore = false;
 	let isPreview = false;
 
-  // Subscribe to the store and update `markdown` whenever `markdownData` changes
-  const unsubscribe = markdownData.subscribe(value => {
-    isUpdatingFromStore = true;
-    markdown = value.content;
-    isUpdatingFromStore = false;
-  });
+	// Subscribe to the store and update `markdown` whenever `markdownData` changes
+	const unsubscribe = markdownData.subscribe(value => {
+		isUpdatingFromStore = true;
+		blogTitle = value.title;
+		description = value.description;
+		authors = value.authors;
+		tags = value.tags;
+		markdown = value.content;
+		isUpdatingFromStore = false;
+	});
 
-  // Clean up the subscription when the component is destroyed
-  onDestroy(() => {
-    unsubscribe();
-  });
+	// Clean up the subscription when the component is destroyed
+	onDestroy(() => {
+		unsubscribe();
+	});
 
-  // Reactive statement to update `markdownData` whenever `markdown` changes
-  $: if (!isUpdatingFromStore) {
+	// Reactive statement to update `markdownData` whenever `markdown` changes
+	$: if (!isUpdatingFromStore) {
 		markdownData.update((data) => {
 			data.content = markdown;
 
 			return data;
 		})
-  }
+	}
 
 	const publish = (isPublic: boolean) => {
 		const uri = blogId ? `/api/blog/${blogId}` : '/api/blog';
