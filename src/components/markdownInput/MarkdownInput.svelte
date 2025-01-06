@@ -26,10 +26,6 @@
 
 	let textareaRef: HTMLTextAreaElement;
 
-	let description: string = blogData.description;
-	let authors: string = blogData.authors;
-	let tags: string[] = blogData.tags;
-	let blogTitle = blogData.title;
 	let markdown = blogData.content;
 	let isUpdatingFromStore = false;
 	let isPreview = false;
@@ -58,14 +54,22 @@
 	const publish = (isPublic: boolean) => {
 		const uri = blogId ? `/api/blog/${blogId}` : '/api/blog';
 
+		const {
+			title,
+			content,
+			authors,
+			tags,
+			description,
+		} = markdownData;
+
 		fetch(uri, {
 			method: 'post',
 			body: JSON.stringify({
-				title: blogTitle,
+				title,
 				description,
 				authors,
 				tags,
-				content: markdown,
+				content,
 				draft: !isPublic,
 				publishedAt: blogData.publishedAt || (new Date).toUTCString(),
 			})
