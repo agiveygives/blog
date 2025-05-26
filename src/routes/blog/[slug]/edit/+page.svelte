@@ -10,6 +10,11 @@
 	$: if (browser && !$loggedIn) {
 		invalidateAll();
 	}
+
+	console.log("In page")
+	console.log(data)
+	console.log(data.blogData.title)
+	console.log(data.blogData.updatedAt)
 </script>
 
 <div class="page-content">

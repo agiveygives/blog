@@ -1,7 +1,7 @@
 import { env } from '$env/dynamic/private';
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { getAuth, setPersistence, browserSessionPersistence } from 'firebase/auth';
+import { getAuth, setPersistence, browserLocalPersistence } from 'firebase/auth';
 // import { getAnalytics } from 'firebase/analytics';
 import { getStorage } from 'firebase/storage';
 
@@ -18,6 +18,6 @@ export const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
-await setPersistence(auth, browserSessionPersistence);
+await setPersistence(auth, browserLocalPersistence);
 // export const analytics = getAnalytics(app);
 export const storage = getStorage(app);

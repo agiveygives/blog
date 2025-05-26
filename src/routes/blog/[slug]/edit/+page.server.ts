@@ -23,7 +23,11 @@ export const load: Load<ParamsType> = async ({ params }) => {
 
 	const { title, authors, content, description, tags, createdAt, updatedAt, publishedAt } = blogData;
 
-	return {
+	console.log("In page server.")
+	console.log(title)
+	console.log(updatedAt)
+
+	const data = {
 		blogData: {
 			title,
 			description,
@@ -36,4 +40,10 @@ export const load: Load<ParamsType> = async ({ params }) => {
 		},
 		blogId: params.slug
 	};
+
+	console.log(data)
+	console.log(data.blogData.title)
+	console.log(data.blogData.updatedAt)
+
+	return data
 };
