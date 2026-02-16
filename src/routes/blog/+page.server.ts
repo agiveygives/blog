@@ -1,4 +1,4 @@
-import type { Load } from '@sveltejs/kit';
+import { type Load } from '@sveltejs/kit';
 import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
 import { auth, db } from '@/firebase.config';
 

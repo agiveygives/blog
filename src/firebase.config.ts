@@ -1,5 +1,5 @@
 import { env } from '$env/dynamic/private';
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore';
 import { getAuth, setPersistence, browserSessionPersistence } from 'firebase/auth';
 // import { getAnalytics } from 'firebase/analytics';

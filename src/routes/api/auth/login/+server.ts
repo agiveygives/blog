@@ -5,6 +5,7 @@ import {
 	type UserCredential,
 } from 'firebase/auth';
 import { auth } from '@/firebase.config';
+import { adminAuth } from '@/firebase-admin.config';
 
 /** @type {import('./$types').RequestHandler} */
 export const POST: RequestHandler = async ({ request, cookies }) => {
@@ -29,8 +30,9 @@ export const POST: RequestHandler = async ({ request, cookies }) => {
 		throw error(401);
 	}
 
-	const refreshToken = signInRes.user.refreshToken;
-	const accessToken = await signInRes.user.getIdToken();
+	const uid = signInRes.user.uid
+	const accessToken = await adminAuth.createCustomToken(uid, { type: "access-token" });
+	const refreshToken = await adminAuth.createCustomToken(uid, { type: "refresh-token" });
 
 	cookies.set(
 		'accessToken',

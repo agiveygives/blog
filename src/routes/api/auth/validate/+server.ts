@@ -1,33 +1,37 @@
 import { env } from '$env/dynamic/private';
 import { json, error, type RequestHandler } from '@sveltejs/kit';
 import {
+	signOut,
 	signInWithCustomToken,
 	type UserCredential,
 } from 'firebase/auth';
 import { auth } from '@/firebase.config';
 
 export const GET: RequestHandler = async ({ cookies }) => {
-	const user = auth.currentUser;
-
-	if (user) {
-		return json({});
-	}
-
 	const refreshToken = cookies.get('refreshToken');
 	const accessToken = cookies.get('accessToken');
 
-	if (!refreshToken) { throw error(401); }
+	if (!refreshToken) {
+		await signOut(auth);
+		cookies.delete('session');
+		cookies.delete('accessToken', { path: '/' });
+		cookies.delete('refreshToken', { path: '/' });
+		throw error(401);
+	}
 
 	let signInRes: UserCredential;
 
 	try {
-		signInRes = await signInWithCustomToken(auth, accessToken);
-	} catch {
-		try {
+		if (accessToken) {
+			signInRes = await signInWithCustomToken(auth, accessToken);
+		} else {
 			signInRes = await signInWithCustomToken(auth, refreshToken);
-		} catch {
-			throw error(401);
 		}
+	} catch {
+		cookies.delete('session');
+		cookies.delete('accessToken', { path: '/' });
+		cookies.delete('refreshToken', { path: '/' });
+		throw error(401);
 	}
 
 	if (signInRes.user) {
@@ -64,6 +68,7 @@ export const GET: RequestHandler = async ({ cookies }) => {
 		});
 	}
 
+	cookies.delete('session');
 	cookies.delete('accessToken', { path: '/' });
 	cookies.delete('refreshToken', { path: '/' });
 
