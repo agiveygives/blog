@@ -1,5 +1,5 @@
-<script>
-	export let companies;
+<script lang="ts">
+	let { companies } = $props();
 	const totalCompanies = companies.length;
 </script>
 

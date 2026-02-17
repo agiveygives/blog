@@ -1,8 +1,8 @@
 <script lang="ts">
-	export let data;
 
 	import Introduction from '@/components/introduction';
 	import Experience from '@/components/experience';
+	let { data } = $props();
 </script>
 
 <Introduction />

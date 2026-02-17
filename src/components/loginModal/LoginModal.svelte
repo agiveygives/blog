@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run, preventDefault } from 'svelte/legacy';
+
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import { faX } from '@fortawesome/free-solid-svg-icons';
@@ -6,11 +8,15 @@
 	import { loggedIn } from '@/stores/loggedIn';
 	import { clickOutside } from '@/directives/onClickOutside';
 
-	export let showModal = false;
+	interface Props {
+		showModal?: boolean;
+	}
+
+	let { showModal = $bindable(false) }: Props = $props();
 	let mounted = false;
-	let greeting = '';
-	let email: string;
-	let password: string;
+	let greeting = $state('');
+	let email: string = $state();
+	let password: string = $state();
 
 	const scrollLock = (showModal) => {
 		if (mounted) {
@@ -19,7 +25,9 @@
 		}
 	};
 
-	$: scrollLock(showModal);
+	run(() => {
+		scrollLock(showModal);
+	});
 
 	onMount(() => {
 		mounted = true;
@@ -81,18 +89,20 @@
 		return greetings[Math.floor(Math.random() * greetings.length)];
 	};
 
-	$: if (showModal) {
-		greeting = randomGreeting();
-	}
+	run(() => {
+		if (showModal) {
+			greeting = randomGreeting();
+		}
+	});
 </script>
 
-<svelte:window on:keydown={keyHandler} />
+<svelte:window onkeydown={keyHandler} />
 
 <div class={`modal-background ${showModal ? '' : 'hidden'}`}>
 	<div class="modal-container">
 		<button
 			class="close"
-			on:click={() => {
+			onclick={() => {
 				showModal = false;
 			}}
 		>
@@ -104,7 +114,7 @@
 		<div
 			class="modal-content"
 			use:clickOutside
-			on:click_outside={() => {
+			onclick_outside={() => {
 				showModal = false;
 			}}
 		>
@@ -112,7 +122,7 @@
 				<img class="bitmoji" src="/images/bitmoji/secret.png" alt="Andrew Givens Bitmoji shh" />
 			</div>
 
-			<form on:submit|preventDefault={handleSubmit}>
+			<form onsubmit={preventDefault(handleSubmit)}>
 				<input type="email" name="email" bind:value={email} placeholder="email" />
 				<input type="password" name="password" bind:value={password} placeholder="password" />
 				<button type="submit">Login</button>

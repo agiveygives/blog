@@ -1,18 +1,28 @@
 <script lang="ts">
-	export let variant: 'primary' | 'secondary' | 'text' | 'ghost' = 'primary';
-	export let rounded = false;
+	import { run, createBubbler } from 'svelte/legacy';
+
+	const bubble = createBubbler();
 
 	import classnames from 'classnames';
+	interface Props {
+		variant?: 'primary' | 'secondary' | 'text' | 'ghost';
+		rounded?: boolean;
+		children?: import('svelte').Snippet;
+	}
 
-	let buttonClasses: string = variant;
+	let { variant = 'primary', rounded = false, children }: Props = $props();
 
-	$: buttonClasses = classnames(variant, {
-		rounded: rounded
+	let buttonClasses: string = $state(variant);
+
+	run(() => {
+		buttonClasses = classnames(variant, {
+			rounded: rounded
+		});
 	});
 </script>
 
-<button class={buttonClasses} on:click>
-	<slot />
+<button class={buttonClasses} onclick={bubble('click')}>
+	{@render children?.()}
 </button>
 
 <style lang="scss">

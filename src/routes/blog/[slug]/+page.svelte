@@ -1,7 +1,7 @@
-<script>
-	export let data;
+<script lang="ts">
 
 	import RenderMarkdown from '@/components/renderMarkdown';
+	let { data } = $props();
 
 	const createdAt = new Date(data.publishedAt || data.createdAt).toLocaleString('default', {
 		month: 'long',

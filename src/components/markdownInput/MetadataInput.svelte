@@ -1,7 +1,6 @@
 <script lang="ts">
-	export let isPreview = false;
-	export let onPublish: () => void;
-	export let onSaveDraft: () => void;
+	import { run } from 'svelte/legacy';
+
 
 	import classnames from 'classnames';
 	import Button from '@/components/button';
@@ -10,9 +9,16 @@
 	import Pill from '@/components/pill';
 	import { TextInput } from '@/components/input';
 	import markdownData from '@/components/markdownInput/store';
+	interface Props {
+		isPreview?: boolean;
+		onPublish: () => void;
+		onSaveDraft: () => void;
+	}
 
-	let authors: string = $markdownData.authors;
-	let description: string = $markdownData.description;
+	let { isPreview = $bindable(false), onPublish, onSaveDraft }: Props = $props();
+
+	let authors: string = $state($markdownData.authors);
+	let description: string = $state($markdownData.description);
 	let tagOptions = [
 		{ value: 'front-end', display: 'Front End' },
 		{ value: 'back-end', display: 'Back End' },
@@ -22,14 +28,14 @@
 		{ value: 'android', display: 'Android' }
 	];
 
-	$: {
+	run(() => {
 		markdownData.update((data) => {
 			data.description = description;
 			data.authors = authors;
 
 			return data;
 		})
-	}
+	});
 
 	const onSelectionChange = (newTags: string[]) => {
 		markdownData.update((data) => {

@@ -1,13 +1,19 @@
 <script lang="ts">
-	export let onLogin: () => void;
-	export let loggedIn: boolean;
+	import { run } from 'svelte/legacy';
+
 
 	import Fa from 'svelte-fa';
 	import { faBars } from '@fortawesome/free-solid-svg-icons';
 	import Popover from '@/components/popover';
 	import { clickOutside } from '@/directives/onClickOutside';
+	interface Props {
+		onLogin: () => void;
+		loggedIn: boolean;
+	}
 
-	let isPopoverVisible = false;
+	let { onLogin, loggedIn }: Props = $props();
+
+	let isPopoverVisible = $state(false);
 
 	const logout = () => {
 		fetch('/api/auth/logout').then((response) => {
@@ -26,8 +32,8 @@
 	};
 
 	let duration = '300ms';
-	let headerClass = 'sharp';
-	let y = 0;
+	let headerClass = $state('sharp');
+	let y = $state(0);
 
 	const deriveClass = (y: number) => {
 		if (y <= 0) {
@@ -41,7 +47,9 @@
 		node.style.transitionDuration = duration;
 	};
 
-	$: headerClass = deriveClass(y);
+	run(() => {
+		headerClass = deriveClass(y);
+	});
 </script>
 
 <svelte:window bind:scrollY={y} />
@@ -57,15 +65,15 @@
 			<li><a href="/about">About Me</a></li>
 		</ul>
 	</nav>
-	<div use:clickOutside on:click_outside={closePopover}>
-		<button class="menu" on:click={togglePopover}><Fa icon={faBars} size="2x" /></button>
+	<div use:clickOutside onclick_outside={closePopover}>
+		<button class="menu" onclick={togglePopover}><Fa icon={faBars} size="2x" /></button>
 		<Popover show={isPopoverVisible}>
 			<button class="menu-option"><a href="mailto:agivens1996@gmail.com">Contact</a></button>
 			{#if loggedIn}
 				<button class="menu-option"><a href="/blog/create">Create blog</a></button>
-				<button class="menu-option" on:click={logout}>Log Out</button>
+				<button class="menu-option" onclick={logout}>Log Out</button>
 			{:else}
-				<button class="menu-option" on:click={() => onLogin()}>Log in</button>
+				<button class="menu-option" onclick={() => onLogin()}>Log in</button>
 			{/if}
 		</Popover>
 	</div>

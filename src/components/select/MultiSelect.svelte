@@ -1,15 +1,15 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import classnames from 'classnames';
 	import { clickOutside } from '@/directives/onClickOutside';
 	import { TextInput } from '@/components/input';
 	import Popover from '@/components/popover';
 
-	export let options = [];
-	export let selectedOptions = [];
-	export let onSelectionChange = (selectedOptions: string[]) => {};
-	let filteredOptions = options;
-	let expanded = false;
-	let search = '';
+	let { options = [], selectedOptions = [], onSelectionChange = (selectedOptions: string[]) => {} } = $props();
+	let filteredOptions = $state(options);
+	let expanded = $state(false);
+	let search = $state('');
 
 	const selectOption = (event) => {
 		const clickedOption = event.target.value;
@@ -32,15 +32,19 @@
 		expanded = false;
 	};
 
-	let checkboxClass = 'checkboxes';
-	$: checkboxClass = classnames('checkboxes', { hidden: !expanded });
+	let checkboxClass = $state('checkboxes');
+	run(() => {
+		checkboxClass = classnames('checkboxes', { hidden: !expanded });
+	});
 
-	$: filteredOptions = options.filter((option) =>
-		option.display.toLowerCase().includes(search.toLowerCase())
-	);
+	run(() => {
+		filteredOptions = options.filter((option) =>
+			option.display.toLowerCase().includes(search.toLowerCase())
+		);
+	});
 </script>
 
-<div use:clickOutside on:click_outside={closeCheckboxes}>
+<div use:clickOutside onclick_outside={closeCheckboxes}>
 	<TextInput bind:value={search} placeholder="Search" on:click={showCheckboxes} />
 
 	<Popover show={expanded}>
@@ -51,7 +55,7 @@
 					id={option.value}
 					value={option.value}
 					checked={selectedOptions.includes(option.value)}
-					on:click={selectOption}
+					onclick={selectOption}
 				/>
 				<span>{option.display}</span>
 			</label>

@@ -1,14 +1,19 @@
 <script lang="ts">
-	export let show = false;
 
 	import classnames from 'classnames';
+	interface Props {
+		show?: boolean;
+		children?: import('svelte').Snippet;
+	}
 
-	$: popoverClasses = classnames({ popover: true, hidden: !show });
+	let { show = false, children }: Props = $props();
+
+	let popoverClasses = $derived(classnames({ popover: true, hidden: !show }));
 </script>
 
 <div class={popoverClasses}>
 	<div class="content">
-		<slot />
+		{@render children?.()}
 	</div>
 </div>
 

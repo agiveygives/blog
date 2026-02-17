@@ -1,8 +1,13 @@
 <script lang="ts">
-	export let href = '';
+	interface Props {
+		href?: string;
+		children?: import('svelte').Snippet;
+	}
+
+	let { href = '', children }: Props = $props();
 </script>
 
-<a {href}><slot /></a>
+<a {href}>{@render children?.()}</a>
 
 <style lang="scss">
 	@use '@/scss/_colors.scss' as colors;

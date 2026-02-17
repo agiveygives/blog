@@ -1,10 +1,17 @@
 <script lang="ts">
-	export let placeholder = '';
-	export let value: string;
-	export let size: 'sm' | 'md' | 'lg' | 'xl' = 'md';
+	import { createBubbler } from 'svelte/legacy';
+
+	const bubble = createBubbler();
+	interface Props {
+		placeholder?: string;
+		value: string;
+		size?: 'sm' | 'md' | 'lg' | 'xl';
+	}
+
+	let { placeholder = '', value = $bindable(), size = 'md' }: Props = $props();
 </script>
 
-<input type="text" bind:value on:click {placeholder} class={size} />
+<input type="text" bind:value onclick={bubble('click')} {placeholder} class={size} />
 
 <style>
 	input {

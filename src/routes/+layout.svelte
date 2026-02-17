@@ -1,11 +1,16 @@
 <script lang="ts">
 	import type { DecodedIdToken } from 'firebase-admin/auth';
-	export let data: { user: DecodedIdToken }
 
 	import Header from '@/components/header';
 	import LoginModal from '@/components/loginModal';
+	interface Props {
+		data: { user: DecodedIdToken };
+		children?: import('svelte').Snippet;
+	}
 
-	let loginOpen = false;
+	let { data, children }: Props = $props();
+
+	let loginOpen = $state(false);
 </script>
 
 <Header
@@ -17,4 +22,4 @@
 
 <LoginModal bind:showModal={loginOpen} />
 
-<slot />
+{@render children?.()}

@@ -1,6 +1,6 @@
 <script lang="ts">
-	export let textareaRef: HTMLElement
-	export let text: string = '';
+	import { run } from 'svelte/legacy';
+
 
 	import Fa from 'svelte-fa';
 	import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
@@ -9,22 +9,28 @@
 	import Popover from '@/components/popover';
 	import { clickOutside } from '@/directives/onClickOutside';
 	import hljs from 'highlight.js';
+	interface Props {
+		textareaRef: HTMLElement;
+		text?: string;
+	}
 
-	let languages = hljs.listLanguages();
+	let { textareaRef, text = '' }: Props = $props();
+
+	let languages = $state(hljs.listLanguages());
 	languages.push('svelte');
 	languages = languages.sort();
 
-	let languageFilter = '';
-	let filteredLanguages = languages;
-	$: {
+	let languageFilter = $state('');
+	let filteredLanguages = $state(languages);
+	run(() => {
 		if (languageFilter.length > 0) {
 			filteredLanguages = languages.filter((language) => language.includes(languageFilter.toLowerCase()))
 		} else {
 			filteredLanguages = languages;
 		}
-	}
+	});
 
-	let headingPopoverVisible = false;
+	let headingPopoverVisible = $state(false);
 	const closeHeadingPopover = () => {
 		headingPopoverVisible = false;
 	};
@@ -32,7 +38,7 @@
 		headingPopoverVisible = !headingPopoverVisible;
 	};
 
-	let codeBlockPopoverVisible = false;
+	let codeBlockPopoverVisible = $state(false);
 	const closeCodeBlockPopover = () => {
 		codeBlockPopoverVisible = false;
 	};
@@ -78,32 +84,32 @@
 	<Button variant="ghost" on:click={() => applyStringModifier('*', '*')}>bold</Button>
 	<Button variant="ghost" on:click={() => applyStringModifier('_', '_')}>italic</Button>
 	<Button variant="ghost" on:click={() => applyStringModifier('`', '`')}>monospaced</Button>
-	<div use:clickOutside on:click_outside={closeCodeBlockPopover}>
+	<div use:clickOutside onclick_outside={closeCodeBlockPopover}>
 		<Button variant="ghost" on:click={toggleCodeBlockPopover}>
 			code block <Fa icon={faCaretDown} />
 		</Button>
 		<Popover show={codeBlockPopoverVisible}>
 			<div class='popover-options'>
 				<input type="text" placeholder="language" bind:value={languageFilter} />
-				<button on:click={() => applyCodeBlock()}><h3>text</h3></button>
+				<button onclick={() => applyCodeBlock()}><h3>text</h3></button>
 				{#each filteredLanguages as language}
-					<button on:click={() => applyCodeBlock(language.toLowerCase())}><h3>{language}</h3></button>
+					<button onclick={() => applyCodeBlock(language.toLowerCase())}><h3>{language}</h3></button>
 				{/each}
 			</div>
 		</Popover>
 	</div>
 
-	<div use:clickOutside on:click_outside={closeHeadingPopover}>
+	<div use:clickOutside onclick_outside={closeHeadingPopover}>
 		<Button variant="ghost" on:click={toggleHeadingPopover}>
 			Heading <Fa icon={faCaretDown} />
 		</Button>
 		<Popover show={headingPopoverVisible}>
 			<div class='popover-options'>
-				<button on:click={() => applyLineModifier('#', closeHeadingPopover)}><h1>Heading 1</h1></button>
-				<button on:click={() => applyLineModifier('##', closeHeadingPopover)}><h2>Heading 2</h2></button>
-				<button on:click={() => applyLineModifier('###', closeHeadingPopover)}><h3>Heading 3</h3></button>
-				<button on:click={() => applyLineModifier('####', closeHeadingPopover)}><h4>Heading 4</h4></button>
-				<button on:click={() => applyLineModifier('#####', closeHeadingPopover)}><h5>Heading 5</h5></button>
+				<button onclick={() => applyLineModifier('#', closeHeadingPopover)}><h1>Heading 1</h1></button>
+				<button onclick={() => applyLineModifier('##', closeHeadingPopover)}><h2>Heading 2</h2></button>
+				<button onclick={() => applyLineModifier('###', closeHeadingPopover)}><h3>Heading 3</h3></button>
+				<button onclick={() => applyLineModifier('####', closeHeadingPopover)}><h4>Heading 4</h4></button>
+				<button onclick={() => applyLineModifier('#####', closeHeadingPopover)}><h5>Heading 5</h5></button>
 			</div>
 		</Popover>
 	</div>

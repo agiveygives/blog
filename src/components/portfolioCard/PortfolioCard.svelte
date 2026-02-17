@@ -1,15 +1,26 @@
 <script lang="ts">
-	export let title: string;
-	export let description: string;
-	export let imageUrl: string;
-	export let techStack: string[];
-	export let demoUrl: string;
-	export let githubRepo: string;
 
 	import Fa from 'svelte-fa';
 	import { faExternalLink } from '@fortawesome/free-solid-svg-icons';
 	import { faGithub } from '@fortawesome/free-brands-svg-icons';
 	import Pill from '@/components/pill';
+	interface Props {
+		title: string;
+		description: string;
+		imageUrl: string;
+		techStack: string[];
+		demoUrl: string;
+		githubRepo: string;
+	}
+
+	let {
+		title,
+		description,
+		imageUrl,
+		techStack,
+		demoUrl,
+		githubRepo
+	}: Props = $props();
 </script>
 
 <div class="card">

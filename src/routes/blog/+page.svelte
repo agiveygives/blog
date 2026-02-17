@@ -1,11 +1,11 @@
 <script lang="ts">
-	export let data;
 
 	import { goto } from '$app/navigation';
 
 	import NotFound from '@/components/notFound';
 	import Link from '@/components/link';
 	import Pill from '@/components/pill';
+	let { data } = $props();
 
 	const formatDate = (date: string) =>
 		new Date(date).toLocaleString('default', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -26,7 +26,7 @@
 	<ul>
 		{#each data.blogs as blog}
 			<li key={blog.id}>
-				<button on:click={() => handleClick(blog.id)}>
+				<button onclick={() => handleClick(blog.id)}>
 					<div class="title">
 						<span>{blog.title}</span>
 						<span class="authors">by: {blog.authors}</span>

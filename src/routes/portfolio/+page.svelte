@@ -1,7 +1,7 @@
-<script>
-	export let data;
+<script lang="ts">
 
 	import PortfolioCard from '@/components/portfolioCard';
+	let { data } = $props();
 </script>
 
 <div class="page-content">
