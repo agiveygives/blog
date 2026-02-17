@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import Fa from 'svelte-fa';
 	import { faX } from '@fortawesome/free-solid-svg-icons';
+	import { login } from '@/lib/login';
 	import { loggedIn } from '@/stores/loggedIn';
 	import { clickOutside } from '@/directives/onClickOutside';
 
@@ -31,10 +32,7 @@
 		email = '';
 		password = '';
 
-		fetch('/api/auth/login', {
-			method: 'post',
-			body: formData
-		})
+		login(email, password)
 			.then((response) => {
 				if (response.ok) {
 					loggedIn.set(true);

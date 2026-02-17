@@ -4,7 +4,7 @@
 
 	import classnames from 'classnames';
 
-	let buttonClasses = variant;
+	let buttonClasses: string = variant;
 
 	$: buttonClasses = classnames(variant, {
 		rounded: rounded
@@ -16,7 +16,8 @@
 </button>
 
 <style lang="scss">
-	@import '@/scss/_variables.scss';
+	@use "@/scss/_colors.scss" as colors;
+	@use "sass:color";
 
 	button {
 		height: fit-content;
@@ -30,43 +31,43 @@
 	}
 
 	.primary {
-		background-color: $mint;
-		color: $white;
+		background-color: colors.$mint;
+		color: colors.$white;
 
 		&:hover,
 		&:focus {
-			background-color: darken($mint, 10%);
+			background-color: color.scale(colors.$mint, $lightness: -10%)
 		}
 	}
 
 	.secondary {
-		background-color: $coral;
-		color: $white;
+		background-color: colors.$coral;
+		color: colors.$white;
 
 		&:hover,
 		&:focus {
-			background-color: darken($coral, 10%);
+			background-color: color.scale(colors.$coral, $lightness: -10%);
 		}
 	}
 
 	.text {
 		background-color: transparent;
-		color: $mint;
+		color: colors.$mint;
 
 		&:hover,
 		&:focus {
-			color: darken($mint, 10%);
+			color: color.scale(colors.$mint, $lightness: -10%);
 		}
 	}
 
 	.ghost {
-		border: solid 1px $caribbean-current;
+		border: solid 1px colors.$caribbean-current;
 		background-color: transparent;
-		color: $caribbean-current;
+		color: colors.$caribbean-current;
 
 		&:hover,
 		&:focus {
-			text-shadow: 0px 0px 1px $caribbean-current;
+			text-shadow: 0px 0px 1px colors.$caribbean-current;
 		}
 	}
 </style>

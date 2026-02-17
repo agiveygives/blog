@@ -21,7 +21,7 @@
 			{/each}
 		</div>
 		{#if i + 1 < totalCompanies}
-			<div class="divider" />
+			<div class="divider"></div>
 		{/if}
 	{/each}
 </div>

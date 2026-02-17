@@ -1,6 +1,6 @@
-import { type Load } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types'
 import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
-import { auth, db } from '@/firebase.config';
+import { db } from '@/firebase.config';
 
 type BlogDocType = {
 	id: string;
@@ -14,13 +14,13 @@ type BlogDocType = {
 	content: string;
 };
 
-export const load: Load = async () => {
+export const load: PageServerLoad = async ({ locals }) => {
 	const blogs: BlogDocType[] = [];
 
 	const blogsRef = collection(db, 'blogs');
 	let blogsQuery;
 
-	if (auth.currentUser) {
+	if (locals.user) {
 		blogsQuery = query(blogsRef, orderBy('createdAt', 'desc'));
 	} else {
 		blogsQuery = query(blogsRef, where('draft', '==', false), orderBy('createdAt', 'desc'));
@@ -36,5 +36,5 @@ export const load: Load = async () => {
 		(a.publishedAt || a.createdAt) < (b.publishedAt || b.createdAt) ? -1 : 1
 	))
 
-	return { blogs, loggedIn: !!auth.currentUser };
+	return { blogs, loggedIn: !!locals.user };
 };

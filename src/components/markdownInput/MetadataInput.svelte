@@ -71,7 +71,7 @@
 			bind:value={description}
 			maxLength={200}
 			placeholder="Description about your blog post."
-		/>
+		></textarea>
 	</div>
 </fieldset>
 

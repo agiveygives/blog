@@ -83,7 +83,7 @@
 	</div>
 </button>
 
-<div class="overlay" class:open on:click={handleClickAway} on:keydown={handleKeyToggle} />
+<div class="overlay" class:open on:click={handleClickAway} on:keydown={handleKeyToggle}></div>
 
 <aside class="drawer" class:open {style}>
 	<div class="panel {placement}" class:size>

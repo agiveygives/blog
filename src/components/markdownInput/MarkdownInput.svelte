@@ -98,7 +98,7 @@
 			{#if isPreview}
 				<RenderMarkdown {markdown} />
 			{:else}
-				<textarea bind:this={textareaRef} bind:value={markdown} />
+				<textarea bind:this={textareaRef} bind:value={markdown}></textarea>
 			{/if}
 		</div>
 

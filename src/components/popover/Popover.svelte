@@ -13,7 +13,7 @@
 </div>
 
 <style lang="scss">
-	@import '@/scss/_variables.scss';
+	@use '@/scss/_colors.scss' as colors;
 
 	.popover {
 		position: relative;
@@ -21,7 +21,7 @@
 
 	.content {
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
-		background-color: $white;
+		background-color: colors.$white;
 		border-radius: 5px;
 		position: absolute;
 		right: 0;
