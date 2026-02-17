@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
-
 	import Fa from 'svelte-fa';
 	import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 	import markdownData from '@/components/markdownInput/store';
@@ -22,7 +19,7 @@
 
 	let languageFilter = $state('');
 	let filteredLanguages = $state(languages);
-	run(() => {
+	$effect(() => {
 		if (languageFilter.length > 0) {
 			filteredLanguages = languages.filter((language) => language.includes(languageFilter.toLowerCase()))
 		} else {

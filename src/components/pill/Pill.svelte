@@ -5,7 +5,7 @@
 
 	let { color = `rgb(${r}, ${g}, ${b})`, children } = $props();
 
-	const style = `--color: ${color}`;
+	const style = $derived(`--color: ${color}`);
 </script>
 
 <div {style}>

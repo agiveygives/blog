@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import classnames from 'classnames';
 	import { clickOutside } from '@/directives/onClickOutside';
 	import { TextInput } from '@/components/input';
@@ -33,11 +31,11 @@
 	};
 
 	let checkboxClass = $state('checkboxes');
-	run(() => {
+	$effect(() => {
 		checkboxClass = classnames('checkboxes', { hidden: !expanded });
 	});
 
-	run(() => {
+	$effect(() => {
 		filteredOptions = options.filter((option) =>
 			option.display.toLowerCase().includes(search.toLowerCase())
 		);

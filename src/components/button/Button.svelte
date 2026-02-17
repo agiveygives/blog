@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { run, createBubbler } from 'svelte/legacy';
+	import { createBubbler } from 'svelte/legacy';
 
 	const bubble = createBubbler();
 
@@ -14,7 +14,7 @@
 
 	let buttonClasses: string = $state(variant);
 
-	run(() => {
+	$effect(() => {
 		buttonClasses = classnames(variant, {
 			rounded: rounded
 		});

@@ -1,6 +1,6 @@
 <script lang="ts">
 	let { companies } = $props();
-	const totalCompanies = companies.length;
+	let totalCompanies = $derived(companies.length);
 </script>
 
 <div class="experience">

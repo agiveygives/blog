@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import Button from '@/components/button';
 	import { TextInput } from '@/components/input';
 	import markdownData from '@/components/markdownInput/store';
@@ -8,7 +6,7 @@
 	let value = $state($markdownData.title);
 	let isEditTitle = $state(false);
 
-	run(() => {
+	$effect(() => {
 		markdownData.update((data) => {
 			data.title = value;
 

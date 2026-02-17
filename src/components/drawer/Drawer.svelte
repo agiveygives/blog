@@ -1,9 +1,5 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
-
 	import { onMount } from 'svelte';
-	import { createEventDispatcher } from 'svelte';
 	import Fa from 'svelte-fa';
 	import {
 		faCaretLeft,
@@ -30,7 +26,7 @@
 
 	let icon = $state(faCaretRight);
 
-	run(() => {
+	$effect(() => {
 		switch (placement) {
 			case 'left':
 				icon = faCaretRight;
@@ -54,7 +50,6 @@
 	};
 
 	let mounted = false;
-	const dispatch = createEventDispatcher();
 
 	let style = $derived(`--duration: ${duration}s; --size: ${size};`);
 
@@ -65,7 +60,7 @@
 		}
 	}
 
-	run(() => {
+	$effect(() => {
 		scrollLock(open);
 	});
 

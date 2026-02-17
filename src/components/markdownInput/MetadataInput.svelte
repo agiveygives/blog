@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
-
 	import classnames from 'classnames';
 	import Button from '@/components/button';
 	import Switch from '@/components/switch';
@@ -28,7 +25,7 @@
 		{ value: 'android', display: 'Android' }
 	];
 
-	run(() => {
+	$effect(() => {
 		markdownData.update((data) => {
 			data.description = description;
 			data.authors = authors;

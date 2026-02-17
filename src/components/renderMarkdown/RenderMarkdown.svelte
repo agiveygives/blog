@@ -1,11 +1,8 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
-
 	import { onMount } from 'svelte';
 	import DOMPurify from 'dompurify';
 	import markdownIt from 'markdown-it';
-	import mdiEmoji from 'markdown-it-emoji';
+	import { full as mdiEmoji } from 'markdown-it-emoji';
 	import mdiTable from 'markdown-it-multimd-table';
 	import mdiFootnote from 'markdown-it-footnote';
 	import mdiHighlightJs from 'markdown-it-highlightjs';
@@ -47,7 +44,7 @@
 		purify = DOMPurify(window);
 	});
 
-	run(() => {
+	$effect(() => {
 		if (purify) {
 			compiledMarkdown = purify.sanitize(md.render(markdown));
 		}

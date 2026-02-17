@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
-
 	import { onDestroy } from 'svelte';
 	import { goto } from '$app/navigation';
 	import Button from '@/components/button';
@@ -57,7 +54,7 @@
 	});
 
 	// Reactive statement to update `markdownData` whenever `markdown` changes
-	run(() => {
+	$effect(() => {
 		if (!isUpdatingFromStore) {
 			markdownData.update((data) => {
 				data.content = markdown;

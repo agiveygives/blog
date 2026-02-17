@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
-
 	import Fa from 'svelte-fa';
 	import { faBars } from '@fortawesome/free-solid-svg-icons';
 	import Popover from '@/components/popover';
@@ -47,7 +44,7 @@
 		node.style.transitionDuration = duration;
 	};
 
-	run(() => {
+	$effect(() => {
 		headerClass = deriveClass(y);
 	});
 </script>
