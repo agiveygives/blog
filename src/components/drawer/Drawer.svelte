@@ -68,7 +68,7 @@
 		closeDrawer();
 	};
 
-	const handleKeyToggle = (event: MouseEvent) => {
+	const handleKeyToggle = (event: KeyboardEvent) => {
 		if (event.key === 'Escape') {
 			closeDrawer();
 		}
@@ -95,7 +95,7 @@
 	</div>
 </button>
 
-<div class="overlay" class:open onclick={handleClickAway} onkeydown={handleKeyToggle}></div>
+<button class="overlay" class:open onclick={handleClickAway} onkeydown={handleKeyToggle} aria-label="Close drawer"></button>
 
 <aside class="drawer" class:open {style}>
 	<div class="panel {placement}" class:size>

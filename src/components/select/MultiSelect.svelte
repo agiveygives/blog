@@ -5,7 +5,7 @@
 	import Popover from '@/components/popover';
 
 	let { options = [], selectedOptions = [], onSelectionChange = (selectedOptions: string[]) => {} } = $props();
-	let filteredOptions = $state(options);
+	let filteredOptions = $derived(options);
 	let expanded = $state(false);
 	let search = $state('');
 

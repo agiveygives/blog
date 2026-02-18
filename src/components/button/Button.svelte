@@ -12,7 +12,7 @@
 
 	let { variant = 'primary', rounded = false, children }: Props = $props();
 
-	let buttonClasses: string = $state(variant);
+	let buttonClasses: string = $derived(variant);
 
 	$effect(() => {
 		buttonClasses = classnames(variant, {

@@ -13,12 +13,14 @@
 
 	let { textareaRef, text = '' }: Props = $props();
 
-	let languages = $state(hljs.listLanguages());
-	languages.push('svelte');
-	languages = languages.sort();
+	let languages = $derived((() => {
+		const langs = hljs.listLanguages();
+		langs.push('svelte');
+		return langs.sort();
+	})());
 
 	let languageFilter = $state('');
-	let filteredLanguages = $state(languages);
+	let filteredLanguages = $derived(languages);
 	$effect(() => {
 		if (languageFilter.length > 0) {
 			filteredLanguages = languages.filter((language) => language.includes(languageFilter.toLowerCase()))

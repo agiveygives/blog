@@ -20,20 +20,25 @@
 		authors: '',
 		tags: [],
 		title: 'New Blog Post',
-		content: ''
+		content: '',
+		publishedAt: '',
+		createdAt: new Date().toISOString(),
+		updatedAt: new Date().toISOString()
 	} }: Props = $props();
 
-	markdownData.set(blogData);
+	$effect(() => {
+		markdownData.set(blogData);
+	});
 
 	let innerWidth = $state(0);
 
 	let textareaRef: HTMLTextAreaElement = $state();
 
-	let description: string = blogData.description;
-	let authors: string = blogData.authors;
-	let tags: string[] = blogData.tags;
-	let blogTitle = blogData.title;
-	let markdown = $state(blogData.content);
+	let description = $derived(blogData.description);
+	let authors = $derived(blogData.authors);
+	let tags = $derived(blogData.tags);
+	let blogTitle = $derived(blogData.title);
+	let markdown = $derived(blogData.content);
 	let isUpdatingFromStore = $state(false);
 	let isPreview = $state(false);
 
