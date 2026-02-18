@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import Button from '@/components/button';
 	import Drawer from '@/components/drawer';
@@ -26,7 +26,9 @@
 		updatedAt: new Date().toISOString()
 	} }: Props = $props();
 
-	$effect(() => {
+	// Initialize the shared store once on mount to avoid continuous feedback loops
+	onMount(() => {
+		console.log('MarkdownInput onMount: initializing markdownData', { blogId });
 		markdownData.set(blogData);
 	});
 
@@ -42,14 +44,22 @@
 	let isUpdatingFromStore = $state(false);
 	let isPreview = $state(false);
 
-	// Subscribe to the store and update `markdown` whenever `markdownData` changes
+	// Subscribe to the store and update local values only when they actually change
 	const unsubscribe = markdownData.subscribe(value => {
+		console.log('markdownData.subscribe ->', {
+			title: value.title,
+			descriptionLen: value.description ? value.description.length : 0,
+			authors: value.authors,
+			tagsCount: value.tags ? value.tags.length : 0,
+			contentLen: value.content ? value.content.length : 0
+		});
+
 		isUpdatingFromStore = true;
-		blogTitle = value.title;
-		description = value.description;
-		authors = value.authors;
-		tags = value.tags;
-		markdown = value.content;
+		if (value.title !== blogTitle) blogTitle = value.title;
+		if (value.description !== description) description = value.description;
+		if (value.authors !== authors) authors = value.authors;
+		if (JSON.stringify(value.tags) !== JSON.stringify(tags)) tags = value.tags;
+		if (value.content !== markdown) markdown = value.content;
 		isUpdatingFromStore = false;
 	});
 
@@ -58,16 +68,20 @@
 		unsubscribe();
 	});
 
-	// Reactive statement to update `markdownData` whenever `markdown` changes
-	$effect(() => {
-		if (!isUpdatingFromStore) {
-			markdownData.update((data) => {
-				data.content = markdown;
-
-				return data;
-			})
-		}
-	});
+	// Use an explicit input handler to update the store (event-driven, not reactive)
+	function handleMarkdownInput(e: Event) {
+		if (isUpdatingFromStore) return;
+		const target = e.target as HTMLTextAreaElement;
+		const val = target.value;
+		markdown = val;
+		markdownData.update((data) => {
+			if (data.content === val) return data;
+			return {
+				...data,
+				content: val
+			};
+		});
+	}
 
 	const publish = (isPublic: boolean) => {
 		const uri = blogId ? `/api/blog/${blogId}` : '/api/blog';
@@ -108,7 +122,7 @@
 			{#if isPreview}
 				<RenderMarkdown {markdown} />
 			{:else}
-				<textarea bind:this={textareaRef} bind:value={markdown}></textarea>
+				<textarea bind:this={textareaRef} bind:value={markdown} on:input={handleMarkdownInput}></textarea>
 			{/if}
 		</div>
 

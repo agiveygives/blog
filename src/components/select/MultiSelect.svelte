@@ -13,13 +13,16 @@
 		const clickedOption = event.target.value;
 		const selectedIndex = selectedOptions.findIndex((option) => option === clickedOption);
 
+		let newSelected;
 		if (selectedIndex > -1) {
-			selectedOptions.splice(selectedIndex, 1);
+			newSelected = selectedOptions.filter((o) => o !== clickedOption);
 		} else {
-			selectedOptions.push(event.target.value);
+			newSelected = [...selectedOptions, clickedOption];
 		}
 
-		onSelectionChange(selectedOptions);
+		console.log('MultiSelect.selectOption', { clickedOption, before: selectedOptions, after: newSelected });
+
+		onSelectionChange(newSelected);
 	};
 
 	const showCheckboxes = () => {

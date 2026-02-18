@@ -1,23 +1,48 @@
 <script lang="ts">
 	import Button from '@/components/button';
 	import { TextInput } from '@/components/input';
+	import { onMount, onDestroy } from 'svelte';
 	import markdownData from '@/components/markdownInput/store';
 
 	let value = $state($markdownData.title);
 	let isEditTitle = $state(false);
+	let initialized = $state(false);
+	let isUpdatingFromStore = $state(false);
 
-	$effect(() => {
-		markdownData.update((data) => {
-			data.title = value;
-
-			return data;
-		})
+	onMount(() => {
+		initialized = true;
 	});
+
+	// Keep local `value` in sync with the shared store to avoid overwriting it on mount
+	const unsubscribe = markdownData.subscribe((v) => {
+		isUpdatingFromStore = true;
+		if (v.title !== value) value = v.title;
+		isUpdatingFromStore = false;
+	});
+
+	onDestroy(() => {
+		unsubscribe();
+	});
+
+
+	function handleTitleInput(e: Event) {
+		const target = e.target as HTMLInputElement;
+		const v = target.value;
+		value = v;
+		if (isUpdatingFromStore) return;
+		markdownData.update((data) => {
+			if (data.title === v) return data;
+			return {
+				...data,
+				title: v
+			};
+		});
+	}
 </script>
 
 <div class="title">
 	{#if isEditTitle}
-		<TextInput bind:value size="xl" />
+		<TextInput bind:value size="xl" on:input={handleTitleInput} />
 		<Button
 			variant="primary"
 			on:click={() => {

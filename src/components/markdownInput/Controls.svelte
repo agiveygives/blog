@@ -58,10 +58,19 @@
 			endModifier +
 			text.substring(endPos, text.length)
 
-			markdownData.update((data) => {
-				data.content = modifiedMarkdown;
+			console.log('Controls.applyStringModifier -> updating content (len)', modifiedMarkdown.length);
 
-				return data;
+			markdownData.update((data) => {
+				const same = data.content === modifiedMarkdown;
+				if (same) {
+					console.log('Controls.applyStringModifier -> new content same as store, skipping');
+					return data;
+				}
+				console.log('Controls.applyStringModifier -> performing store update');
+				return {
+					...data,
+					content: modifiedMarkdown
+				};
 			});
 		}
 
