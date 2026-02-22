@@ -1,10 +1,14 @@
 <script lang="ts">
-	export let placeholder = '';
-	export let value: string;
-	export let size: 'sm' | 'md' | 'lg' | 'xl' = 'md';
+	interface Props {
+		placeholder?: string;
+		value: string;
+		size?: 'sm' | 'md' | 'lg' | 'xl';
+	}
+
+	let { placeholder = '', value = $bindable(), size = 'md', ...restProps }: Props = $props();
 </script>
 
-<input type="text" bind:value on:click {placeholder} class={size} />
+<input type="text" bind:value {placeholder} class={size} {...restProps} />
 
 <style>
 	input {

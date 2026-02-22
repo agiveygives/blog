@@ -4,24 +4,23 @@
 	import { TextInput } from '@/components/input';
 	import Popover from '@/components/popover';
 
-	export let options = [];
-	export let selectedOptions = [];
-	export let onSelectionChange = (selectedOptions: string[]) => {};
-	let filteredOptions = options;
-	let expanded = false;
-	let search = '';
+	let { options = [], selectedOptions = [], onSelectionChange = (selectedOptions: string[]) => {}, ...restProps } = $props();
+	let filteredOptions = $derived(options);
+	let expanded = $state(false);
+	let search = $state('');
 
 	const selectOption = (event) => {
 		const clickedOption = event.target.value;
 		const selectedIndex = selectedOptions.findIndex((option) => option === clickedOption);
 
+		let newSelected;
 		if (selectedIndex > -1) {
-			selectedOptions.splice(selectedIndex, 1);
+			newSelected = selectedOptions.filter((o) => o !== clickedOption);
 		} else {
-			selectedOptions.push(event.target.value);
+			newSelected = [...selectedOptions, clickedOption];
 		}
 
-		onSelectionChange(selectedOptions);
+		onSelectionChange(newSelected);
 	};
 
 	const showCheckboxes = () => {
@@ -32,16 +31,20 @@
 		expanded = false;
 	};
 
-	let checkboxClass = 'checkboxes';
-	$: checkboxClass = classnames('checkboxes', { hidden: !expanded });
+	let checkboxClass = $state('checkboxes');
+	$effect(() => {
+		checkboxClass = classnames('checkboxes', { hidden: !expanded });
+	});
 
-	$: filteredOptions = options.filter((option) =>
-		option.display.toLowerCase().includes(search.toLowerCase())
-	);
+	$effect(() => {
+		filteredOptions = options.filter((option) =>
+			option.display.toLowerCase().includes(search.toLowerCase())
+		);
+	});
 </script>
 
-<div use:clickOutside on:click_outside={closeCheckboxes}>
-	<TextInput bind:value={search} placeholder="Search" on:click={showCheckboxes} />
+<div use:clickOutside onclick_outside={closeCheckboxes}>
+	<TextInput bind:value={search} placeholder="Search" onclick={showCheckboxes} />
 
 	<Popover show={expanded}>
 		{#each filteredOptions as option}
@@ -51,7 +54,8 @@
 					id={option.value}
 					value={option.value}
 					checked={selectedOptions.includes(option.value)}
-					on:click={selectOption}
+					onclick={selectOption}
+					{...restProps}
 				/>
 				<span>{option.display}</span>
 			</label>

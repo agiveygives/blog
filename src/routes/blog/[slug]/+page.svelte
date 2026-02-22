@@ -1,18 +1,18 @@
-<script>
-	export let data;
+<script lang="ts">
 
 	import RenderMarkdown from '@/components/renderMarkdown';
+	let { data } = $props();
 
-	const createdAt = new Date(data.publishedAt || data.createdAt).toLocaleString('default', {
+	const createdAt = $derived(new Date(data.publishedAt || data.createdAt).toLocaleString('default', {
 		month: 'long',
 		day: 'numeric',
 		year: 'numeric'
-	});
-	const updatedAt = new Date(data.updatedAt).toLocaleString('default', {
+	}));
+	const updatedAt = $derived(new Date(data.updatedAt).toLocaleString('default', {
 		month: 'long',
 		day: 'numeric',
 		year: 'numeric'
-	});
+	}));
 </script>
 
 <article class="page-content">

@@ -1,32 +1,20 @@
 <script lang="ts">
-	export let onLogin: () => void;
-
 	import Fa from 'svelte-fa';
-	import classnames from 'classnames';
 	import { faBars } from '@fortawesome/free-solid-svg-icons';
-	import { onMount } from 'svelte';
-	import { loggedIn } from '@/stores/loggedIn';
 	import Popover from '@/components/popover';
 	import { clickOutside } from '@/directives/onClickOutside';
+	interface Props {
+		onLogin: () => void;
+		loggedIn: boolean;
+	}
 
-	let isPopoverVisible = false;
+	let { onLogin, loggedIn }: Props = $props();
 
-	onMount(() => {
-		fetch('/api/auth/validate')
-			.then((response) => {
-				if (response.ok) {
-					loggedIn.set(true);
-				} else {
-					loggedIn.set(false);
-				}
-			})
-			.catch(() => loggedIn.set(false));
-	});
+	let isPopoverVisible = $state(false);
 
 	const logout = () => {
 		fetch('/api/auth/logout').then((response) => {
 			if (response.ok) {
-				loggedIn.set(false);
 				window.location.reload();
 			}
 		});
@@ -41,8 +29,8 @@
 	};
 
 	let duration = '300ms';
-	let headerClass = 'sharp';
-	let y = 0;
+	let headerClass = $state('sharp');
+	let y = $state(0);
 
 	const deriveClass = (y: number) => {
 		if (y <= 0) {
@@ -56,7 +44,9 @@
 		node.style.transitionDuration = duration;
 	};
 
-	$: headerClass = deriveClass(y);
+	$effect(() => {
+		headerClass = deriveClass(y);
+	});
 </script>
 
 <svelte:window bind:scrollY={y} />
@@ -72,22 +62,23 @@
 			<li><a href="/about">About Me</a></li>
 		</ul>
 	</nav>
-	<div use:clickOutside on:click_outside={closePopover}>
-		<button class="menu" on:click={togglePopover}><Fa icon={faBars} size="2x" /></button>
+	<div use:clickOutside onclick_outside={closePopover}>
+		<button class="menu" onclick={togglePopover}><Fa icon={faBars} size="2x" /></button>
 		<Popover show={isPopoverVisible}>
 			<button class="menu-option"><a href="mailto:agivens1996@gmail.com">Contact</a></button>
-			{#if $loggedIn}
+			{#if loggedIn}
 				<button class="menu-option"><a href="/blog/create">Create blog</a></button>
-				<button class="menu-option" on:click={logout}>Log Out</button>
+				<button class="menu-option" onclick={logout}>Log Out</button>
 			{:else}
-				<button class="menu-option" on:click={() => onLogin()}>Log in</button>
+				<button class="menu-option" onclick={() => onLogin()}>Log in</button>
 			{/if}
 		</Popover>
 	</div>
 </header>
 
 <style lang="scss">
-	@import '@/scss/_variables.scss';
+	@use '@/scss/_colors.scss' as colors;
+	@use "sass:color";
 
 	header {
 		position: fixed;
@@ -99,14 +90,14 @@
 		grid-template-columns: max-content auto max-content;
 		grid-column-gap: 20px;
 		align-items: center;
-		background-color: $white;
+		background-color: colors.$white;
 		padding: 5px 10px;
 		transition: border-radius 300ms linear, background-color 300ms linear;
-		background-color: $white;
-		$darkened-background: darken($white, 5%);
+		background-color: colors.$white;
+		$darkened-background: color.scale(colors.$white, $lightness: -5%);
 
 		.menu {
-			color: $caribbean-current;
+			color: colors.$caribbean-current;
 			background: inherit;
 			border-radius: 50px;
 			padding: 8px 10px;
@@ -126,8 +117,8 @@
 	.rounded {
 		border-radius: 0px 0px 20px 20px;
 		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-		background-color: $mint;
-		$darkened-background: darken($mint, 5%);
+		background-color: colors.$mint;
+		$darkened-background: color.scale(colors.$mint, $lightness: -5%);
 
 		.menu {
 			&:hover,
@@ -145,7 +136,7 @@
 		display: grid;
 		grid-template-columns: max-content max-content max-content;
 		text-align: center;
-		color: $caribbean-current;
+		color: colors.$caribbean-current;
 		font-weight: 600;
 		list-style: none;
 		padding: 0px;
@@ -153,7 +144,7 @@
 
 		li:not(:last-child) {
 			padding-right: 10px;
-			border-right: 1px solid $caribbean-current;
+			border-right: 1px solid colors.$caribbean-current;
 		}
 
 		li:not(:first-child) {
@@ -163,7 +154,7 @@
 
 	li {
 		a {
-			color: $caribbean-current;
+			color: colors.$caribbean-current;
 			text-decoration: none;
 			display: block;
 			position: relative;
@@ -177,7 +168,7 @@
 				left: 0;
 				width: 100%;
 				height: 0.1em;
-				background-color: $caribbean-current;
+				background-color: colors.$caribbean-current;
 				opacity: 0;
 				transition: opacity 300ms, transform 300ms;
 				opacity: 1;
@@ -198,13 +189,13 @@
 		width: 100%;
 		min-width: max-content;
 		border: none;
-		color: $caribbean-current;
-		background-color: $white;
+		color: colors.$caribbean-current;
+		background-color: colors.$white;
 		font-size: 16px;
 		padding: 10px 20px;
 
 		&:hover {
-			background-color: darken($white, 10%);
+			background-color: color.scale(colors.$white, $lightness: -10%);
 			cursor: pointer;
 		}
 

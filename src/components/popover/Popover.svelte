@@ -1,27 +1,33 @@
 <script lang="ts">
-	export let show = false;
 
 	import classnames from 'classnames';
+	interface Props {
+		show?: boolean;
+		children?: import('svelte').Snippet;
+	}
 
-	$: popoverClasses = classnames({ popover: true, hidden: !show });
+	let { show = false, children }: Props = $props();
+
+	let popoverClasses = $derived(classnames({ popover: true, hidden: !show }));
 </script>
 
 <div class={popoverClasses}>
 	<div class="content">
-		<slot />
+		{@render children?.()}
 	</div>
 </div>
 
 <style lang="scss">
-	@import '@/scss/_variables.scss';
+	@use '@/scss/_colors.scss' as colors;
 
 	.popover {
 		position: relative;
+		z-index: 100;
 	}
 
 	.content {
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
-		background-color: $white;
+		background-color: colors.$white;
 		border-radius: 5px;
 		position: absolute;
 		right: 0;

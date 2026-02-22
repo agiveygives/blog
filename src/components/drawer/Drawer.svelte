@@ -1,11 +1,5 @@
 <script lang="ts">
-	export let duration = 0.2;
-	export let placement: 'left' | 'right' | 'top' | 'bottom' = 'left';
-	export let size = '300px';
-	export let open = false;
-
 	import { onMount } from 'svelte';
-	import { createEventDispatcher } from 'svelte';
 	import Fa from 'svelte-fa';
 	import {
 		faCaretLeft,
@@ -14,34 +8,50 @@
 		faCaretDown
 	} from '@fortawesome/free-solid-svg-icons';
 	import classnames from 'classnames';
-
-	let icon = faCaretRight;
-
-	$: switch (placement) {
-		case 'left':
-			icon = faCaretRight;
-			break;
-		case 'right':
-			icon = faCaretLeft;
-			break;
-		case 'top':
-			icon = faCaretDown;
-			break;
-		case 'bottom':
-			icon = faCaretUp;
-			break;
-		default:
-			break;
+	interface Props {
+		duration?: number;
+		placement?: 'left' | 'right' | 'top' | 'bottom';
+		size?: string;
+		open?: boolean;
+		children?: import('svelte').Snippet;
 	}
+
+	let {
+		duration = 0.2,
+		placement = 'left',
+		size = '300px',
+		open = $bindable(false),
+		children
+	}: Props = $props();
+
+	let icon = $state(faCaretRight);
+
+	$effect(() => {
+		switch (placement) {
+			case 'left':
+				icon = faCaretRight;
+				break;
+			case 'right':
+				icon = faCaretLeft;
+				break;
+			case 'top':
+				icon = faCaretDown;
+				break;
+			case 'bottom':
+				icon = faCaretUp;
+				break;
+			default:
+				break;
+		}
+	});
 
 	const toggleDrawer = () => {
 		open = !open;
 	};
 
 	let mounted = false;
-	const dispatch = createEventDispatcher();
 
-	$: style = `--duration: ${duration}s; --size: ${size};`;
+	let style = $derived(`--duration: ${duration}s; --size: ${size};`);
 
 	function scrollLock(open) {
 		if (mounted) {
@@ -50,13 +60,15 @@
 		}
 	}
 
-	$: scrollLock(open);
+	$effect(() => {
+		scrollLock(open);
+	});
 
 	const handleClickAway = () => {
 		closeDrawer();
 	};
 
-	const handleKeyToggle = (event: MouseEvent) => {
+	const handleKeyToggle = (event: KeyboardEvent) => {
 		if (event.key === 'Escape') {
 			closeDrawer();
 		}
@@ -75,19 +87,19 @@
 	});
 </script>
 
-<svelte:window on:keydown={handleKeyToggle} />
+<svelte:window onkeydown={handleKeyToggle} />
 
-<button class={classnames('toggle', placement, { closed: !open })} on:click={toggleDrawer} {style}>
+<button class={classnames('toggle', placement, { closed: !open })} onclick={toggleDrawer} {style}>
 	<div class="toggle-icon" class:open {style}>
 		<Fa {icon} />
 	</div>
 </button>
 
-<div class="overlay" class:open on:click={handleClickAway} on:keydown={handleKeyToggle} />
+<button class="overlay" class:open onclick={handleClickAway} onkeydown={handleKeyToggle} aria-label="Close drawer"></button>
 
 <aside class="drawer" class:open {style}>
 	<div class="panel {placement}" class:size>
-		<slot />
+		{@render children?.()}
 	</div>
 </aside>
 

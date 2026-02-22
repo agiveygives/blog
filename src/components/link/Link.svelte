@@ -1,14 +1,19 @@
 <script lang="ts">
-	export let href = '';
+	interface Props {
+		href?: string;
+		children?: import('svelte').Snippet;
+	}
+
+	let { href = '', children }: Props = $props();
 </script>
 
-<a {href}><slot /></a>
+<a {href}>{@render children?.()}</a>
 
 <style lang="scss">
-	@import '@/scss/_variables.scss';
+	@use '@/scss/_colors.scss' as colors;
 
 	a {
-		color: $caribbean-current;
+		color: colors.$caribbean-current;
 		text-decoration: none;
 		display: block;
 		position: relative;
@@ -22,7 +27,7 @@
 			left: 0;
 			width: 100%;
 			height: 0.1em;
-			background-color: $caribbean-current;
+			background-color: colors.$caribbean-current;
 			opacity: 0;
 			transition: opacity 300ms, transform 300ms;
 			opacity: 1;

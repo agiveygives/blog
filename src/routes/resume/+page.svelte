@@ -2,11 +2,11 @@
 	<article>
 		<section>
 			<h1>Andrew Givens</h1>
-			<div class="section-divider" />
+			<div class="section-divider"></div>
 
 			<div class="content-section">
 				<h2>Professional Summary</h2>
-				<div class="section-divider" />
+				<div class="section-divider"></div>
 
 				<p>
 					Hardworking software development professional driven to increase team effectiveness. Focused on usability and performance improvements. Proven history of developing useful, efficient and cost-effective projects.
@@ -15,7 +15,7 @@
 
 			<div class="content-section">
 				<h2>Work History</h2>
-				<div class="section-divider" />
+				<div class="section-divider"></div>
 
 				<div>
 					<p>
@@ -92,7 +92,7 @@
 
 			<div class="content-section">
 				<h2>Education</h2>
-				<div class="section-divider" />
+				<div class="section-divider"></div>
 
 				<p>
 					<strong>Bachelor of Science, Computer Science</strong>, 05/2018
@@ -154,14 +154,14 @@
 
 			<div>
 				<h2 class="white">Profiles</h2>
-				<div class="section-divider white" />
+				<div class="section-divider white"></div>
 				<p>linkedin.com/in/andrew-givens-464291127</p>
 				<p>github.com/agiveygives</p>
 			</div>
 
 			<div>
 				<h2 class="white">Skills</h2>
-				<div class="section-divider white" />
+				<div class="section-divider white"></div>
 
 				<ul>
 					<li>React</li>

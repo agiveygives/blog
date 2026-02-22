@@ -1,15 +1,15 @@
-<script>
-	export let data;
-
-	import { onMount } from 'svelte';
+<script lang="ts">
 	import { invalidateAll } from '$app/navigation';
 	import { browser } from '$app/environment';
 	import { loggedIn } from '@/stores/loggedIn';
 	import MarkdownInput from '@/components/markdownInput';
+	let { data } = $props();
 
-	$: if (browser && !$loggedIn) {
-		invalidateAll();
-	}
+	$effect(() => {
+		if (browser && !$loggedIn) {
+			invalidateAll();
+		}
+	});
 </script>
 
 <div class="page-content">

@@ -1,8 +1,4 @@
 <script lang="ts">
-	export let isPreview = false;
-	export let onPublish: () => void;
-	export let onSaveDraft: () => void;
-
 	import classnames from 'classnames';
 	import Button from '@/components/button';
 	import Switch from '@/components/switch';
@@ -10,32 +6,85 @@
 	import Pill from '@/components/pill';
 	import { TextInput } from '@/components/input';
 	import markdownData from '@/components/markdownInput/store';
+	import { onMount, onDestroy } from 'svelte';
+	interface Props {
+		isPreview?: boolean;
+		onPublish: () => void;
+		onSaveDraft: () => void;
+	}
 
-	let authors: string = $markdownData.authors;
-	let description: string = $markdownData.description;
+	let { isPreview = $bindable(false), onPublish, onSaveDraft }: Props = $props();
+
+	let authors: string = $state($markdownData.authors);
+	let description: string = $state($markdownData.description);
+	let initialized = $state(false);
+	let isUpdatingFromStore = $state(false);
+
+	onMount(() => {
+		initialized = true;
+	});
+
+	// Subscribe to store so local inputs reflect initial store values and avoid overwrites
+	const unsubscribe = markdownData.subscribe((v) => {
+		isUpdatingFromStore = true;
+		if (v.authors !== authors) authors = v.authors;
+		if (v.description !== description) description = v.description;
+		isUpdatingFromStore = false;
+	});
+
+	onDestroy(() => {
+		unsubscribe();
+	});
 	let tagOptions = [
 		{ value: 'front-end', display: 'Front End' },
 		{ value: 'back-end', display: 'Back End' },
 		{ value: 'web', display: 'Web' },
 		{ value: 'mobile', display: 'Mobile' },
 		{ value: 'ios', display: 'iOS' },
-		{ value: 'android', display: 'Android' }
+		{ value: 'android', display: 'Android' },
+		{ value: 'programming', display: 'Programming' },
+		{ value: 'technology', display: 'Technology' },
 	];
 
-	$: {
+	function handleAuthorsInput(e: Event) {
+		const target = e.target as HTMLInputElement;
+		const v = target.value;
+		authors = v;
+		if (isUpdatingFromStore) return;
 		markdownData.update((data) => {
-			data.description = description;
-			data.authors = authors;
+			if (data.authors === v) return data;
+			return {
+				...data,
+				authors: v
+			};
+		});
+	}
 
-			return data;
-		})
+	function handleDescriptionInput(e: Event) {
+		const target = e.target as HTMLTextAreaElement;
+		const v = target.value;
+		description = v;
+		if (isUpdatingFromStore) return;
+		markdownData.update((data) => {
+			if (data.description === v) return data;
+			return {
+				...data,
+				description: v
+			};
+		});
 	}
 
 	const onSelectionChange = (newTags: string[]) => {
+		if (!initialized) {
+			return;
+		}
 		markdownData.update((data) => {
-			data.tags = newTags;
-
-			return data;
+			const same = JSON.stringify(data.tags) === JSON.stringify(newTags);
+			if (same) return data;
+			return {
+				...data,
+				tags: newTags
+			};
 		});
 	};
 </script>
@@ -48,7 +97,7 @@
 <fieldset class="authors">
 	<legend>Authors</legend>
 
-	<TextInput placeholder="Authors" size="md" bind:value={authors} />
+	<TextInput placeholder="Authors" size="md" bind:value={authors} oninput={handleAuthorsInput} />
 </fieldset>
 
 <fieldset class="tags">
@@ -69,9 +118,10 @@
 	<div class="description-container">
 		<textarea
 			bind:value={description}
+			oninput={handleDescriptionInput}
 			maxLength={200}
 			placeholder="Description about your blog post."
-		/>
+		></textarea>
 	</div>
 </fieldset>
 

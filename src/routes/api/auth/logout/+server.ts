@@ -7,8 +7,7 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 
 	await signOut(auth);
 
-	cookies.delete('accessToken', { path: '/' });
-	cookies.delete('refreshToken', { path: '/' });
+	cookies.delete('session', { path: '/' });
 
 	throw redirect(307, location);
 };

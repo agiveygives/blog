@@ -1,10 +1,8 @@
 <script lang="ts">
-	export let markdown: string = '';
-
 	import { onMount } from 'svelte';
 	import DOMPurify from 'dompurify';
 	import markdownIt from 'markdown-it';
-	import mdiEmoji from 'markdown-it-emoji';
+	import { full as mdiEmoji } from 'markdown-it-emoji';
 	import mdiTable from 'markdown-it-multimd-table';
 	import mdiFootnote from 'markdown-it-footnote';
 	import mdiHighlightJs from 'markdown-it-highlightjs';
@@ -15,6 +13,11 @@
 	import mdiMark from 'markdown-it-mark';
 	import mdiSub from 'markdown-it-sub';
 	import mdiSup from 'markdown-it-sup';
+	interface Props {
+		markdown?: string;
+	}
+
+	let { markdown = '' }: Props = $props();
 
 	const md = new markdownIt({
 		html: true,
@@ -34,16 +37,18 @@
 		.use(mdiSub)
 		.use(mdiSup);
 
-	let compiledMarkdown = '<div class="centered"><div class="loading" /></div>';
-	let purify;
+	let compiledMarkdown = $state('<div class="centered"><div class="loading" /></div>');
+	let purify = $state();
 
 	onMount(() => {
 		purify = DOMPurify(window);
 	});
 
-	$: if (purify) {
-		compiledMarkdown = purify.sanitize(md.render(markdown));
-	}
+	$effect(() => {
+		if (purify) {
+			compiledMarkdown = purify.sanitize(md.render(markdown));
+		}
+	});
 </script>
 
 <svelte:head>

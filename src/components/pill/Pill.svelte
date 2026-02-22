@@ -3,13 +3,13 @@
 	const g = Math.round(Math.random(255) * 255);
 	const b = Math.round(Math.random(255) * 255);
 
-	export let color = `rgb(${r}, ${g}, ${b})`;
+	let { color = `rgb(${r}, ${g}, ${b})`, children } = $props();
 
-	const style = `--color: ${color}`;
+	const style = $derived(`--color: ${color}`);
 </script>
 
 <div {style}>
-	<slot />
+	{@render children?.()}
 </div>
 
 <style lang="scss">

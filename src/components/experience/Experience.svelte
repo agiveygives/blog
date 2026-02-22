@@ -1,6 +1,6 @@
-<script>
-	export let companies;
-	const totalCompanies = companies.length;
+<script lang="ts">
+	let { companies } = $props();
+	let totalCompanies = $derived(companies.length);
 </script>
 
 <div class="experience">
@@ -21,7 +21,7 @@
 			{/each}
 		</div>
 		{#if i + 1 < totalCompanies}
-			<div class="divider" />
+			<div class="divider"></div>
 		{/if}
 	{/each}
 </div>
