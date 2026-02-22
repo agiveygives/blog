@@ -28,7 +28,6 @@
 
 	// Initialize the shared store once on mount to avoid continuous feedback loops
 	onMount(() => {
-		console.log('MarkdownInput onMount: initializing markdownData', { blogId });
 		markdownData.set(blogData);
 	});
 
@@ -46,14 +45,6 @@
 
 	// Subscribe to the store and update local values only when they actually change
 	const unsubscribe = markdownData.subscribe(value => {
-		console.log('markdownData.subscribe ->', {
-			title: value.title,
-			descriptionLen: value.description ? value.description.length : 0,
-			authors: value.authors,
-			tagsCount: value.tags ? value.tags.length : 0,
-			contentLen: value.content ? value.content.length : 0
-		});
-
 		isUpdatingFromStore = true;
 		if (value.title !== blogTitle) blogTitle = value.title;
 		if (value.description !== description) description = value.description;
@@ -122,7 +113,7 @@
 			{#if isPreview}
 				<RenderMarkdown {markdown} />
 			{:else}
-				<textarea bind:this={textareaRef} bind:value={markdown} on:input={handleMarkdownInput}></textarea>
+				<textarea bind:this={textareaRef} bind:value={markdown} oninput={handleMarkdownInput}></textarea>
 			{/if}
 		</div>
 

@@ -22,6 +22,7 @@
 
 	.popover {
 		position: relative;
+		z-index: 100;
 	}
 
 	.content {

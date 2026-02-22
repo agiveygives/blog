@@ -1,7 +1,6 @@
 import { json, error, type RequestHandler } from '@sveltejs/kit';
-import { setDoc, doc } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
-import { db } from '@/firebase.config';
+import { db } from '@/firebase-admin.config';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const newBlogId = uuidv4();
@@ -10,7 +9,8 @@ export const POST: RequestHandler = async ({ request }) => {
 	try {
 		const data = await request.json();
 
-		await setDoc(doc(db, 'blogs', newBlogId), {
+		const docRef = db.doc(`blogs/${newBlogId}`);
+		await docRef.create({
 			...data,
 			createdAt: now,
 			updatedAt: now

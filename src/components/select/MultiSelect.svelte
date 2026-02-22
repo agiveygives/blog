@@ -4,7 +4,7 @@
 	import { TextInput } from '@/components/input';
 	import Popover from '@/components/popover';
 
-	let { options = [], selectedOptions = [], onSelectionChange = (selectedOptions: string[]) => {} } = $props();
+	let { options = [], selectedOptions = [], onSelectionChange = (selectedOptions: string[]) => {}, ...restProps } = $props();
 	let filteredOptions = $derived(options);
 	let expanded = $state(false);
 	let search = $state('');
@@ -19,8 +19,6 @@
 		} else {
 			newSelected = [...selectedOptions, clickedOption];
 		}
-
-		console.log('MultiSelect.selectOption', { clickedOption, before: selectedOptions, after: newSelected });
 
 		onSelectionChange(newSelected);
 	};
@@ -46,7 +44,7 @@
 </script>
 
 <div use:clickOutside onclick_outside={closeCheckboxes}>
-	<TextInput bind:value={search} placeholder="Search" on:click={showCheckboxes} />
+	<TextInput bind:value={search} placeholder="Search" onclick={showCheckboxes} />
 
 	<Popover show={expanded}>
 		{#each filteredOptions as option}
@@ -57,6 +55,7 @@
 					value={option.value}
 					checked={selectedOptions.includes(option.value)}
 					onclick={selectOption}
+					{...restProps}
 				/>
 				<span>{option.display}</span>
 			</label>

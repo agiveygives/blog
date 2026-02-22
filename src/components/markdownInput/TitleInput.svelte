@@ -42,7 +42,7 @@
 
 <div class="title">
 	{#if isEditTitle}
-		<TextInput bind:value size="xl" on:input={handleTitleInput} />
+		<TextInput bind:value size="xl" oninput={handleTitleInput} />
 		<Button
 			variant="primary"
 			on:click={() => {

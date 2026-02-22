@@ -41,7 +41,9 @@
 		{ value: 'web', display: 'Web' },
 		{ value: 'mobile', display: 'Mobile' },
 		{ value: 'ios', display: 'iOS' },
-		{ value: 'android', display: 'Android' }
+		{ value: 'android', display: 'Android' },
+		{ value: 'programming', display: 'Programming' },
+		{ value: 'technology', display: 'Technology' },
 	];
 
 	function handleAuthorsInput(e: Event) {
@@ -73,16 +75,12 @@
 	}
 
 	const onSelectionChange = (newTags: string[]) => {
-		console.log('MetadataInput onSelectionChange -> newTags', newTags);
 		if (!initialized) {
-			console.log('MetadataInput onSelectionChange -> skipping initial tag update');
 			return;
 		}
 		markdownData.update((data) => {
 			const same = JSON.stringify(data.tags) === JSON.stringify(newTags);
-			console.log('MetadataInput onSelectionChange -> same?', same);
 			if (same) return data;
-			console.log('MetadataInput onSelectionChange -> updating tags');
 			return {
 				...data,
 				tags: newTags
@@ -99,7 +97,7 @@
 <fieldset class="authors">
 	<legend>Authors</legend>
 
-	<TextInput placeholder="Authors" size="md" bind:value={authors} on:input={handleAuthorsInput} />
+	<TextInput placeholder="Authors" size="md" bind:value={authors} oninput={handleAuthorsInput} />
 </fieldset>
 
 <fieldset class="tags">
@@ -120,7 +118,7 @@
 	<div class="description-container">
 		<textarea
 			bind:value={description}
-			on:input={handleDescriptionInput}
+			oninput={handleDescriptionInput}
 			maxLength={200}
 			placeholder="Description about your blog post."
 		></textarea>
