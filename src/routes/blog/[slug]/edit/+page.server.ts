@@ -1,15 +1,18 @@
 import { redirect } from '@sveltejs/kit';
-import type { Load } from '@sveltejs/kit';
+import type { ServerLoad } from '@sveltejs/kit';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/firebase.config';
+import { protectedRoute } from '@/lib/protectedRoute';
 import type BlogType from '@/types/blogType';
 
 type ParamsType = {
 	slug: string;
 };
 
-export const load: Load<ParamsType> = async ({ params }) => {
-	let blogData;
+export const load: ServerLoad<ParamsType> = async ({ params, locals }) => {
+	await protectedRoute(`/blog/${params.slug}`, locals);
+
+	let blogData: BlogType;
 	try {
 		blogData = (await getDoc(doc(db, 'blogs', params.slug))).data() as BlogType;
 
